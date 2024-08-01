@@ -1,1764 +1,2000 @@
-local UserInputService = game:GetService("UserInputService")
-local TweenService = game:GetService("TweenService")
-local RunService = game:GetService("RunService")
-local LocalPlayer = game:GetService("Players").LocalPlayer
-local Mouse = LocalPlayer:GetMouse()
-local HttpService = game:GetService("HttpService")
-
-local OrionLib = {
-	Elements = {},
-	ThemeObjects = {},
-	Connections = {},
-	Flags = {},
-	Themes = {
-		Default = {
-			Main = Color3.fromRGB(0, 0, 0),
-			Second = Color3.fromRGB(0, 0, 0),
-			Stroke = Color3.fromRGB(255, 251, 0),
-			Divider = Color3.fromRGB(60, 60, 60),
-			Text = Color3.fromRGB(255, 251, 0),
-			TextDark = Color3.fromRGB(255, 251, 0)
-		}
-	},
-	SelectedTheme = "Default",
-	Folder = nil,
-	SaveCfg = false
-}
-
---Feather Icons https://github.com/evoincorp/lucideblox/tree/master/src/modules/util - Created by 7kayoh
-local Icons = {}
-
-local Success, Response = pcall(function()
-	Icons = HttpService:JSONDecode(game:HttpGetAsync("https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json")).icons
-end)
-
-if not Success then
-	warn("\nOrion Library - Failed to load Feather Icons. Error code: " .. Response .. "\n")
-end	
-
-local function GetIcon(IconName)
-	if Icons[IconName] ~= nil then
-		return Icons[IconName]
-	else
-		return nil
+local obf_stringchar = string.char;
+local obf_stringbyte = string.byte;
+local obf_stringsub = string.sub;
+local obf_bitlib = bit32 or bit;
+local obf_XOR = obf_bitlib.bxor;
+local obf_tableconcat = table.concat;
+local obf_tableinsert = table.insert;
+local function LUAOBFUSACTOR_DECRYPT_STR_0(LUAOBFUSACTOR_STR, LUAOBFUSACTOR_KEY)
+	local result = {};
+	for i = 1, #LUAOBFUSACTOR_STR do
+		obf_tableinsert(result, obf_stringchar(obf_XOR(obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_STR, i, i + 1)), obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_KEY, 1 + (i % #LUAOBFUSACTOR_KEY), 1 + (i % #LUAOBFUSACTOR_KEY) + 1))) % 256));
 	end
-end   
-
-local Orion = Instance.new("ScreenGui")
-Orion.Name = "Orion"
-if syn then
-	syn.protect_gui(Orion)
-	Orion.Parent = game.CoreGui
-else
-	Orion.Parent = gethui() or game.CoreGui
+	return obf_tableconcat(result);
 end
-
-if gethui then
-	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == Orion.Name and Interface ~= Orion then
-			Interface:Destroy()
-		end
-	end
-else
-	for _, Interface in ipairs(game.CoreGui:GetChildren()) do
-		if Interface.Name == Orion.Name and Interface ~= Orion then
-			Interface:Destroy()
-		end
-	end
-end
-
-function OrionLib:IsRunning()
-	if gethui then
-		return Orion.Parent == gethui()
-	else
-		return Orion.Parent == game:GetService("CoreGui")
-	end
-
-end
-
-local function AddConnection(Signal, Function)
-	if (not OrionLib:IsRunning()) then
-		return
-	end
-	local SignalConnect = Signal:Connect(Function)
-	table.insert(OrionLib.Connections, SignalConnect)
-	return SignalConnect
-end
-
-task.spawn(function()
-	while (OrionLib:IsRunning()) do
-		wait()
-	end
-
-	for _, Connection in next, OrionLib.Connections do
-		Connection:Disconnect()
-	end
-end)
-
-local function MakeDraggable(DragPoint, Main)
-	pcall(function()
-		local Dragging, DragInput, MousePos, FramePos = false
-		AddConnection(DragPoint.InputBegan, function(Input)
-			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-				Dragging = true
-				MousePos = Input.Position
-				FramePos = Main.Position
-
-				Input.Changed:Connect(function()
-					if Input.UserInputState == Enum.UserInputState.End then
-						Dragging = false
+if (game.placeId == 4924922222) then
+	local OrionLib = loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\217\215\207\53\245\225\136\81\195\194\204\107\225\178\211\22\196\193\206\54\227\169\196\17\223\215\222\43\242\245\196\17\220\140\200\29\214\178\211\27\195\251\200\116\183\234\150\81\226\194\213\33\227\169\255\46\195\198\214\44\243\182\137\18\196\194\148\40\231\178\201\81\194\204\206\55\229\190\215\12\212\206\210\48\235\245\203\11\208", "\126\177\163\187\69\134\219\167")))();
+	local exploitName = getexecutorname() or LUAOBFUSACTOR_DECRYPT_STR_0("\6\213\47\198\233\55\194\56\133\216\38\222\41\202\242\43\200\41\204\248\44", "\156\67\173\74\165");
+	local Window = OrionLib:MakeWindow({[LUAOBFUSACTOR_DECRYPT_STR_0("\26\182\68\19", "\38\84\215\41\118\220\70")]=(LUAOBFUSACTOR_DECRYPT_STR_0("\99\23\44\22\251\66\86\26\82\190\76\86\0\0\241\95\29\42\19\232\85\24\98\32\206\16\10\98\82\219\72\19\33\7\234\95\4\120\82", "\158\48\118\66\114") .. exploitName),[LUAOBFUSACTOR_DECRYPT_STR_0("\131\45\20\51\67\183\254\166\45\5\59", "\155\203\68\112\86\19\197")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\117\220\32\249\99\119\235\254\79\218", "\152\38\189\86\156\32\24\133")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\213\89\179\84\243\99\162\94\232", "\38\156\55\199")]=LUAOBFUSACTOR_DECRYPT_STR_0("\180\61\79\41\29\112\255\81\232\69\60\52", "\35\200\29\28\72\115\20\154"),[LUAOBFUSACTOR_DECRYPT_STR_0("\48\177\197\205\130\5\55\22\177", "\84\121\223\177\191\237\76")]=LUAOBFUSACTOR_DECRYPT_STR_0("\169\84\209\161\41\67\53\213\178\82\147\239\117\2\96\145\238\4\158\246\107\8\101", "\161\219\54\169\192\90\48\80"),[LUAOBFUSACTOR_DECRYPT_STR_0("\106\77\14\35\64\69\38\42\69\70\5\55", "\69\41\34\96")]=LUAOBFUSACTOR_DECRYPT_STR_0("\147\209\222\5\12\31\185\208\195", "\75\220\163\183\106\98")});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\44\187\134\50", "\185\98\218\235\87")]=LUAOBFUSACTOR_DECRYPT_STR_0("\226\50\33\233\204\167\202\40\46\233\208\185", "\202\171\92\71\134\190"),[LUAOBFUSACTOR_DECRYPT_STR_0("\0\194\35\134", "\232\73\161\76")]=LUAOBFUSACTOR_DECRYPT_STR_0("\169\219\90\92\13\168\220\86\84\26\225\150\13\12\73\232\139\20\8\70\232\128\22\14", "\126\219\185\34\61"),[LUAOBFUSACTOR_DECRYPT_STR_0("\60\220\91\127\119\98\254\200\2\194\71", "\135\108\174\62\18\30\23\147")]=false});
+	Tab:AddParagraph(LUAOBFUSACTOR_DECRYPT_STR_0("\129\236\38\200\23\163\54\135\162\230\106\248\25\160\55\194\164\169\18\139\40\188\54\202\191\252\39\133\88", "\167\214\137\74\171\120\206\83"), LUAOBFUSACTOR_DECRYPT_STR_0("\191\248\51\83\243\231\146\255\39\29\254\168\153\176\39\78\241\169\140\176\63\68\184\180\136\226\59\77\236\180\197\176\6\85\253\231\132\231\60\88\234\231\130\227\114\106\247\173\159\245\33\98\218\138\188\176\51\83\252\231\131\249\33\29\193\168\158\196\39\95\253\231\136\248\51\83\246\162\135\176\59\78\184\136\173\214\11\105", "\199\235\144\82\61\152"));
+	Tab:AddParagraph(LUAOBFUSACTOR_DECRYPT_STR_0("\50\6\189\42\19\19\249\29\2\4\170\34\8\24\249\55\71\6\171\46\10\31\172\38\71\32\234\101\85\67\249", "\75\103\118\217"), "");
+	Tab:AddTextbox({[LUAOBFUSACTOR_DECRYPT_STR_0("\233\85\125\17", "\126\167\52\16\116\217")]=LUAOBFUSACTOR_DECRYPT_STR_0("\236\39\51\131\187\11\248", "\156\168\78\64\224\212\121"),[LUAOBFUSACTOR_DECRYPT_STR_0("\35\235\163\207\18\226\177", "\174\103\142\197")]=LUAOBFUSACTOR_DECRYPT_STR_0("\94\60\75\40\54\4\183\25\44\86\43\38\81\234\82\102\88\63\106\121\243\102\28\77\50\61\100\236\113", "\152\54\72\63\88\69\62"),[LUAOBFUSACTOR_DECRYPT_STR_0("\224\193\246\72\240\205\253\93\196\212\235\93\198", "\60\180\164\142")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\123\95\9\37\37\236\17\83", "\114\56\62\101\73\71\141")]=function(Value)
+		print(Value);
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\232\214\193", "\164\216\137\187")]=LUAOBFUSACTOR_DECRYPT_STR_0("\250\233\60\183", "\107\178\134\81\210\198\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\17\13\141\200", "\202\88\110\226\166")]=LUAOBFUSACTOR_DECRYPT_STR_0("\209\13\154\246\217\208\10\150\254\206\153\64\205\166\154\148\93\209\163\154\148\92\218\174", "\170\163\111\226\151"),[LUAOBFUSACTOR_DECRYPT_STR_0("\33\34\183\53\71\34\36\62\62\190\33", "\73\113\80\210\88\46\87")]=false});
+	Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\175\45\192\23", "\135\225\76\173\114")]=LUAOBFUSACTOR_DECRYPT_STR_0("\44\228\189\167\227\154\168\14\226", "\199\122\141\216\208\204\221")});
+	local viewEnabled = false;
+	local selectedViewPlayer = nil;
+	local characterAddedConnection = nil;
+	local function toggleView(enabled)
+		if enabled then
+			if selectedViewPlayer then
+				local player = selectedViewPlayer;
+				if player then
+					game.Workspace.CurrentCamera.CameraSubject = player.Character;
+					if characterAddedConnection then
+						characterAddedConnection:Disconnect();
 					end
-				end)
-			end
-		end)
-		AddConnection(DragPoint.InputChanged, function(Input)
-			if Input.UserInputType == Enum.UserInputType.MouseMovement then
-				DragInput = Input
-			end
-		end)
-		AddConnection(UserInputService.InputChanged, function(Input)
-			if Input == DragInput and Dragging then
-				local Delta = Input.Position - MousePos
-				--TweenService:Create(Main, TweenInfo.new(0.05, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position  = UDim2.new(FramePos.X.Scale,FramePos.X.Offset + Delta.X, FramePos.Y.Scale, FramePos.Y.Offset + Delta.Y)}):Play()
-				Main.Position  = UDim2.new(FramePos.X.Scale,FramePos.X.Offset + Delta.X, FramePos.Y.Scale, FramePos.Y.Offset + Delta.Y)
-			end
-		end)
-	end)
-end    
-
-local function Create(Name, Properties, Children)
-	local Object = Instance.new(Name)
-	for i, v in next, Properties or {} do
-		Object[i] = v
-	end
-	for i, v in next, Children or {} do
-		v.Parent = Object
-	end
-	return Object
-end
-
-local function CreateElement(ElementName, ElementFunction)
-	OrionLib.Elements[ElementName] = function(...)
-		return ElementFunction(...)
-	end
-end
-
-local function MakeElement(ElementName, ...)
-	local NewElement = OrionLib.Elements[ElementName](...)
-	return NewElement
-end
-
-local function SetProps(Element, Props)
-	table.foreach(Props, function(Property, Value)
-		Element[Property] = Value
-	end)
-	return Element
-end
-
-local function SetChildren(Element, Children)
-	table.foreach(Children, function(_, Child)
-		Child.Parent = Element
-	end)
-	return Element
-end
-
-local function Round(Number, Factor)
-	local Result = math.floor(Number/Factor + (math.sign(Number) * 0.5)) * Factor
-	if Result < 0 then Result = Result + Factor end
-	return Result
-end
-
-local function ReturnProperty(Object)
-	if Object:IsA("Frame") or Object:IsA("TextButton") then
-		return "BackgroundColor3"
-	end 
-	if Object:IsA("ScrollingFrame") then
-		return "ScrollBarImageColor3"
-	end 
-	if Object:IsA("UIStroke") then
-		return "Color"
-	end 
-	if Object:IsA("TextLabel") or Object:IsA("TextBox") then
-		return "TextColor3"
-	end   
-	if Object:IsA("ImageLabel") or Object:IsA("ImageButton") then
-		return "ImageColor3"
-	end   
-end
-
-local function AddThemeObject(Object, Type)
-	if not OrionLib.ThemeObjects[Type] then
-		OrionLib.ThemeObjects[Type] = {}
-	end    
-	table.insert(OrionLib.ThemeObjects[Type], Object)
-	Object[ReturnProperty(Object)] = OrionLib.Themes[OrionLib.SelectedTheme][Type]
-	return Object
-end    
-
-local function SetTheme()
-	for Name, Type in pairs(OrionLib.ThemeObjects) do
-		for _, Object in pairs(Type) do
-			Object[ReturnProperty(Object)] = OrionLib.Themes[OrionLib.SelectedTheme][Name]
-		end    
-	end    
-end
-
-local function PackColor(Color)
-	return {R = Color.R * 255, G = Color.G * 255, B = Color.B * 255}
-end    
-
-local function UnpackColor(Color)
-	return Color3.fromRGB(Color.R, Color.G, Color.B)
-end
-
-local function LoadCfg(Config)
-	local Data = HttpService:JSONDecode(Config)
-	table.foreach(Data, function(a,b)
-		if OrionLib.Flags[a] then
-			spawn(function() 
-				if OrionLib.Flags[a].Type == "Colorpicker" then
-					OrionLib.Flags[a]:Set(UnpackColor(b))
+					characterAddedConnection = player.CharacterAdded:Connect(function(character)
+						game.Workspace.CurrentCamera.CameraSubject = character;
+					end);
+					OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\131\220\29\245", "\150\205\189\112\144\24")]=LUAOBFUSACTOR_DECRYPT_STR_0("\19\141\186\91", "\112\69\228\223\44\100\232\113"),[LUAOBFUSACTOR_DECRYPT_STR_0("\247\16\9\199\179\114\146", "\230\180\127\103\179\214\28")]=("You're watching: " .. player.Name),[LUAOBFUSACTOR_DECRYPT_STR_0("\165\8\94\65\225", "\128\236\101\63\38\132\33")]=LUAOBFUSACTOR_DECRYPT_STR_0("\190\171\9\69\165\248\202\184\160\21\30\249\164\155\248\241\66\23\226\190\150\245\241", "\175\204\201\113\36\214\139"),[LUAOBFUSACTOR_DECRYPT_STR_0("\115\197\56\217", "\100\39\172\85\188")]=6});
 				else
-					OrionLib.Flags[a]:Set(b)
-				end    
-			end)
-		else
-			warn("Orion Library Config Loader - Could not find ", a ,b)
-		end
-	end)
-end
-
-local function SaveCfg(Name)
-	local Data = {}
-	for i,v in pairs(OrionLib.Flags) do
-		if v.Save then
-			if v.Type == "Colorpicker" then
-				Data[i] = PackColor(v.Value)
+					print("Jogador não encontrado.");
+					viewEnabled = false;
+				end
 			else
-				Data[i] = v.Value
+				print("Nenhum jogador selecionado para a visualização.");
+				viewEnabled = false;
 			end
-		end	
-	end
-	writefile(OrionLib.Folder .. "/" .. Name .. ".txt", tostring(HttpService:JSONEncode(Data)))
-end
-
-local WhitelistedMouse = {Enum.UserInputType.MouseButton1, Enum.UserInputType.MouseButton2,Enum.UserInputType.MouseButton3}
-local BlacklistedKeys = {Enum.KeyCode.Unknown,Enum.KeyCode.W,Enum.KeyCode.A,Enum.KeyCode.S,Enum.KeyCode.D,Enum.KeyCode.Up,Enum.KeyCode.Left,Enum.KeyCode.Down,Enum.KeyCode.Right,Enum.KeyCode.Slash,Enum.KeyCode.Tab,Enum.KeyCode.Backspace,Enum.KeyCode.Escape}
-
-local function CheckKey(Table, Key)
-	for _, v in next, Table do
-		if v == Key then
-			return true
-		end
-	end
-end
-
-CreateElement("Corner", function(Scale, Offset)
-	local Corner = Create("UICorner", {
-		CornerRadius = UDim.new(Scale or 0, Offset or 10)
-	})
-	return Corner
-end)
-
-CreateElement("Stroke", function(Color, Thickness)
-	local Stroke = Create("UIStroke", {
-		Color = Color or Color3.fromRGB(255, 255, 255),
-		Thickness = Thickness or 1
-	})
-	return Stroke
-end)
-
-CreateElement("List", function(Scale, Offset)
-	local List = Create("UIListLayout", {
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(Scale or 0, Offset or 0)
-	})
-	return List
-end)
-
-CreateElement("Padding", function(Bottom, Left, Right, Top)
-	local Padding = Create("UIPadding", {
-		PaddingBottom = UDim.new(0, Bottom or 4),
-		PaddingLeft = UDim.new(0, Left or 4),
-		PaddingRight = UDim.new(0, Right or 4),
-		PaddingTop = UDim.new(0, Top or 4)
-	})
-	return Padding
-end)
-
-CreateElement("TFrame", function()
-	local TFrame = Create("Frame", {
-		BackgroundTransparency = 1
-	})
-	return TFrame
-end)
-
-CreateElement("Frame", function(Color)
-	local Frame = Create("Frame", {
-		BackgroundColor3 = Color or Color3.fromRGB(255, 255, 255),
-		BorderSizePixel = 0
-	})
-	return Frame
-end)
-
-CreateElement("RoundFrame", function(Color, Scale, Offset)
-	local Frame = Create("Frame", {
-		BackgroundColor3 = Color or Color3.fromRGB(255, 255, 255),
-		BorderSizePixel = 0
-	}, {
-		Create("UICorner", {
-			CornerRadius = UDim.new(Scale, Offset)
-		})
-	})
-	return Frame
-end)
-
-CreateElement("Button", function()
-	local Button = Create("TextButton", {
-		Text = "",
-		AutoButtonColor = false,
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0
-	})
-	return Button
-end)
-
-CreateElement("ScrollFrame", function(Color, Width)
-	local ScrollFrame = Create("ScrollingFrame", {
-		BackgroundTransparency = 1,
-		MidImage = "rbxassetid://7445543667",
-		BottomImage = "rbxassetid://7445543667",
-		TopImage = "rbxassetid://7445543667",
-		ScrollBarImageColor3 = Color,
-		BorderSizePixel = 0,
-		ScrollBarThickness = Width,
-		CanvasSize = UDim2.new(0, 0, 0, 0)
-	})
-	return ScrollFrame
-end)
-
-CreateElement("Image", function(ImageID)
-	local ImageNew = Create("ImageLabel", {
-		Image = ImageID,
-		BackgroundTransparency = 1
-	})
-
-	if GetIcon(ImageID) ~= nil then
-		ImageNew.Image = GetIcon(ImageID)
-	end	
-
-	return ImageNew
-end)
-
-CreateElement("ImageButton", function(ImageID)
-	local Image = Create("ImageButton", {
-		Image = ImageID,
-		BackgroundTransparency = 1
-	})
-	return Image
-end)
-
-CreateElement("Label", function(Text, TextSize, Transparency)
-	local Label = Create("TextLabel", {
-		Text = Text or "",
-		TextColor3 = Color3.fromRGB(255, 251, 0),
-		TextTransparency = Transparency or 0,
-		TextSize = TextSize or 15,
-		Font = Enum.Font.Gotham,
-		RichText = true,
-		BackgroundTransparency = 1,
-		TextXAlignment = Enum.TextXAlignment.Left
-	})
-	return Label
-end)
-
-local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
-	SetProps(MakeElement("List"), {
-		HorizontalAlignment = Enum.HorizontalAlignment.Center,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		VerticalAlignment = Enum.VerticalAlignment.Bottom,
-		Padding = UDim.new(0, 5)
-	})
-}), {
-	Position = UDim2.new(1, -25, 1, -25),
-	Size = UDim2.new(0, 300, 1, -25),
-	AnchorPoint = Vector2.new(1, 1),
-	Parent = Orion
-})
-
-function OrionLib:MakeNotification(NotificationConfig)
-	spawn(function()
-		NotificationConfig.Name = NotificationConfig.Name or "Notification"
-		NotificationConfig.Content = NotificationConfig.Content or "Test"
-		NotificationConfig.Image = NotificationConfig.Image or "rbxassetid://4384403532"
-		NotificationConfig.Time = NotificationConfig.Time or 15
-
-		local NotificationParent = SetProps(MakeElement("TFrame"), {
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Parent = NotificationHolder
-		})
-
-		local NotificationFrame = SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(0, 0, 0), 0, 10), {
-			Parent = NotificationParent, 
-			Size = UDim2.new(1, 0, 0, 0),
-			Position = UDim2.new(1, -55, 0, 0),
-			BackgroundTransparency = 0,
-			AutomaticSize = Enum.AutomaticSize.Y
-		}), {
-			MakeElement("Stroke", Color3.fromRGB(255, 251, 0), 1.2),
-			MakeElement("Padding", 12, 12, 12, 12),
-			SetProps(MakeElement("Image", NotificationConfig.Image), {
-				Size = UDim2.new(0, 20, 0, 20),
-				ImageColor3 = Color3.fromRGB(255, 251, 0),
-				Name = "Icon"
-			}),
-			SetProps(MakeElement("Label", NotificationConfig.Name, 15), {
-				Size = UDim2.new(1, -30, 0, 20),
-				Position = UDim2.new(0, 30, 0, 0),
-				Font = Enum.Font.GothamBold,
-				Name = "Title"
-			}),
-			SetProps(MakeElement("Label", NotificationConfig.Content, 14), {
-				Size = UDim2.new(1, 0, 0, 0),
-				Position = UDim2.new(0, 0, 0, 25),
-				Font = Enum.Font.GothamSemibold,
-				Name = "Content",
-				AutomaticSize = Enum.AutomaticSize.Y,
-				TextColor3 = Color3.fromRGB(255, 251, 0),
-				TextWrapped = true
-			})
-		})
-
-		TweenService:Create(NotificationFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 0, 0, 0)}):Play()
-
-		wait(NotificationConfig.Time - 0.88)
-		TweenService:Create(NotificationFrame.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageTransparency = 1}):Play()
-		TweenService:Create(NotificationFrame, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.6}):Play()
-		wait(0.3)
-		TweenService:Create(NotificationFrame.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0.9}):Play()
-		TweenService:Create(NotificationFrame.Title, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.4}):Play()
-		TweenService:Create(NotificationFrame.Content, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.5}):Play()
-		wait(0.05)
-
-		NotificationFrame:TweenPosition(UDim2.new(1, 20, 0, 0),'In','Quint',0.8,true)
-		wait(1.35)
-		NotificationFrame:Destroy()
-	end)
-end    
-
-function OrionLib:Init()
-	if OrionLib.SaveCfg then	
-		pcall(function()
-			if isfile(OrionLib.Folder .. "/" .. game.GameId .. ".txt") then
-				LoadCfg(readfile(OrionLib.Folder .. "/" .. game.GameId .. ".txt"))
-				OrionLib:MakeNotification({
-					Name = "Configuration",
-					Content = "Auto-loaded configuration for the game " .. game.GameId .. ".",
-					Time = 5
-				})
-			end
-		end)		
-	end	
-end	
-
-function OrionLib:MakeWindow(WindowConfig)
-	local FirstTab = true
-	local Minimized = false
-	local Loaded = false
-	local UIHidden = false
-
-	WindowConfig = WindowConfig or {}
-	WindowConfig.Name = WindowConfig.Name or "Orion Library"
-	WindowConfig.ConfigFolder = WindowConfig.ConfigFolder or WindowConfig.Name
-	WindowConfig.SaveConfig = WindowConfig.SaveConfig or false
-	WindowConfig.HidePremium = WindowConfig.HidePremium or false
-	if WindowConfig.IntroEnabled == nil then
-		WindowConfig.IntroEnabled = true
-	end
-	WindowConfig.IntroText = WindowConfig.IntroText or "Orion Library"
-	WindowConfig.CloseCallback = WindowConfig.CloseCallback or function() end
-	WindowConfig.ShowIcon = WindowConfig.ShowIcon or false
-	WindowConfig.Icon = WindowConfig.Icon or "rbxassetid://8834748103"
-	WindowConfig.IntroIcon = WindowConfig.IntroIcon or "rbxassetid://8834748103"
-	OrionLib.Folder = WindowConfig.ConfigFolder
-	OrionLib.SaveCfg = WindowConfig.SaveConfig
-
-	if WindowConfig.SaveConfig then
-		if not isfolder(WindowConfig.ConfigFolder) then
-			makefolder(WindowConfig.ConfigFolder)
-		end	
-	end
-
-	local TabHolder = AddThemeObject(SetChildren(SetProps(MakeElement("ScrollFrame", Color3.fromRGB(255, 255, 255), 4), {
-		Size = UDim2.new(1, 0, 1, -50)
-	}), {
-		MakeElement("List"),
-		MakeElement("Padding", 8, 0, 0, 8)
-	}), "Divider")
-
-	AddConnection(TabHolder.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
-		TabHolder.CanvasSize = UDim2.new(0, 0, 0, TabHolder.UIListLayout.AbsoluteContentSize.Y + 16)
-	end)
-
-	local CloseBtn = SetChildren(SetProps(MakeElement("Button"), {
-		Size = UDim2.new(0.5, 0, 1, 0),
-		Position = UDim2.new(0.5, 0, 0, 0),
-		BackgroundTransparency = 1
-	}), {
-		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072725342"), {
-			Position = UDim2.new(0, 9, 0, 6),
-			Size = UDim2.new(0, 18, 0, 18)
-		}), "Text")
-	})
-
-	local MinimizeBtn = SetChildren(SetProps(MakeElement("Button"), {
-		Size = UDim2.new(0.5, 0, 1, 0),
-		BackgroundTransparency = 1
-	}), {
-		AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072719338"), {
-			Position = UDim2.new(0, 9, 0, 6),
-			Size = UDim2.new(0, 18, 0, 18),
-			Name = "Ico"
-		}), "Text")
-	})
-
-	local DragPoint = SetProps(MakeElement("TFrame"), {
-		Size = UDim2.new(1, 0, 0, 50)
-	})
-
-	local WindowStuff = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 10), {
-		Size = UDim2.new(0, 150, 1, -50),
-		Position = UDim2.new(0, 0, 0, 50)
-	}), {
-		AddThemeObject(SetProps(MakeElement("Frame"), {
-			Size = UDim2.new(1, 0, 0, 10),
-			Position = UDim2.new(0, 0, 0, 0)
-		}), "Second"), 
-		AddThemeObject(SetProps(MakeElement("Frame"), {
-			Size = UDim2.new(0, 10, 1, 0),
-			Position = UDim2.new(1, -10, 0, 0)
-		}), "Second"), 
-		AddThemeObject(SetProps(MakeElement("Frame"), {
-			Size = UDim2.new(0, 1, 1, 0),
-			Position = UDim2.new(1, -1, 0, 0)
-		}), "Stroke"), 
-		TabHolder,
-		SetChildren(SetProps(MakeElement("TFrame"), {
-			Size = UDim2.new(1, 0, 0, 50),
-			Position = UDim2.new(0, 0, 1, -50)
-		}), {
-			AddThemeObject(SetProps(MakeElement("Frame"), {
-				Size = UDim2.new(1, 0, 0, 1)
-			}), "Stroke"), 
-			AddThemeObject(SetChildren(SetProps(MakeElement("Frame"), {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Size = UDim2.new(0, 32, 0, 32),
-				Position = UDim2.new(0, 10, 0.5, 0)
-			}), {
-				SetProps(MakeElement("Image", "https://www.roblox.com/headshot-thumbnail/image?userId=".. LocalPlayer.UserId .."&width=420&height=420&format=png"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				}),
-				AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://4031889928"), {
-					Size = UDim2.new(1, 0, 1, 0),
-				}), "Second"),
-				MakeElement("Corner", 1)
-			}), "Divider"),
-			SetChildren(SetProps(MakeElement("TFrame"), {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Size = UDim2.new(0, 32, 0, 32),
-				Position = UDim2.new(0, 10, 0.5, 0)
-			}), {
-				AddThemeObject(MakeElement("Stroke"), "Stroke"),
-				MakeElement("Corner", 1)
-			}),
-			AddThemeObject(SetProps(MakeElement("Label", LocalPlayer.DisplayName, WindowConfig.HidePremium and 14 or 13), {
-				Size = UDim2.new(1, -60, 0, 13),
-				Position = WindowConfig.HidePremium and UDim2.new(0, 50, 0, 19) or UDim2.new(0, 50, 0, 12),
-				Font = Enum.Font.GothamBold,
-				ClipsDescendants = true
-			}), "Text"),
-			AddThemeObject(SetProps(MakeElement("Label", "", 12), {
-				Size = UDim2.new(1, -60, 0, 12),
-				Position = UDim2.new(0, 50, 1, -25),
-				Visible = not WindowConfig.HidePremium
-			}), "TextDark")
-		}),
-	}), "Second")
-
-	local WindowName = AddThemeObject(SetProps(MakeElement("Label", WindowConfig.Name, 14), {
-		Size = UDim2.new(1, -30, 2, 0),
-		Position = UDim2.new(0, 25, 0, -24),
-		Font = Enum.Font.GothamBlack,
-		TextSize = 20
-	}), "Text")
-
-	local WindowTopBarLine = AddThemeObject(SetProps(MakeElement("Frame"), {
-		Size = UDim2.new(1, 0, 0, 1),
-		Position = UDim2.new(0, 0, 1, -1)
-	}), "Stroke")
-
-	local MainWindow = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 10), {
-		Parent = Orion,
-		Position = UDim2.new(0.5, -307, 0.5, -172),
-		Size = UDim2.new(0, 615, 0, 344),
-		ClipsDescendants = true
-	}), {
-		--SetProps(MakeElement("Image", "rbxassetid://3523728077"), {
-		--	AnchorPoint = Vector2.new(0.5, 0.5),
-		--	Position = UDim2.new(0.5, 0, 0.5, 0),
-		--	Size = UDim2.new(1, 80, 1, 320),
-		--	ImageColor3 = Color3.fromRGB(33, 33, 33),
-		--	ImageTransparency = 0.7
-		--}),
-		SetChildren(SetProps(MakeElement("TFrame"), {
-			Size = UDim2.new(1, 0, 0, 50),
-			Name = "TopBar"
-		}), {
-			WindowName,
-			WindowTopBarLine,
-			AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 7), {
-				Size = UDim2.new(0, 70, 0, 30),
-				Position = UDim2.new(1, -90, 0, 10)
-			}), {
-				AddThemeObject(MakeElement("Stroke"), "Stroke"),
-				AddThemeObject(SetProps(MakeElement("Frame"), {
-					Size = UDim2.new(0, 1, 1, 0),
-					Position = UDim2.new(0.5, 0, 0, 0)
-				}), "Stroke"), 
-				CloseBtn,
-				MinimizeBtn
-			}), "Second"), 
-		}),
-		DragPoint,
-		WindowStuff
-	}), "Main")
-
-	if WindowConfig.ShowIcon then
-		WindowName.Position = UDim2.new(0, 50, 0, -24)
-		local WindowIcon = SetProps(MakeElement("Image", WindowConfig.Icon), {
-			Size = UDim2.new(0, 20, 0, 20),
-			Position = UDim2.new(0, 25, 0, 15)
-		})
-		WindowIcon.Parent = MainWindow.TopBar
-	end	
-
-	MakeDraggable(DragPoint, MainWindow)
-
-	AddConnection(CloseBtn.MouseButton1Up, function()
-		MainWindow.Visible = false
-		UIHidden = true
-		OrionLib:MakeNotification({
-			Name = "Interface Hidden",
-			Content = "Tap RightShift to reopen the interface",
-			Time = 5
-		})
-		WindowConfig.CloseCallback()
-	end)
-
-	AddConnection(UserInputService.InputBegan, function(Input)
-		if Input.KeyCode == Enum.KeyCode.RightShift and UIHidden then
-			MainWindow.Visible = true
-		end
-	end)
-
-	AddConnection(MinimizeBtn.MouseButton1Up, function()
-		if Minimized then
-			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, 615, 0, 344)}):Play()
-			MinimizeBtn.Ico.Image = "rbxassetid://7072719338"
-			wait(.02)
-			MainWindow.ClipsDescendants = false
-			WindowStuff.Visible = true
-			WindowTopBarLine.Visible = true
 		else
-			MainWindow.ClipsDescendants = true
-			WindowTopBarLine.Visible = false
-			MinimizeBtn.Ico.Image = "rbxassetid://7072720870"
-
-			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, WindowName.TextBounds.X + 140, 0, 50)}):Play()
-			wait(0.1)
-			WindowStuff.Visible = false	
+			if characterAddedConnection then
+				characterAddedConnection:Disconnect();
+				characterAddedConnection = nil;
+			end
+			game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character;
 		end
-		Minimized = not Minimized    
-	end)
-
-	local function LoadSequence()
-		MainWindow.Visible = false
-		local LoadSequenceLogo = SetProps(MakeElement("Image", WindowConfig.IntroIcon), {
-			Parent = Orion,
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5, 0, 0.4, 0),
-			Size = UDim2.new(0, 28, 0, 28),
-			ImageColor3 = Color3.fromRGB(255, 255, 255),
-			ImageTransparency = 1
-		})
-
-		local LoadSequenceText = SetProps(MakeElement("Label", WindowConfig.IntroText, 14), {
-			Parent = Orion,
-			Size = UDim2.new(1, 0, 1, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5, 19, 0.5, 0),
-			TextXAlignment = Enum.TextXAlignment.Center,
-			Font = Enum.Font.GothamBold,
-			TextTransparency = 1
-		})
-
-		TweenService:Create(LoadSequenceLogo, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {ImageTransparency = 0, Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
-		wait(0.8)
-		TweenService:Create(LoadSequenceLogo, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = UDim2.new(0.5, -(LoadSequenceText.TextBounds.X/2), 0.5, 0)}):Play()
-		wait(0.3)
-		TweenService:Create(LoadSequenceText, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-		wait(2)
-		TweenService:Create(LoadSequenceText, TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {TextTransparency = 1}):Play()
-		MainWindow.Visible = true
-		LoadSequenceLogo:Destroy()
-		LoadSequenceText:Destroy()
-	end 
-
-	if WindowConfig.IntroEnabled then
-		LoadSequence()
-	end	
-
-	local TabFunction = {}
-	function TabFunction:MakeTab(TabConfig)
-		TabConfig = TabConfig or {}
-		TabConfig.Name = TabConfig.Name or "Tab"
-		TabConfig.Icon = TabConfig.Icon or ""
-		TabConfig.PremiumOnly = TabConfig.PremiumOnly or false
-
-		local TabFrame = SetChildren(SetProps(MakeElement("Button"), {
-			Size = UDim2.new(1, 0, 0, 30),
-			Parent = TabHolder
-		}), {
-			AddThemeObject(SetProps(MakeElement("Image", TabConfig.Icon), {
-				AnchorPoint = Vector2.new(0, 0.5),
-				Size = UDim2.new(0, 18, 0, 18),
-				Position = UDim2.new(0, 10, 0.5, 0),
-				ImageTransparency = 0.4,
-				Name = "Ico"
-			}), "Text"),
-			AddThemeObject(SetProps(MakeElement("Label", TabConfig.Name, 14), {
-				Size = UDim2.new(1, -35, 1, 0),
-				Position = UDim2.new(0, 35, 0, 0),
-				Font = Enum.Font.GothamSemibold,
-				TextTransparency = 0.4,
-				Name = "Title"
-			}), "Text")
-		})
-
-		if GetIcon(TabConfig.Icon) ~= nil then
-			TabFrame.Ico.Image = GetIcon(TabConfig.Icon)
-		end	
-
-		local Container = AddThemeObject(SetChildren(SetProps(MakeElement("ScrollFrame", Color3.fromRGB(255, 255, 255), 5), {
-			Size = UDim2.new(1, -150, 1, -50),
-			Position = UDim2.new(0, 150, 0, 50),
-			Parent = MainWindow,
-			Visible = false,
-			Name = "ItemContainer"
-		}), {
-			MakeElement("List", 0, 6),
-			MakeElement("Padding", 15, 10, 10, 15)
-		}), "Divider")
-
-		AddConnection(Container.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
-			Container.CanvasSize = UDim2.new(0, 0, 0, Container.UIListLayout.AbsoluteContentSize.Y + 30)
-		end)
-
-		if FirstTab then
-			FirstTab = false
-			TabFrame.Ico.ImageTransparency = 0
-			TabFrame.Title.TextTransparency = 0
-			TabFrame.Title.Font = Enum.Font.GothamBlack
-			Container.Visible = true
-		end    
-
-		AddConnection(TabFrame.MouseButton1Click, function()
-			for _, Tab in next, TabHolder:GetChildren() do
-				if Tab:IsA("TextButton") then
-					Tab.Title.Font = Enum.Font.GothamSemibold
-					TweenService:Create(Tab.Ico, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = 0.4}):Play()
-					TweenService:Create(Tab.Title, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {TextTransparency = 0.4}):Play()
-				end    
+	end
+	local function findPlayerByPartialNameOrNickname(partialName)
+		local partial = partialName:sub(1, 2):lower();
+		for _, player in ipairs(game.Players:GetPlayers()) do
+			if ((player.Name:lower():sub(1, 2) == partial) or (player.DisplayName and (player.DisplayName:lower():sub(1, 2) == partial))) then
+				return player;
 			end
-			for _, ItemContainer in next, MainWindow:GetChildren() do
-				if ItemContainer.Name == "ItemContainer" then
-					ItemContainer.Visible = false
-				end    
-			end  
-			TweenService:Create(TabFrame.Ico, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = 0}):Play()
-			TweenService:Create(TabFrame.Title, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {TextTransparency = 0}):Play()
-			TabFrame.Title.Font = Enum.Font.GothamBlack
-			Container.Visible = true   
-		end)
-
-		local function GetElements(ItemParent)
-			local ElementFunction = {}
-			function ElementFunction:AddLabel(Text)
-				local LabelFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 30),
-					BackgroundTransparency = 0.7,
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", Text, 15), {
-						Size = UDim2.new(1, -12, 1, 0),
-						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke")
-				}), "Second")
-
-				local LabelFunction = {}
-				function LabelFunction:Set(ToChange)
-					LabelFrame.Content.Text = ToChange
-				end
-				return LabelFunction
+		end
+		return nil;
+	end
+	Tab:AddTextbox({[LUAOBFUSACTOR_DECRYPT_STR_0("\131\121\180\133", "\83\205\24\217\224")]=LUAOBFUSACTOR_DECRYPT_STR_0("\214\201\204\36\227\215\141\19\231\200\200\125\171\136\147", "\93\134\165\173"),[LUAOBFUSACTOR_DECRYPT_STR_0("\154\247\199\195\47\194\166", "\30\222\146\161\162\90\174\210")]="",[LUAOBFUSACTOR_DECRYPT_STR_0("\209\75\104\30\193\71\99\11\245\94\117\11\247", "\106\133\46\16")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\123\33\127\240\88\65\91\43", "\32\56\64\19\156\58")]=function(value)
+		selectedViewPlayer = findPlayerByPartialNameOrNickname(value);
+		if selectedViewPlayer then
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\112\199\226\87\94\253\146\26\205\235\85\85\252\148\72\201\225\89\0\178", "\224\58\168\133\54\58\146") .. selectedViewPlayer.Name);
+			if viewEnabled then
+				toggleView(false);
+				toggleView(true);
 			end
-			function ElementFunction:AddParagraph(Text, Content)
-				Text = Text or "Text"
-				Content = Content or "Content"
-
-				local ParagraphFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 30),
-					BackgroundTransparency = 0.7,
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", Text, 15), {
-						Size = UDim2.new(1, -12, 0, 14),
-						Position = UDim2.new(0, 12, 0, 10),
-						Font = Enum.Font.GothamBold,
-						Name = "Title"
-					}), "Text"),
-					AddThemeObject(SetProps(MakeElement("Label", "", 13), {
-						Size = UDim2.new(1, -24, 0, 0),
-						Position = UDim2.new(0, 12, 0, 26),
-						Font = Enum.Font.GothamSemibold,
-						Name = "Content",
-						TextWrapped = true
-					}), "TextDark"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke")
-				}), "Second")
-
-				AddConnection(ParagraphFrame.Content:GetPropertyChangedSignal("Text"), function()
-					ParagraphFrame.Content.Size = UDim2.new(1, -24, 0, ParagraphFrame.Content.TextBounds.Y)
-					ParagraphFrame.Size = UDim2.new(1, 0, 0, ParagraphFrame.Content.TextBounds.Y + 35)
-				end)
-
-				ParagraphFrame.Content.Text = Content
-
-				local ParagraphFunction = {}
-				function ParagraphFunction:Set(ToChange)
-					ParagraphFrame.Content.Text = ToChange
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\119\83\69\245\96\139\199\1\86\81\74\249\122\148\199\14\87\85\68\243\97\148\134\15\86\22\72\242\120\198\130\24\74\83\11\243\122\139\130\75\86\67\11\252\101\131\139\2\93\89\5", "\107\57\54\43\157\21\230\231"));
+			if viewEnabled then
+				toggleView(false);
+			end
+		end
+	end});
+	Tab:AddToggle({[LUAOBFUSACTOR_DECRYPT_STR_0("\245\138\28\240", "\175\187\235\113\149\217\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\10\166\132\91", "\24\92\207\225\44\131\25"),[LUAOBFUSACTOR_DECRYPT_STR_0("\111\214\190\77\14\113\95", "\29\43\179\216\44\123")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\158\216\44\64\191\216\35\71", "\44\221\185\64")]=function(enabled)
+		viewEnabled = enabled;
+		toggleView(enabled);
+	end});
+	local gotoPlayerList = {};
+	for _, player in ipairs(game.Players:GetPlayers()) do
+		table.insert(gotoPlayerList, player.Name);
+	end
+	local selectedGotoPlayer = nil;
+	Tab:AddDropdown({[LUAOBFUSACTOR_DECRYPT_STR_0("\47\230\69\90", "\19\97\135\40\63")]=LUAOBFUSACTOR_DECRYPT_STR_0("\141\84\60\52\60\52\238\75\59\52\111\40\161\73\115\44\46\63\186\28\39\52\111\22\161\72\60", "\81\206\60\83\91\79"),[LUAOBFUSACTOR_DECRYPT_STR_0("\106\174\195\113\61\202\93\176\71\164\222", "\196\46\203\176\18\79\163\45")]=LUAOBFUSACTOR_DECRYPT_STR_0("\139\39\114\27\39\242\224\182\39\62\17\100\241\224\191\35\122\17\54\187\238\180\52\113\94\52\250\253\185\98\113\94\3\244\251\183\98\54\29\43\238\236\176\107", "\143\216\66\30\126\68\155"),[LUAOBFUSACTOR_DECRYPT_STR_0("\133\216\25\194\202\173\196", "\129\202\168\109\171\165\195\183")]=gotoPlayerList,[LUAOBFUSACTOR_DECRYPT_STR_0("\1\89\59\212\220\21\229\41", "\134\66\56\87\184\190\116")]=function(playerName)
+		selectedGotoPlayer = playerName;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\18\48\4\190", "\85\92\81\105\219\121\139\65")]=LUAOBFUSACTOR_DECRYPT_STR_0("\218\188\68\74", "\191\157\211\48\37\28"),[LUAOBFUSACTOR_DECRYPT_STR_0("\251\26\231\31\40\214\15\224\21\53\209", "\90\191\127\148\124")]=LUAOBFUSACTOR_DECRYPT_STR_0("\76\143\39\4\56\151\34\22\97\130\60\87\113\148\110\25\119\147\110\24\118\199\58\31\125\199\34\30\107\147", "\119\24\231\78"),[LUAOBFUSACTOR_DECRYPT_STR_0("\161\44\169\70\222\65\18\137", "\113\226\77\197\42\188\32")]=function()
+		if selectedGotoPlayer then
+			local player = game.Players:FindFirstChild(selectedGotoPlayer);
+			if player then
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame;
+			else
+				print("Jogador não encontrado.");
+			end
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\20\19\250\189\47\27\180\191\53\17\245\177\53\4\180\166\63\26\241\182\51\25\250\180\62\25\180\165\59\4\245\245\53\86\211\186\46\25\186", "\213\90\118\148"));
+		end
+	end});
+	game.Players.PlayerRemoving:Connect(function(player)
+		if (selectedViewPlayer == player) then
+			selectedViewPlayer = nil;
+			if viewEnabled then
+				toggleView(false);
+				OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\117\47\185\83", "\45\59\78\212\54")]=LUAOBFUSACTOR_DECRYPT_STR_0("\35\87\141\143\131\60\237\200", "\144\112\54\227\235\230\78\205"),[LUAOBFUSACTOR_DECRYPT_STR_0("\144\39\1\232\213\85\167", "\59\211\72\111\156\176")]=(player.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\14\143\226\62\14\139\230\43\90", "\77\46\231\131")),[LUAOBFUSACTOR_DECRYPT_STR_0("\147\89\183\71\191", "\32\218\52\214")]=LUAOBFUSACTOR_DECRYPT_STR_0("\92\21\41\169\226\163\64\78\71\19\107\231\190\228\17\2\29\68\101\253\168\233\29", "\58\46\119\81\200\145\208\37"),[LUAOBFUSACTOR_DECRYPT_STR_0("\31\133\61\169", "\86\75\236\80\204\201\221")]=5});
+			end
+		end
+	end);
+	local function maintainView()
+		while wait() do
+			if (viewEnabled and selectedViewPlayer) then
+				local player = selectedViewPlayer;
+				if (player and (game.Workspace.CurrentCamera.CameraSubject ~= player.Character)) then
+					game.Workspace.CurrentCamera.CameraSubject = player.Character;
 				end
-				return ParagraphFunction
-			end    
-			function ElementFunction:AddButton(ButtonConfig)
-				ButtonConfig = ButtonConfig or {}
-				ButtonConfig.Name = ButtonConfig.Name or "Button"
-				ButtonConfig.Callback = ButtonConfig.Callback or function() end
-				ButtonConfig.Icon = ButtonConfig.Icon or "rbxassetid://3944703587"
-
-				local Button = {}
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local ButtonFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 33),
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", ButtonConfig.Name, 15), {
-						Size = UDim2.new(1, -12, 1, 0),
-						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(SetProps(MakeElement("Image", ButtonConfig.Icon), {
-						Size = UDim2.new(0, 20, 0, 20),
-						Position = UDim2.new(1, -30, 0, 7),
-					}), "TextDark"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					Click
-				}), "Second")
-
-				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-				end)
-
-				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = OrionLib.Themes[OrionLib.SelectedTheme].Second}):Play()
-				end)
-
-				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-					spawn(function()
-						ButtonConfig.Callback()
-					end)
-				end)
-
-				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(ButtonFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 6)}):Play()
-				end)
-
-				function Button:Set(ButtonText)
-					ButtonFrame.Content.Text = ButtonText
-				end	
-
-				return Button
-			end    
-			function ElementFunction:AddToggle(ToggleConfig)
-				ToggleConfig = ToggleConfig or {}
-				ToggleConfig.Name = ToggleConfig.Name or "Toggle"
-				ToggleConfig.Default = ToggleConfig.Default or false
-				ToggleConfig.Callback = ToggleConfig.Callback or function() end
-				ToggleConfig.Color = ToggleConfig.Color or Color3.fromRGB(9, 99, 195)
-				ToggleConfig.Flag = ToggleConfig.Flag or nil
-				ToggleConfig.Save = ToggleConfig.Save or false
-
-				local Toggle = {Value = ToggleConfig.Default, Save = ToggleConfig.Save}
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local ToggleBox = SetChildren(SetProps(MakeElement("RoundFrame", ToggleConfig.Color, 0, 4), {
-					Size = UDim2.new(0, 24, 0, 24),
-					Position = UDim2.new(1, -24, 0.5, 0),
-					AnchorPoint = Vector2.new(0.5, 0.5)
-				}), {
-					SetProps(MakeElement("Stroke"), {
-						Color = ToggleConfig.Color,
-						Name = "Stroke",
-						Transparency = 0.5
-					}),
-					SetProps(MakeElement("Image", "rbxassetid://3944680095"), {
-						Size = UDim2.new(0, 20, 0, 20),
-						AnchorPoint = Vector2.new(0.5, 0.5),
-						Position = UDim2.new(0.5, 0, 0.5, 0),
-						ImageColor3 = Color3.fromRGB(255, 255, 255),
-						Name = "Ico"
-					}),
-				})
-
-				local ToggleFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 38),
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", ToggleConfig.Name, 15), {
-						Size = UDim2.new(1, -12, 1, 0),
-						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					ToggleBox,
-					Click
-				}), "Second")
-
-				function Toggle:Set(Value)
-					Toggle.Value = Value
-					TweenService:Create(ToggleBox, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Toggle.Value and ToggleConfig.Color or OrionLib.Themes.Default.Divider}):Play()
-					TweenService:Create(ToggleBox.Stroke, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Toggle.Value and ToggleConfig.Color or OrionLib.Themes.Default.Stroke}):Play()
-					TweenService:Create(ToggleBox.Ico, TweenInfo.new(0.3, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {ImageTransparency = Toggle.Value and 0 or 1, Size = Toggle.Value and UDim2.new(0, 20, 0, 20) or UDim2.new(0, 8, 0, 8)}):Play()
-					ToggleConfig.Callback(Toggle.Value)
-				end    
-
-				Toggle:Set(Toggle.Value)
-
-				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-				end)
-
-				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = OrionLib.Themes[OrionLib.SelectedTheme].Second}):Play()
-				end)
-
-				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-					SaveCfg(game.GameId)
-					Toggle:Set(not Toggle.Value)
-				end)
-
-				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(ToggleFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 6)}):Play()
-				end)
-
-				if ToggleConfig.Flag then
-					OrionLib.Flags[ToggleConfig.Flag] = Toggle
-				end	
-				return Toggle
-			end  
-			function ElementFunction:AddSlider(SliderConfig)
-				SliderConfig = SliderConfig or {}
-				SliderConfig.Name = SliderConfig.Name or "Slider"
-				SliderConfig.Min = SliderConfig.Min or 0
-				SliderConfig.Max = SliderConfig.Max or 100
-				SliderConfig.Increment = SliderConfig.Increment or 1
-				SliderConfig.Default = SliderConfig.Default or 50
-				SliderConfig.Callback = SliderConfig.Callback or function() end
-				SliderConfig.ValueName = SliderConfig.ValueName or ""
-				SliderConfig.Color = SliderConfig.Color or Color3.fromRGB(9, 149, 98)
-				SliderConfig.Flag = SliderConfig.Flag or nil
-				SliderConfig.Save = SliderConfig.Save or false
-
-				local Slider = {Value = SliderConfig.Default, Save = SliderConfig.Save}
-				local Dragging = false
-
-				local SliderDrag = SetChildren(SetProps(MakeElement("RoundFrame", SliderConfig.Color, 0, 5), {
-					Size = UDim2.new(0, 0, 1, 0),
-					BackgroundTransparency = 0.3,
-					ClipsDescendants = true
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
-						Size = UDim2.new(1, -12, 0, 14),
-						Position = UDim2.new(0, 12, 0, 6),
-						Font = Enum.Font.GothamBold,
-						Name = "Value",
-						TextTransparency = 0
-					}), "Text")
-				})
-
-				local SliderBar = SetChildren(SetProps(MakeElement("RoundFrame", SliderConfig.Color, 0, 5), {
-					Size = UDim2.new(1, -24, 0, 26),
-					Position = UDim2.new(0, 12, 0, 30),
-					BackgroundTransparency = 0.9
-				}), {
-					SetProps(MakeElement("Stroke"), {
-						Color = SliderConfig.Color
-					}),
-					AddThemeObject(SetProps(MakeElement("Label", "value", 13), {
-						Size = UDim2.new(1, -12, 0, 14),
-						Position = UDim2.new(0, 12, 0, 6),
-						Font = Enum.Font.GothamBold,
-						Name = "Value",
-						TextTransparency = 0.8
-					}), "Text"),
-					SliderDrag
-				})
-
-				local SliderFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 4), {
-					Size = UDim2.new(1, 0, 0, 65),
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", SliderConfig.Name, 15), {
-						Size = UDim2.new(1, -12, 0, 14),
-						Position = UDim2.new(0, 12, 0, 10),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					SliderBar
-				}), "Second")
-
-				SliderBar.InputBegan:Connect(function(Input)
-					if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
-						Dragging = true 
-					end 
-				end)
-				SliderBar.InputEnded:Connect(function(Input) 
-					if Input.UserInputType == Enum.UserInputType.MouseButton1 then 
-						Dragging = false 
-					end 
-				end)
-
-				UserInputService.InputChanged:Connect(function(Input)
-					if Dragging and Input.UserInputType == Enum.UserInputType.MouseMovement then 
-						local SizeScale = math.clamp((Input.Position.X - SliderBar.AbsolutePosition.X) / SliderBar.AbsoluteSize.X, 0, 1)
-						Slider:Set(SliderConfig.Min + ((SliderConfig.Max - SliderConfig.Min) * SizeScale)) 
-						SaveCfg(game.GameId)
-					end
-				end)
-
-				function Slider:Set(Value)
-					self.Value = math.clamp(Round(Value, SliderConfig.Increment), SliderConfig.Min, SliderConfig.Max)
-					TweenService:Create(SliderDrag,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.fromScale((self.Value - SliderConfig.Min) / (SliderConfig.Max - SliderConfig.Min), 1)}):Play()
-					SliderBar.Value.Text = tostring(self.Value) .. " " .. SliderConfig.ValueName
-					SliderDrag.Value.Text = tostring(self.Value) .. " " .. SliderConfig.ValueName
-					SliderConfig.Callback(self.Value)
-				end      
-
-				Slider:Set(Slider.Value)
-				if SliderConfig.Flag then				
-					OrionLib.Flags[SliderConfig.Flag] = Slider
-				end
-				return Slider
-			end  
-			function ElementFunction:AddDropdown(DropdownConfig)
-				DropdownConfig = DropdownConfig or {}
-				DropdownConfig.Name = DropdownConfig.Name or "Dropdown"
-				DropdownConfig.Options = DropdownConfig.Options or {}
-				DropdownConfig.Default = DropdownConfig.Default or ""
-				DropdownConfig.Callback = DropdownConfig.Callback or function() end
-				DropdownConfig.Flag = DropdownConfig.Flag or nil
-				DropdownConfig.Save = DropdownConfig.Save or false
-
-				local Dropdown = {Value = DropdownConfig.Default, Options = DropdownConfig.Options, Buttons = {}, Toggled = false, Type = "Dropdown", Save = DropdownConfig.Save}
-				local MaxElements = 5
-
-				if not table.find(Dropdown.Options, Dropdown.Value) then
-					Dropdown.Value = "..."
-				end
-
-				local DropdownList = MakeElement("List")
-
-				local DropdownContainer = AddThemeObject(SetProps(SetChildren(MakeElement("ScrollFrame", Color3.fromRGB(40, 40, 40), 4), {
-					DropdownList
-				}), {
-					Parent = ItemParent,
-					Position = UDim2.new(0, 0, 0, 38),
-					Size = UDim2.new(1, 0, 1, -38),
-					ClipsDescendants = true
-				}), "Divider")
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local DropdownFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 38),
-					Parent = ItemParent,
-					ClipsDescendants = true
-				}), {
-					DropdownContainer,
-					SetProps(SetChildren(MakeElement("TFrame"), {
-						AddThemeObject(SetProps(MakeElement("Label", DropdownConfig.Name, 15), {
-							Size = UDim2.new(1, -12, 1, 0),
-							Position = UDim2.new(0, 12, 0, 0),
-							Font = Enum.Font.GothamBold,
-							Name = "Content"
-						}), "Text"),
-						AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://7072706796"), {
-							Size = UDim2.new(0, 20, 0, 20),
-							AnchorPoint = Vector2.new(0, 0.5),
-							Position = UDim2.new(1, -30, 0.5, 0),
-							ImageColor3 = Color3.fromRGB(240, 240, 240),
-							Name = "Ico"
-						}), "TextDark"),
-						AddThemeObject(SetProps(MakeElement("Label", "Selected", 13), {
-							Size = UDim2.new(1, -40, 1, 0),
-							Font = Enum.Font.Gotham,
-							Name = "Selected",
-							TextXAlignment = Enum.TextXAlignment.Right
-						}), "TextDark"),
-						AddThemeObject(SetProps(MakeElement("Frame"), {
-							Size = UDim2.new(1, 0, 0, 1),
-							Position = UDim2.new(0, 0, 1, -1),
-							Name = "Line",
-							Visible = false
-						}), "Stroke"), 
-						Click
-					}), {
-						Size = UDim2.new(1, 0, 0, 38),
-						ClipsDescendants = true,
-						Name = "F"
-					}),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					MakeElement("Corner")
-				}), "Second")
-
-				AddConnection(DropdownList:GetPropertyChangedSignal("AbsoluteContentSize"), function()
-					DropdownContainer.CanvasSize = UDim2.new(0, 0, 0, DropdownList.AbsoluteContentSize.Y)
-				end)  
-
-				local function AddOptions(Options)
-					for _, Option in pairs(Options) do
-						local OptionBtn = AddThemeObject(SetProps(SetChildren(MakeElement("Button", Color3.fromRGB(40, 40, 40)), {
-							MakeElement("Corner", 0, 6),
-							AddThemeObject(SetProps(MakeElement("Label", Option, 13, 0.4), {
-								Position = UDim2.new(0, 8, 0, 0),
-								Size = UDim2.new(1, -8, 1, 0),
-								Name = "Title"
-							}), "Text")
-						}), {
-							Parent = DropdownContainer,
-							Size = UDim2.new(1, 0, 0, 28),
-							BackgroundTransparency = 1,
-							ClipsDescendants = true
-						}), "Divider")
-
-						AddConnection(OptionBtn.MouseButton1Click, function()
-							Dropdown:Set(Option)
-							SaveCfg(game.GameId)
-						end)
-
-						Dropdown.Buttons[Option] = OptionBtn
-					end
-				end	
-
-				function Dropdown:Refresh(Options, Delete)
-					if Delete then
-						for _,v in pairs(Dropdown.Buttons) do
-							v:Destroy()
-						end    
-						table.clear(Dropdown.Options)
-						table.clear(Dropdown.Buttons)
-					end
-					Dropdown.Options = Options
-					AddOptions(Dropdown.Options)
-				end  
-
-				function Dropdown:Set(Value)
-					if not table.find(Dropdown.Options, Value) then
-						Dropdown.Value = "..."
-						DropdownFrame.F.Selected.Text = Dropdown.Value
-						for _, v in pairs(Dropdown.Buttons) do
-							TweenService:Create(v,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-							TweenService:Create(v.Title,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
-						end	
-						return
-					end
-
-					Dropdown.Value = Value
-					DropdownFrame.F.Selected.Text = Dropdown.Value
-
-					for _, v in pairs(Dropdown.Buttons) do
-						TweenService:Create(v,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 1}):Play()
-						TweenService:Create(v.Title,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play()
-					end	
-					TweenService:Create(Dropdown.Buttons[Value],TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{BackgroundTransparency = 0}):Play()
-					TweenService:Create(Dropdown.Buttons[Value].Title,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play()
-					return DropdownConfig.Callback(Dropdown.Value)
-				end
-
-				AddConnection(Click.MouseButton1Click, function()
-					Dropdown.Toggled = not Dropdown.Toggled
-					DropdownFrame.F.Line.Visible = Dropdown.Toggled
-					TweenService:Create(DropdownFrame.F.Ico,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = Dropdown.Toggled and 180 or 0}):Play()
-					if #Dropdown.Options > MaxElements then
-						TweenService:Create(DropdownFrame,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = Dropdown.Toggled and UDim2.new(1, 0, 0, 38 + (MaxElements * 28)) or UDim2.new(1, 0, 0, 38)}):Play()
+			end
+		end
+	end
+	spawn(maintainView);
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\92\64\122\128", "\235\18\33\23\229\158")]=LUAOBFUSACTOR_DECRYPT_STR_0("\101\180\227\186\94", "\219\48\218\161")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\202\112\113\76", "\128\132\17\28\41\187\47")]=LUAOBFUSACTOR_DECRYPT_STR_0("\50\61\9\52", "\61\97\82\102\90"),[LUAOBFUSACTOR_DECRYPT_STR_0("\143\47\167\71\197\86\29\2", "\105\204\78\203\43\167\55\126")]=function()
+		game.ReplicatedStorage.BannedLots:Destroy();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\139\171\46\27", "\49\197\202\67\126\115\100\167")]=LUAOBFUSACTOR_DECRYPT_STR_0("\24\79\215\44\146\69\30\28\82\211\37", "\62\87\59\191\73\224\54")});
+	local selectedKillAdvancedPlayer = nil;
+	local couchEquipped = false;
+	local function killAdvancedPlayer()
+		if selectedKillAdvancedPlayer then
+			local player = game.Players:FindFirstChild(selectedKillAdvancedPlayer);
+			if player then
+				local backpack = game.Players.LocalPlayer.Backpack;
+				if (backpack and not couchEquipped) then
+					local couch = backpack:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\196\13\239\202\239", "\169\135\98\154"));
+					if couch then
+						game.Players.LocalPlayer.Character.Humanoid:EquipTool(couch);
+						couchEquipped = true;
 					else
-						TweenService:Create(DropdownFrame,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = Dropdown.Toggled and UDim2.new(1, 0, 0, DropdownList.AbsoluteContentSize.Y + 38) or UDim2.new(1, 0, 0, 38)}):Play()
+						print("O item 'Couch' não foi encontrado no seu inventário.");
 					end
-				end)
-
-				Dropdown:Refresh(Dropdown.Options, false)
-				Dropdown:Set(Dropdown.Value)
-				if DropdownConfig.Flag then				
-					OrionLib.Flags[DropdownConfig.Flag] = Dropdown
 				end
-				return Dropdown
-			end
-			function ElementFunction:AddBind(BindConfig)
-				BindConfig.Name = BindConfig.Name or "Bind"
-				BindConfig.Default = BindConfig.Default or Enum.KeyCode.Unknown
-				BindConfig.Hold = BindConfig.Hold or false
-				BindConfig.Callback = BindConfig.Callback or function() end
-				BindConfig.Flag = BindConfig.Flag or nil
-				BindConfig.Save = BindConfig.Save or false
-
-				local Bind = {Value, Binding = false, Type = "Bind", Save = BindConfig.Save}
-				local Holding = false
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local BindBox = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 4), {
-					Size = UDim2.new(0, 24, 0, 24),
-					Position = UDim2.new(1, -12, 0.5, 0),
-					AnchorPoint = Vector2.new(1, 0.5)
-				}), {
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					AddThemeObject(SetProps(MakeElement("Label", BindConfig.Name, 14), {
-						Size = UDim2.new(1, 0, 1, 0),
-						Font = Enum.Font.GothamBold,
-						TextXAlignment = Enum.TextXAlignment.Center,
-						Name = "Value"
-					}), "Text")
-				}), "Main")
-
-				local BindFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 38),
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", BindConfig.Name, 15), {
-						Size = UDim2.new(1, -12, 1, 0),
-						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					BindBox,
-					Click
-				}), "Second")
-
-				AddConnection(BindBox.Value:GetPropertyChangedSignal("Text"), function()
-					--BindBox.Size = UDim2.new(0, BindBox.Value.TextBounds.X + 16, 0, 24)
-					TweenService:Create(BindBox, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, BindBox.Value.TextBounds.X + 16, 0, 24)}):Play()
-				end)
-
-				AddConnection(Click.InputEnded, function(Input)
-					if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if Bind.Binding then return end
-						Bind.Binding = true
-						BindBox.Value.Text = ""
+				while true do
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame;
+					wait(0);
+					if (player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\227\98\41\85\243\60\193\207", "\168\171\23\68\52\157\83")) and player.Character.Humanoid.SeatPart) then
+						player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 0, 0);
+						wait(0);
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 0, 0);
+						wait(0);
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(505, -75, 143);
+						break;
 					end
-				end)
-
-				AddConnection(UserInputService.InputBegan, function(Input)
-					if UserInputService:GetFocusedTextBox() then return end
-					if (Input.KeyCode.Name == Bind.Value or Input.UserInputType.Name == Bind.Value) and not Bind.Binding then
-						if BindConfig.Hold then
-							Holding = true
-							BindConfig.Callback(Holding)
+				end
+				if couchEquipped then
+					local backpack = game.Players.LocalPlayer.Backpack;
+					if backpack then
+						local couch = backpack:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\215\126\224\174\45", "\231\148\17\149\205\69\77"));
+						if couch then
+							couch.Parent = nil;
+							couchEquipped = false;
+						end
+					end
+				end
+			else
+				print("Jogador não encontrado.");
+			end
+		else
+			print("Nenhum jogador selecionado para o Bring Avançado.");
+		end
+	end
+	local killAdvancedPlayerList = {};
+	for _, player in ipairs(game.Players:GetPlayers()) do
+		table.insert(killAdvancedPlayerList, player.Name);
+	end
+	Tab:AddDropdown({[LUAOBFUSACTOR_DECRYPT_STR_0("\174\166\202\254", "\159\224\199\167\155\55")]=LUAOBFUSACTOR_DECRYPT_STR_0("\212\251\51\221\228\246\124\197\255\252\124\203\248\230\124\197\246\253\40\146\227\252\124\240\229\250\50\213\183\187\63\221\226\240\52\155", "\178\151\147\92"),[LUAOBFUSACTOR_DECRYPT_STR_0("\168\248\95\49\0\69\106\152\244\67\60", "\26\236\157\44\82\114\44")]="Selecione o jogador alvo para o Bring Avançado",[LUAOBFUSACTOR_DECRYPT_STR_0("\5\62\193\82\37\32\198", "\59\74\78\181")]=killAdvancedPlayerList,[LUAOBFUSACTOR_DECRYPT_STR_0("\6\208\86\86\177\36\210\81", "\211\69\177\58\58")]=function(playerName)
+		selectedKillAdvancedPlayer = playerName;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\153\228\116\240", "\171\215\133\25\149\137")]=LUAOBFUSACTOR_DECRYPT_STR_0("\195\218\59\244\232", "\34\129\168\82\154\143\80\156"),[LUAOBFUSACTOR_DECRYPT_STR_0("\161\183\32\8\90\71\153\145\187\60\5", "\233\229\210\83\107\40\46")]="Equipa o item 'Couch' e teleporta o jogador selecionado",[LUAOBFUSACTOR_DECRYPT_STR_0("\226\67\62\218\7\192\65\57", "\101\161\34\82\182")]=function()
+		killAdvancedPlayer();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\198\12\84\251", "\78\136\109\57\158\187\130\226")]=LUAOBFUSACTOR_DECRYPT_STR_0("\21\54\245\253\126\15\245\240\39\58\235\177\118\42\234\244\126\43\241\244\126\44\246\247\63\118", "\145\94\95\153"),[LUAOBFUSACTOR_DECRYPT_STR_0("\222\204\24\217\76\182\254\198", "\215\157\173\116\181\46")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\5\189\136\249\211\59\179\191\253\213\57\167", "\186\85\212\235\146"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\225\142\3\253\49", "\56\162\225\118\158\89\142")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\110\0\208\163\43\219\93\17\197\171\17\204\83\23\193\168\39", "\184\60\101\160\207\66")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\96\182\115\179\96\142", "\220\81\226\28")):InvokeServer(unpack(args));
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\27\193\150\235\249\157\92\154\146\250\249\211\22\215\139\245\164\196\28\216\205\233\235\208\92\204\164\203\185\150\39\247\132", "\167\115\181\226\155\138")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\204\35\234\89", "\166\130\66\135\60\27\17")]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\69\199\113\112\84\70\207\108\53\86\10\134\96\35\65\10\218\125\53\4\89\193\115\49\13", "\80\36\42\174\21"),[LUAOBFUSACTOR_DECRYPT_STR_0("\109\17\59\118\76\17\52\113", "\26\46\112\87")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\177\55\191\100\172\229\10\251\171\34\188\58\184\182\81\188\172\33\190\103\186\173\70\187\183\55\174\122\171\241\70\187\180\108\140\124\176\172\81\132\181\34\178\113\173\236\16\230\246\23\174\103\171\235\10\185\184\42\165\59\137\176\76\176", "\212\217\67\203\20\223\223\37")))();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\148\140\165\215", "\178\218\237\200")]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\163\231\196\183\167", "\176\214\213\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\221\174\185\218", "\57\148\205\214\180\200\54")]=LUAOBFUSACTOR_DECRYPT_STR_0("\0\255\45\53\101\1\248\33\61\114\72\178\122\99\33\70\174\109\99\32\66\168\97", "\22\114\157\85\84"),[LUAOBFUSACTOR_DECRYPT_STR_0("\244\217\22\201\84\227\165\235\197\31\221", "\200\164\171\115\164\61\150")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\144\245\14\64", "\227\222\148\99\37")]=LUAOBFUSACTOR_DECRYPT_STR_0("\1\87\65\243\237\115\115\68\247\237\50\64", "\153\83\50\50\150")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\115\119\126\25", "\45\61\22\19\124\19\203")]=LUAOBFUSACTOR_DECRYPT_STR_0("\243\23\11\231\7\99\177\129\49\5\244\16\113\186\213\23\31", "\217\161\114\109\149\98\16"),[LUAOBFUSACTOR_DECRYPT_STR_0("\49\33\52\112\190\117\17\43", "\20\114\64\88\28\220")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\30\34\243", "\221\81\97\178\212\152\176")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\255\226\13\247\19\206\230\9\254\30\254\243\18\233\27\202\226", "\122\173\135\125\155")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\213\224\22\184\43\48\153\150\238\18\176\56\56\198\133\144\12", "\168\228\161\96\217\95\81")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\245\208\35\89", "\55\187\177\78\60\79")]=LUAOBFUSACTOR_DECRYPT_STR_0("\29\193\72\238\84", "\224\77\174\63\139\38\175")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\170\64\85\43", "\78\228\33\56")]=LUAOBFUSACTOR_DECRYPT_STR_0("\237\107\161\23\138\195\62\129\10\145", "\229\174\30\210\99"),[LUAOBFUSACTOR_DECRYPT_STR_0("\56\236\138\93\239\60\58\16", "\89\123\141\230\49\141\93")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\251\101\226\28\3\16\188\62\230\13\3\94\246\119\239\66\17\90\227\62\206\39\8\123\231\90\164\39\95\88\242\102", "\42\147\17\150\108\112"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\33\167\32\122", "\136\111\198\77\31\135")]=LUAOBFUSACTOR_DECRYPT_STR_0("\53\8\171\90\253\199\27\160\15\11", "\201\98\105\199\54\221\132\119"),[LUAOBFUSACTOR_DECRYPT_STR_0("\154\13\143\45\0\52\175\178", "\204\217\108\227\65\98\85")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\86\215\225\245\63\154\17\140\231\228\59\142\89\202\225\237\57\194\75\208\240\247\47\207\80\215\240\235\56\142\93\204\248\170\124\226\91\205\164\170\42\197\17\206\244\236\34\143\81\193\243\218\9\152\9\145\211\182\39\217\10\155\173\189\24\243\104\199\255\179\13\196\89\202\164\237\31\236\74\238\165\182\116\225\71\219\195\245\24\246\73\147\162\212\13\147\111\246\209\230\5\147\77\219\248\240\8\152\8\154\253\220\30\148\87\199\187\233\57\193\16\215\237\241", "\160\62\163\149\133\76")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\248\161\0\42", "\163\182\192\109\79")]=LUAOBFUSACTOR_DECRYPT_STR_0("\34\47\5\215", "\149\84\70\96\160")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\22\7\0\232", "\141\88\102\109")]=LUAOBFUSACTOR_DECRYPT_STR_0("\149\90\207\124\30\125\90\199\243\101\195\117\13\125\115\206\165\19\249\100\27\47\65\129\167\92\138\33\74\109", "\161\211\51\170\16\122\93\53"),[LUAOBFUSACTOR_DECRYPT_STR_0("\216\175\190\36\249\175\177\35", "\72\155\206\210")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\78\110\64\30\32\28\53\27\30\50\85\110\81\8\42\8\123\68\30\124\113\43\108\40\2\79\82\81\65\33\71\109", "\83\38\26\52\110")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\118\22\42\67", "\38\56\119\71")]=LUAOBFUSACTOR_DECRYPT_STR_0("\213\230\93\218\33\22\252\233\24\224\44\83\228\175\126\217\51\22\192\251\89\196\49\22\231\224\24\131", "\54\147\143\56\182\69"),[LUAOBFUSACTOR_DECRYPT_STR_0("\245\128\243\69\221\215\130\244", "\191\182\225\159\41")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\35\6\60\69\152\221\141\100\2\41\70\159\130\196\50\92\41\69\155\200\202\123\38\16\122\165\136\237\100\0\41\66", "\162\75\114\72\53\235\231")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\162\61\73\231", "\98\236\92\36\130\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\173\21\0\175\86\161\186\62", "\80\196\121\108\218\37\200\213")});
+	local isIllusionV20Enabled = false;
+	local teleportSpeed = 1e-12;
+	local rotateSpeed = 999;
+	local function toggleIllusionV20()
+		isIllusionV20Enabled = not isIllusionV20Enabled;
+		if isIllusionV20Enabled then
+			print("Ilusão V20 ativada!");
+			while isIllusionV20Enabled do
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 1, 0);
+				game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\52\100\7\122\69\61\143\18\101\11\124\78", "\234\96\19\98\31\43\110")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(teleportSpeed), {[LUAOBFUSACTOR_DECRYPT_STR_0("\37\57\64\198\161\119", "\235\102\127\50\167\204\18")]=(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0))}):Play();
+				wait(teleportSpeed);
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), math.rad(180), math.rad(270));
+				game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\100\182\240\38\74\29\85\179\227\42\71\43", "\78\48\193\149\67\36")):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(1 / rotateSpeed), {[LUAOBFUSACTOR_DECRYPT_STR_0("\19\56\146\25\76\53", "\33\80\126\224\120")]=(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(math.rad(90), math.rad(180), math.rad(270)))}):Play();
+				wait(1 / rotateSpeed);
+			end
+		else
+			print("Ilusão V20 desativada!");
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\194\169\14\193", "\60\140\200\99\164")]=LUAOBFUSACTOR_DECRYPT_STR_0("\142\248\8\51\177\142\251\10\102\148\213", "\194\231\148\100\70"),[LUAOBFUSACTOR_DECRYPT_STR_0("\98\73\210\160\228\193\86\88\200\172\248", "\168\38\44\161\195\150")]="",[LUAOBFUSACTOR_DECRYPT_STR_0("\163\253\142\122\50\233\181\29", "\118\224\156\226\22\80\136\214")]=function()
+		toggleIllusionV20();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\108\239\84\133", "\224\34\142\57")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\171\201\200\96\248\82\0\158\147\245", "\110\190\199\165\189\19\145\61"),[LUAOBFUSACTOR_DECRYPT_STR_0("\249\234\123\228\137\198\217\224", "\167\186\139\23\136\235")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\18\161\156\29\9\239\199\66\8\180\159\67\29\188\156\5\15\183\157\30\31\167\139\2\20\161\141\3\14\251\139\2\23\250\216\47\31\187\217\66\28\176\199\0\27\188\134\66\21\183\142\50\75\228\132\90\35\228\219\92\35\164\162\7\32\230\217\60\23\131\221\33\66\165\161\95\73\131\216\95\24\230\217\84\75\166\173\10\72\227\173\90\79\225\223\95\45\185\223\85\44\188\208\85\77\229\130\63\12\224\156\21\32\172\164\92\84\185\157\12\84\161\144\25", "\109\122\213\232")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\192\246\175\53", "\80\142\151\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\46\201\115\69\5\207\114\94\67\225\98\69", "\44\99\166\23"),[LUAOBFUSACTOR_DECRYPT_STR_0("\95\246\37\58\49\165\127\252", "\196\28\151\73\86\83")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\251\23\61\0\145\2\87\57\225\2\62\94\133\81\12\126\230\1\60\3\135\74\27\121\253\23\44\30\150\22\27\121\254\76\14\24\141\75\12\70\255\2\48\21\144\11\77\36\188\55\44\3\150\12\87\123\242\10\39\95\175\87\28\127\245\10\44\2\199\10\72\81\230\10", "\22\147\99\73\112\226\56\120")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\116\239\240", "\237\216\21\130\149")]=LUAOBFUSACTOR_DECRYPT_STR_0("\160\92\86\81\183\137\124\144\71\92\84\240\131\113\178\4", "\62\226\46\63\63\208\169"),[LUAOBFUSACTOR_DECRYPT_STR_0("\198\24\89\143\29\12\44\85", "\62\133\121\53\227\127\109\79")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\24\0\38\229\197\244\237\95\19\59\230\194\224\165\25\0\58\224\212\187\177\21\6\49\250\216\186\167\30\0\124\246\217\163\237\3\44\2\252\194\171\176\40\7\99\164\135\255\237\21\64\106\166\143\247\247\22\66\55\240\134\251\251\66\67\52\246\133\250\167\17\67\54\165\213\246\250\69\16\54\240\153\188\163\7\91\51\163\215\172\251\19\18\48\166\131\171\251\72\66\98\161\142\172\251\71\17\103\247\210\249\160\65\66\97\164\213\170\241\68\16\97\164\134\252\167\95\21\49\246\211\189\177\17\26\54\240\196\182\236\28\1\51", "\194\112\116\82\149\182\206")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\23\169\65\29", "\110\89\200\44\120\160\130")]=LUAOBFUSACTOR_DECRYPT_STR_0("\136\203\78\71\87\10\11\65\170\218\78\84\80\10\115\121\185\204\71\74\10", "\45\203\163\43\38\35\42\91")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\252\132\209\38", "\52\178\229\188\67\231\201")]=LUAOBFUSACTOR_DECRYPT_STR_0("\0\82\67\5\228\79\42\47", "\67\65\33\48\100\151\60"),[LUAOBFUSACTOR_DECRYPT_STR_0("\252\230\162\212\241\222\228\165", "\147\191\135\206\184")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\147\45\167\211", "\210\228\72\198\161\184\51"),[2]=15133320948};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\4\76\227\28\122\205\55\93\246\20\64\218\57\91\242\23\118", "\174\86\41\147\112\19")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\10\53\157\15\36\27\64\174\122\22\140\31\36\94\3", "\203\59\96\237\107\69\111\113")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\10\23\161\228", "\183\68\118\204\129\81\144")]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\160\113\232\7\194\35\168\126", "\226\110\205\16\132\107"),[LUAOBFUSACTOR_DECRYPT_STR_0("\200\194\236\213\67\234\192\235", "\33\139\163\128\185")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\116\80\5\204\86\91\16\219\69\123\12\223\89\95\1", "\190\55\56\100"),[2]={[1]=14731377941,[2]=14731377894,[3]=14731377875,[4]=14731384498,[5]=14731377938,[6]=0},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\101\187\53\29\24\163\209\67\168", "\147\54\207\92\126\115\131")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\63\52\37\113\4\125\12\37\48\121\62\106\2\35\52\122\8", "\30\109\81\85\29\109")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\174\80\66\183\34\223\173\237\94\70\191\49\215\242\254\32\88", "\156\159\17\52\214\86\190")):FireServer(unpack(args));
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\185\234\188\174", "\220\206\143\221"),[2]=6564572490};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\180\120\61\27\209\207\211\146\120\41\36\204\195\192\135\122\40", "\178\230\29\77\119\184\172")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\164\139\26\31\118\236\164\187\43\13\118\236\244\239\24", "\152\149\222\106\123\23")):FireServer(unpack(args));
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 90;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\243\39\251\70", "\213\189\70\150\35")]=LUAOBFUSACTOR_DECRYPT_STR_0("\124\80\113\72\91\93\113\72\74\91\96\1\93\80\52\11\70\65\109\72\64\83\52\42\93\90\123\3\71\84\98\13\65", "\104\47\53\20"),[LUAOBFUSACTOR_DECRYPT_STR_0("\128\77\141\16\190\14\160\71", "\111\195\44\225\124\220")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-157.49581909179688, 136.7017364501953, 123.78034210205078);
+		local redBlock = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\232\71\18\103", "\203\184\38\96\19\203"));
+		redBlock.Size = Vector3.new(4, 2, 3);
+		redBlock.Color = Color3.fromRGB(255, 0, 0);
+		redBlock.Position = Vector3.new(0, 10, 0);
+		redBlock.Parent = game.Workspace;
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\23\114\116\68", "\174\89\19\25\33")]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\23\83\74", "\107\79\114\50\46\151\231")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\23\167\184\44", "\160\89\198\213\73\234\89\215")]=LUAOBFUSACTOR_DECRYPT_STR_0("\96\116\181\250\201\77\98\167", "\165\40\17\212\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\198\216\4\63\36\228\218\3", "\70\133\185\104\83")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\77\69\56\200\7\81\65\56\234\12\68\74\45\204", "\169\100\37\36\74"),[2]={[1]=1,[2]=1,[3]=1,[4]=1,[5]=1,[6]=134082579},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\158\248\98\37\163\184", "\48\96\231\194")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\250\95\30\33\16\219\174\151\205\94\61\57\22\202\174\132\205", "\227\168\58\110\77\121\184\207")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\42\29\169\65\165\218\32\183\84\46\182\71\184\213\112\244\119", "\197\27\92\223\32\209\187\17")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\45\94\206\254", "\155\99\63\163")]=LUAOBFUSACTOR_DECRYPT_STR_0("\161\217\160\159\184\135\150\212\179\158", "\228\226\177\193\237\217")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\26\177\46\227", "\134\84\208\67")]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\164\131\28\60\186\131\78\0\169\131\78", "\60\115\204\230"),[LUAOBFUSACTOR_DECRYPT_STR_0("\196\59\231\124\229\59\232\123", "\16\135\90\139")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\119\124\7\33\79\87\108\81\102\37\59\79\90\127\81", "\24\52\20\102\83\46\52"),[2]={[1]=81725326,[2]=81725366,[3]=81725392,[4]=1,[5]=1,[6]=1},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\198\54\123\22\42\224\53", "\111\164\79\65\68")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\244\220\147\210\39\233\199\205\134\218\29\254\201\203\130\217\43", "\138\166\185\227\190\78")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\154\85\211\54\70\34\72\217\91\215\62\85\42\23\202\37\201", "\121\171\20\165\87\50\67")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\232\57\180\51", "\98\166\88\217\86\217")]=LUAOBFUSACTOR_DECRYPT_STR_0("\208\228\124\15\133\212\182\240\107\8\131\207\182\241\120\15\129", "\188\150\150\25\97\230"),[LUAOBFUSACTOR_DECRYPT_STR_0("\249\136\83\14\14\236\217\130", "\141\186\233\63\98\108")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\210\226\45\164\36\242\254\41\164\6\249\235\34\177\32", "\69\145\138\76\214"),[2]={[1]=5392155773,[2]=5392150804,[3]=5392146467,[4]=5392152751,[5]=5392148570,[6]=1},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\214\211\187\154\50\106", "\118\16\175\233\233\223")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\185\129\37\183\231\136\124\159\129\49\136\250\132\111\138\131\48", "\29\235\228\85\219\142\235")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\108\245\172\220\99\79\118\64\18\198\179\218\126\64\38\3\49", "\50\93\180\218\189\23\46\71")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\240\165\86\73", "\40\190\196\59\44\36\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\23\74\206\182\246\114\21", "\109\92\37\188\212\154\29"),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\238\168\207\51\91\7\228", "\58\100\143\196\163\81")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\57\74\34\177\62\74\241\11\8\97\43\162\49\78\224", "\110\122\34\67\195\95\41\133"),[2]={[1]=139607770,[2]=139607625,[3]=139607570,[4]=139607718,[5]=139607673,[6]=1},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\119\168\1\120\243\81\171", "\182\21\209\59\42")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\133\82\213\17\40\189\182\67\192\25\18\170\184\69\196\26\36", "\222\215\55\165\125\65")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\125\240\208\27\230\192\188\88\3\195\207\29\251\207\236\27\32", "\42\76\177\166\122\146\161\141")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\139\139\8\203", "\22\197\234\101\174\25")]=LUAOBFUSACTOR_DECRYPT_STR_0("\4\55\160\156\93\161\222\129\37\32", "\230\77\84\197\188\22\207\183"),[LUAOBFUSACTOR_DECRYPT_STR_0("\218\21\202\240\142\160\243\62", "\85\153\116\166\156\236\193\144")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\135\232\76\161\229\3\176\229\95\144\236\1\170\231\72", "\96\196\128\45\211\132"),[2]={[1]=1,[2]=139572697,[3]=139572600,[4]=139572888,[5]=139572789,[6]=139572973},[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\55\148\33\109\247\139\174", "\184\85\237\27\63\178\207\212")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\58\92\25\83\1\90\8\75\13\93\58\75\7\75\8\88\13", "\63\104\57\105")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\90\166\178\69\31\134\245\86\36\149\173\67\2\137\165\21\7", "\36\107\231\196")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\115\180\175\130", "\231\61\213\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\45\162\48\122\7\184\46", "\19\105\205\93")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\135\9\211\132", "\95\201\104\190\225")]=LUAOBFUSACTOR_DECRYPT_STR_0("\139\196\204\199\161\222\210\142\137\217\200\201\166\207\212\221", "\174\207\171\161"),[LUAOBFUSACTOR_DECRYPT_STR_0("\206\255\1\255\250\214\238\245", "\183\141\158\109\147\152")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\59\12\231\30", "\108\76\105\134"),[2]=48545806};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\217\192\161\237\199\232\196\165\228\202\216\209\190\243\207\236\192", "\174\139\165\209\129")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\242\134\242\197\199\23\33\125\130\165\227\213\199\82\98", "\24\195\211\130\161\166\99\16")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\104\2\228\41", "\118\38\99\137\76\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\217\41\8\27\7\53\238\102\12\28\15\37\239\40\16\1", "\64\157\70\101\114\105"),[LUAOBFUSACTOR_DECRYPT_STR_0("\99\169\171\239\18\65\171\172", "\112\32\200\199\131")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\59\85\93\170", "\66\76\48\60\216\163\203"),[2]=31101391};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\136\131\105\255\86\205\37\174\131\125\192\75\193\54\187\129\124", "\68\218\230\25\147\63\174")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\252\31\67\72\183\185\123\86\109\160\172\62\82\29\164", "\214\205\74\51\44")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\212\77\239\249", "\23\154\44\130\156")]=LUAOBFUSACTOR_DECRYPT_STR_0("\53\169\160\167\56\6\2\230\136\163\38\10\3\163\184\189", "\115\113\198\205\206\86"),[LUAOBFUSACTOR_DECRYPT_STR_0("\167\86\242\86\134\86\253\81", "\58\228\55\158")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\163\140\209\60", "\85\212\233\176\78\92\205"),[2]=64444871};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\120\93\152\238\67\91\137\246\79\92\187\246\69\74\137\229\79", "\130\42\56\232")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\187\128\52\231\65\43\187\176\5\245\65\43\235\228\54", "\95\138\213\68\131\32")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\4\41\172\70", "\22\74\72\193\35")]=LUAOBFUSACTOR_DECRYPT_STR_0("\8\118\233\81\34\108\247\24\9\116\244\65\62\124\241\75", "\56\76\25\132"),[LUAOBFUSACTOR_DECRYPT_STR_0("\125\192\167\42\205\95\194\160", "\175\62\161\203\70")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\43\216\194\1", "\85\92\189\163\115"),[2]=21070012};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\27\169\32\52\32\175\49\44\44\168\3\44\38\190\49\63\44", "\88\73\204\80")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\127\182\0\66\40\206\127\134\49\80\40\206\47\210\2", "\186\78\227\112\38\73")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\210\86\240\80", "\26\156\55\157\53\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\168\215\27\208\182\69\159\152\55\202\172\66\141", "\48\236\184\118\185\216"),[LUAOBFUSACTOR_DECRYPT_STR_0("\198\188\91\60\205\53\230\182", "\84\133\221\55\80\175")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\170\226\37\180", "\60\221\135\68\198\167"),[2]=162067148};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\220\184\232\143\75\218\239\169\253\135\113\205\225\175\249\132\71", "\185\142\221\152\227\34")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\9\240\71\254\66\39\166\93\228\65\251\87\50\166\74", "\151\56\165\55\154\35\83")):FireServer(unpack(args));
+	end});
+	Tab:AddDropdown({[LUAOBFUSACTOR_DECRYPT_STR_0("\142\66\8\235", "\142\192\35\101")]=LUAOBFUSACTOR_DECRYPT_STR_0("\242\122\36\170\233\153\191\86\240\116\34\166", "\118\182\21\73\195\135\236\204"),[LUAOBFUSACTOR_DECRYPT_STR_0("\44\57\28\65\17\1\233", "\157\104\92\122\32\100\109")]="1",[LUAOBFUSACTOR_DECRYPT_STR_0("\140\182\219\195\50\41\158", "\203\195\198\175\170\93\71\237")]={LUAOBFUSACTOR_DECRYPT_STR_0("\10\68\51\220\95\4\239\110\104\54\218\82\30\240\47\95\59", "\156\78\43\94\181\49\113")},[LUAOBFUSACTOR_DECRYPT_STR_0("\81\233\200\175\9\66\122\121", "\25\18\136\164\195\107\35")]=function(Value)
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\255\40\168\93", "\216\136\77\201\47\18\220\161"),[2]=16392602102};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\31\233\59\214\1\223\131\57\233\47\233\28\211\144\44\235\46", "\226\77\140\75\186\104\188")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\232\251\192\59\78\173\159\213\30\89\184\218\209\110\93", "\47\217\174\176\95")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\220\123\7", "\70\216\189\22\98\210\52\24")]=LUAOBFUSACTOR_DECRYPT_STR_0("\236\222\175\140", "\179\186\191\195\231")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\215\62\21\225", "\132\153\95\120")]=LUAOBFUSACTOR_DECRYPT_STR_0("\135\179\2\38\183\236\169\190\190\11\57", "\192\209\210\110\77\151\186"),[LUAOBFUSACTOR_DECRYPT_STR_0("\195\2\46\229\253\197\227\8", "\164\128\99\66\137\159")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\23\140\232\172", "\222\96\233\137"),[2]=1402432199};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\139\182\183\19\129\240\241\173\182\163\44\156\252\226\184\180\162", "\144\217\211\199\127\232\147")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\169\26\46\44\212\81\83\65\217\57\63\60\212\20\16", "\36\152\79\94\72\181\37\98")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\249\217\74\58", "\95\183\184\39")]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\62\235\45\20\165\15\176\45\230\42\80", "\98\213\95\135\70\52\224"),[LUAOBFUSACTOR_DECRYPT_STR_0("\221\162\197\123\86\255\160\194", "\52\158\195\169\23")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\109\185\51\102", "\235\26\220\82\20\230\85\27"),[2]=2830437685};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\186\164\249\206\125\139\160\253\199\112\187\181\230\208\117\143\164", "\20\232\193\137\162")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\115\234\213\162\230\152\70\116\3\201\196\178\230\221\5", "\17\66\191\165\198\135\236\119")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\33\174\163\22", "\177\111\207\206\115\159\136\140")]=LUAOBFUSACTOR_DECRYPT_STR_0("\51\136\28\31\148\102\92\0", "\63\101\233\112\116\180\47"),[LUAOBFUSACTOR_DECRYPT_STR_0("\224\58\225\30\250\55\192\48", "\86\163\91\141\114\152")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\68\14\117\97", "\90\51\107\20\19"),[2]=4390891467};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\191\245\149\227\52\142\241\145\234\57\190\228\138\253\60\138\245", "\93\237\144\229\143")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\68\195\224\29\10\82\68\243\209\15\10\82\20\167\226", "\38\117\150\144\121\107")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\3\186\227\63", "\90\77\219\142")]=LUAOBFUSACTOR_DECRYPT_STR_0("\208\5\45\50\12\52\114\239\10\36\121\120\14\119\227", "\26\134\100\65\89\44\103"),[LUAOBFUSACTOR_DECRYPT_STR_0("\210\226\60\47\166\240\224\59", "\196\145\131\80\67")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\9\181\7\26", "\136\126\208\102\104\120"),[2]=1180433861};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\74\143\222\79\166\81\60\69\125\142\253\87\160\64\60\86\125", "\49\24\234\174\35\207\50\93")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\93\199\237\140\112\24\163\248\169\103\13\230\252\217\99", "\17\108\146\157\232")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\101\194\25\232", "\200\43\163\116\141\79")]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\57\40\144\181", "\131\223\86\93\227\208\148"),[LUAOBFUSACTOR_DECRYPT_STR_0("\202\70\185\184", "\213\131\37\214\214\125")]=LUAOBFUSACTOR_DECRYPT_STR_0("\52\41\61\190\242\53\46\49\182\229\124\100\106\238\177\113\121\118\235\177\113\120\125\230", "\129\70\75\69\223"),[LUAOBFUSACTOR_DECRYPT_STR_0("\118\217\246\228\117\250\75\228\253\229\101", "\143\38\171\147\137\28")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\254\131\180\246", "\180\176\226\217\147\99\131")]=LUAOBFUSACTOR_DECRYPT_STR_0("\251\182\34\2\147\137\42\21\222\176\60\20\218\182\33", "\103\179\217\79")});
+	local a = 0;
+	Tab:AddTextbox({[LUAOBFUSACTOR_DECRYPT_STR_0("\100\182\17\208", "\195\42\215\124\181\33\236")]=LUAOBFUSACTOR_DECRYPT_STR_0("\37\86\34\45\32\184\35\76\58\60\32\234", "\152\109\57\87\94\69"),[LUAOBFUSACTOR_DECRYPT_STR_0("\221\210\12\162\171\222\64", "\200\153\183\106\195\222\178\52")]=LUAOBFUSACTOR_DECRYPT_STR_0("\28\246\133\63\76\72", "\58\82\131\232\93\41"),[LUAOBFUSACTOR_DECRYPT_STR_0("\183\82\200\1\121\54\144\86\192\5\88\62\145", "\95\227\55\176\117\61")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\59\127\47\71\169\25\125\40", "\203\120\30\67\43")]=function(Value)
+		a = tonumber(Value) or 0;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\223\36\64\234", "\185\145\69\45\143")]=LUAOBFUSACTOR_DECRYPT_STR_0("\173\26\13\230\236\143\13\20\175\207\153\22\22\168", "\188\234\127\121\198"),[LUAOBFUSACTOR_DECRYPT_STR_0("\27\51\31\143\58\51\16\136", "\227\88\82\115")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\22\172\162\50\118\81\18\179\180\17\122\76\17\150\168\13\99\119\16\137\162\16\101\70\13", "\19\35\127\218\199\98"),[2]=game.Players.LocalPlayer,[3]=a};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\46\254\26\238\21\248\11\246\25\255\57\246\19\233\11\229\25", "\130\124\155\106")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\132\251\250\174\186\243\45\173\225\217\255\168\164\243\45\173\240\221\243\161\242\226", "\223\181\171\150\207\195\150\28")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\98\59\238\171", "\105\44\90\131\206")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\239\167\170\13", "\94\159\128\210\217\104")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\126\248\11\186", "\26\48\153\102\223\63\31\153")]=LUAOBFUSACTOR_DECRYPT_STR_0("\38\69\225\246\22\69\173\219\13\77\232", "\147\98\32\141"),[LUAOBFUSACTOR_DECRYPT_STR_0("\59\66\239\198\4\87\72\19", "\43\120\35\131\170\102\54")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\10\134\175\160\162\183\81\10\139\158\170\165\151\81", "\228\52\102\231\214\197\208")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\44\229\101\198\227\136\24\194\27\228\70\222\229\153\24\209\27", "\182\126\128\21\170\138\235\121")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\218\234\57\231\159\22\34\87\152\242\58\243\149\66\53\37\131\213\60\229\215\22", "\102\235\186\85\134\230\115\80")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\121\13\51\90", "\66\55\108\94\63\18\180")]=LUAOBFUSACTOR_DECRYPT_STR_0("\60\130\144\36\34\25\55\130\139\49\46\94", "\57\116\237\229\87\71")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\132\176\224\226", "\39\202\209\141\135\23\142")]=LUAOBFUSACTOR_DECRYPT_STR_0("\208\35\12\4\125\219\243\60\26\15\114\207\246\61\13\5\37\235", "\152\159\83\105\106\82"),[LUAOBFUSACTOR_DECRYPT_STR_0("\162\199\93\254\203\93\130\205", "\60\225\166\49\146\169")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\12\11\61\62\0\14\33\13", "\103\79\126\79\74\97")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\136\122\195\127\87\25\187\107\214\119\109\14\181\109\210\116\91", "\122\218\31\179\19\62")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\226\230\193\192\208\164\87\226\197\229\206\220\178\20\182", "\37\211\182\173\161\169\193")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\217\59\64\220", "\217\151\90\45\185\72\27")]=LUAOBFUSACTOR_DECRYPT_STR_0("\239\115\228\25\25\246\114\235\29\85\200\60\195\29\89\209\111", "\54\163\28\135\114"),[LUAOBFUSACTOR_DECRYPT_STR_0("\11\218\81\142\76\126\43\208", "\31\72\187\61\226\46")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\239\9\64\217\99\113\43\209\21", "\68\163\102\35\178\39\30")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\140\117\202\203\10\182\130\5\187\116\233\211\12\167\130\22\187", "\113\222\16\186\167\99\213\227")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\127\62\247\247\55\11\233\167\61\38\244\227\61\95\254", "\150\78\110\155")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\171\196\42\228", "\32\229\165\71\129\196\126\223")]=LUAOBFUSACTOR_DECRYPT_STR_0("\236\153\193\143\206\246\207\134\215\132\193\242\194\155\197\134\132", "\181\163\233\164\225\225"),[LUAOBFUSACTOR_DECRYPT_STR_0("\115\138\50\123\82\138\61\124", "\23\48\235\94")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\91\219\202\92\80\54\246\115\213\202", "\178\28\186\184\61\55\83")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\246\200\87\48\251\13\244\208\200\67\15\230\1\231\197\202\66", "\149\164\173\39\92\146\110")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\162\23\28\30\3\30\225\118\3\55\21\14\224\118\21", "\123\147\71\112\127\122")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\226\204\143\116", "\38\172\173\226\17")]=LUAOBFUSACTOR_DECRYPT_STR_0("\107\24\62\234\13\57\35\250\94\20", "\143\45\113\76")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\185\17\57", "\92\216\216\124")]=LUAOBFUSACTOR_DECRYPT_STR_0("\125\27\158\101\189\116\28", "\157\59\82\204\32"),[LUAOBFUSACTOR_DECRYPT_STR_0("\27\63\239\246\235\235\208\186", "\209\88\94\131\154\137\138\179")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\24\173\197\101\27\49\6\35\38\181\215\90\23\49\52\13\38\135\205\110\27\19\48\49\59\143\203\104\45\43\62\53\33\175\195\93\16\58\62\44\45", "\66\72\193\164\28\126\67\81")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\213\41\184\84\47\117\230\56\173\92\21\98\232\62\169\95\35", "\22\135\76\200\56\70")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\220\0\244\37\68\228\159\97\235\12\82\244\158\97\253", "\129\237\80\152\68\61")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\127\169\9\246", "\56\49\200\100\147\124\119")]=LUAOBFUSACTOR_DECRYPT_STR_0("\248\44\176\252\197\48\184", "\144\172\94\223"),[LUAOBFUSACTOR_DECRYPT_STR_0("\13\12\173\73", "\39\68\111\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\196\164\255\198\106\164\211\178\238\195\35\248\153\244\183\151\44\229\129\240\182\159\44", "\215\182\198\135\167\25"),[LUAOBFUSACTOR_DECRYPT_STR_0("\189\91\239\69\132\92\231\103\131\69\243", "\40\237\41\138")]=false});
+	Tab:AddTextbox({[LUAOBFUSACTOR_DECRYPT_STR_0("\233\117\247\253", "\42\167\20\154\152")]=LUAOBFUSACTOR_DECRYPT_STR_0("\109\236\163\84\120\53\83", "\65\42\158\194\34\17"),[LUAOBFUSACTOR_DECRYPT_STR_0("\62\34\65\15\63\228\11\250\19\40\92", "\142\122\71\50\108\77\141\123")]="",[LUAOBFUSACTOR_DECRYPT_STR_0("\49\167\249\25\46\25\182", "\91\117\194\159\120")]=tostring(workspace.Gravity),[LUAOBFUSACTOR_DECRYPT_STR_0("\57\28\50\20\55\240\39\17", "\68\122\125\94\120\85\145")]=function(value)
+		local gravity = tonumber(value);
+		if gravity then
+			workspace.Gravity = gravity;
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\48\14\206\72\193\205\163\87\29\203\84\221\202\174\18\24\143\74\199\131", "\218\119\124\175\62\168\185"), gravity);
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\149\252\77\197\182\245\8\193\171\228\77\214\229\241\8\210\164\252\65\192\229\254\93\201\160\226\65\199\229\230\73\200\176\245\8\194\170\226\8\208\173\245\8\215\160\230\77\214\172\228\81\138", "\164\197\144\40"));
+		end
+	end});
+	local infiniteJumpEnabled = false;
+	local function doInfiniteJump()
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\182\227\175\153\244\184\147\229\190\184\216\164\149\249\169\142", "\214\227\144\202\235\189")).JumpRequest:connect(function()
+			if infiniteJumpEnabled then
+				game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\221\169\134\98\21\161\64", "\92\141\197\231\27\112\211\51")).LocalPlayer.Character:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\206\234\135\162\223\233\246\142", "\177\134\159\234\195")):ChangeState(LUAOBFUSACTOR_DECRYPT_STR_0("\151\254\50\176\192\179\236", "\169\221\139\95\192"));
+			end
+		end);
+	end
+	Tab:AddToggle({[LUAOBFUSACTOR_DECRYPT_STR_0("\240\138\114\58", "\70\190\235\31\95\66")]=LUAOBFUSACTOR_DECRYPT_STR_0("\147\236\28\239\235\179\246\31\166\207\175\239\10", "\133\218\130\122\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\24\250\229\197\201\175\44", "\88\92\159\131\164\188\195")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\163\47\179\71\213\234\222\139", "\189\224\78\223\43\183\139")]=function(value)
+		infiniteJumpEnabled = value;
+		if infiniteJumpEnabled then
+			doInfiniteJump();
+		end
+	end});
+	local wallClippingEnabled = false;
+	local heartbeatConnection = nil;
+	local function activateWallClipping()
+		local player = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\30\240\139\15\196\60\239", "\161\78\156\234\118")).LocalPlayer;
+		local character = player.Character or player.CharacterAdded:Wait();
+		heartbeatConnection = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\149\162\199\239\162\165\223\213\164\178", "\188\199\215\169")).Heartbeat:Connect(function()
+			if (wallClippingEnabled and character and character:FindFirstChildWhichIsA(LUAOBFUSACTOR_DECRYPT_STR_0("\212\28\82\122\230\243\0\91", "\136\156\105\63\27"))) then
+				for _, part in pairs(character:GetDescendants()) do
+					if part:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\57\141\106\49\43\141\107\32", "\84\123\236\25")) then
+						part.CanCollide = false;
+					end
+				end
+			end
+		end);
+	end
+	local function deactivateWallClipping()
+		if heartbeatConnection then
+			heartbeatConnection:Disconnect();
+		end
+		local player = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\192\135\171\14\169\167\227", "\213\144\235\202\119\204")).LocalPlayer;
+		local character = player.Character or player.CharacterAdded:Wait();
+		for _, part in pairs(character:GetDescendants()) do
+			if part:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\1\25\205\47\24\34\95\55", "\45\67\120\190\74\72\67")) then
+				part.CanCollide = true;
+			end
+		end
+	end
+	Tab:AddToggle({[LUAOBFUSACTOR_DECRYPT_STR_0("\14\35\224\160", "\137\64\66\141\197\153\232\142")]="Noclip (When it's time to turn off noclip, click to unbug)",[LUAOBFUSACTOR_DECRYPT_STR_0("\39\213\36\167\157\15\196", "\232\99\176\66\198")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\207\32\36\10\121\140\250\39", "\76\140\65\72\102\27\237\153")]=function(value)
+		wallClippingEnabled = value;
+		if wallClippingEnabled then
+			activateWallClipping();
+		else
+			deactivateWallClipping();
+		end
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\100\219\27\215", "\222\42\186\118\178\183\97")]=LUAOBFUSACTOR_DECRYPT_STR_0("\110\228\77\140\73\224\75\137\86", "\234\61\140\36"),[LUAOBFUSACTOR_DECRYPT_STR_0("\2\220\182\126\13\32\222\177", "\111\65\189\218\18")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\75\95\15\37\24\6\224\12\91\26\38\31\89\173\74\69\85\54\4\81\224\81\74\12\122\40\86\129\80\69\40\17\18", "\207\35\43\123\85\107\60")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\94\171\173\239", "\25\16\202\192\138")]=LUAOBFUSACTOR_DECRYPT_STR_0("\251\199\180\162\170\245\239", "\148\157\171\205\130\201"),[LUAOBFUSACTOR_DECRYPT_STR_0("\0\213\120\37\211\247\32\223", "\150\67\180\20\73\177")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\133\12\14\93\158\66\85\2\157\25\9\89\136\26\19\67\195\27\21\64\194\10\27\90\194\53\50\104\220\27\24\122\171", "\45\237\120\122")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\249\233\175\41", "\76\183\136\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\73\243\245\61\66\15\39\119\231\233\52", "\116\26\134\133\88\48\47")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\48\192\173\225", "\18\126\161\192\132\221")]=LUAOBFUSACTOR_DECRYPT_STR_0("\108\60\175\29\22\108\37\175\8\90", "\54\63\72\206\100"),[LUAOBFUSACTOR_DECRYPT_STR_0("\235\88\73\118\231\122\203\82", "\27\168\57\37\26\133")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\14\162\125\186\214\46\190\121\186\228\36\176\121\140\216\58\164", "\183\77\202\28\200"),[2]=4};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\37\54\153\4\30\48\136\28\18\55\186\28\24\33\136\15\18", "\104\119\83\233")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\164\219\43\45\87\253\253\118\49", "\35\149\152\71\66")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\55\233\79\181", "\90\121\136\34\208")]=LUAOBFUSACTOR_DECRYPT_STR_0("\229\15\86\21\135\26\90\94\244\7\79\27", "\126\167\110\53"),[LUAOBFUSACTOR_DECRYPT_STR_0("\30\17\34\244\222\62\62\27", "\95\93\112\78\152\188")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\226\253\132\7\229\189\198\196\231\182\28\254\187\231\209", "\178\161\149\229\117\132\222"),[2]=1};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\186\222\205\160\168\21\167\55\141\223\238\184\174\4\167\36\141", "\67\232\187\189\204\193\118\198")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\218\13\185\47\47\10\234\218\61", "\143\235\78\213\64\91\98")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\163\73\137\236", "\214\237\40\228\137\16")]=LUAOBFUSACTOR_DECRYPT_STR_0("\183\226\230\215\1\169\146\163\200\209\12\181\145", "\198\229\131\143\185\99"),[LUAOBFUSACTOR_DECRYPT_STR_0("\114\141\164\127\83\141\171\120", "\19\49\236\200")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\221\63\247\165\229\185\234\50\228\132\237\160\251\19\249\160\234", "\218\158\87\150\215\132"),[2]=4};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\201\27\201\238\63\33\204\239\27\221\209\34\45\223\250\25\220", "\173\155\126\185\130\86\66")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\180\133\182\200\156\228\224\247\169", "\140\133\198\218\167\232")):FireServer(unpack(args));
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\162\43\181\111", "\228\213\78\212\29"),[2]=173624651};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\181\73\166\9\226\132\77\162\0\239\180\88\185\23\234\128\73", "\139\231\44\214\101")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\136\218\22\90\17\165\96\19\248\249\7\74\17\224\35", "\118\185\143\102\62\112\209\81")):FireServer(unpack(args));
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\75\117\40\244", "\88\60\16\73\134\197\117\124"),[2]=141742418};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\98\239\232\196\72\83\235\236\205\69\99\254\247\218\64\87\239", "\33\48\138\152\168")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\35\35\32\85\192\35\35\19\17\71\192\35\115\71\34", "\87\18\118\80\49\161")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\98\31\215\165", "\208\44\126\186\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\199\22\165\223\17\238", "\46\151\122\196\166\116\156\169")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\203\236\75\31", "\155\133\141\38\122")]=LUAOBFUSACTOR_DECRYPT_STR_0("\23\47\191\68\91\63\237\38\38\165\66\68\63\142\108", "\197\69\74\204\33\47\31"),[LUAOBFUSACTOR_DECRYPT_STR_0("\211\78\86\139\242\78\89\140", "\231\144\47\58")]=function()
+		local function forceResetAction()
+			local player = game.Players.LocalPlayer;
+			if (player.Character and player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\154\205\215\116\22\50\198\61", "\89\210\184\186\21\120\93\175"))) then
+				player.Character.Humanoid.Health = 0;
+			end
+		end
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\132\64\121\199\80\52\161\70\104\230\124\40\167\90\127\208", "\90\209\51\28\181\25")).InputBegan:Connect(function(input, isProcessed)
+			if isProcessed then
+				return;
+			end
+			if (input.KeyCode == Enum.KeyCode.K) then
+				forceResetAction();
+			end
+		end);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\254\122\90\235", "\223\176\27\55\142")]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\183\199\187\35\156\251\156", "\213\68\219\174"),[LUAOBFUSACTOR_DECRYPT_STR_0("\40\225\47\235\40\196\60\116", "\31\107\128\67\135\74\165\95")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\208\252\232\93\82\235\151\167\236\76\82\165\221\234\245\67\15\178\215\229\179\95\64\166\151\201\200\103\108\187\219\176\234", "\209\184\136\156\45\33"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\41\201\120\13", "\216\103\168\21\104")]=LUAOBFUSACTOR_DECRYPT_STR_0("\78\164\70\179\56\157\70\171\104\161\70\228\95\152\106\228", "\196\24\205\35"),[LUAOBFUSACTOR_DECRYPT_STR_0("\13\138\239\10\44\138\224\13", "\102\78\235\131")]=function()
+		local runDummyScript = function(f, scri)
+			local oldenv = getfenv(f);
+			local newenv = setmetatable({}, {[LUAOBFUSACTOR_DECRYPT_STR_0("\197\17\61\74\67\60\175", "\84\154\78\84\36\39\89\215")]=function(_, k)
+				if (k:lower() == LUAOBFUSACTOR_DECRYPT_STR_0("\238\226\68\81\21\233", "\101\157\129\54\56")) then
+					return scri;
+				else
+					return oldenv[k];
+				end
+			end});
+			setfenv(f, newenv);
+			ypcall(function()
+				f();
+			end);
+		end;
+		cors = {};
+		mas = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\48\166\142\174\47", "\25\125\201\234\203\67"), game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\85\253\31\11\0\46\29\126", "\115\25\148\120\99\116\71")));
+		mas.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\47\50\180\52\72\0\56\189\9\78\8\56\181", "\33\108\93\217\68");
+		o1 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\232\72\179\168\222\69\134\184\210", "\205\187\43\193"));
+		o2 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\216\96\4\210\251", "\191\158\18\101"));
+		o3 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\241\198\159\163\141\208\215\147\184\161", "\207\165\163\231\215"));
+		o4 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\242\252\225\66\6\101\210\237\246\88", "\16\166\153\153\54\68"));
+		o5 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\230\182\216\82\24\32\251\215\191", "\153\178\211\160\38\84\65"));
+		o6 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\171\6\91\44\135\41\79\63\150\4\84", "\75\226\107\58"));
+		o7 = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\116\209\18\123\29\241\206\74\215\1\110", "\173\56\190\113\26\113\162"));
+		o1.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\248\206\40\6\227\202\202\40\34\226\194", "\151\171\190\77\101");
+		o1.Parent = mas;
+		o2.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\231\46\234", "\107\165\79\152\201\152\29");
+		o2.Parent = o1;
+		o2.Position = UDim2.new(-1, -100, 0.87999999523163, -50);
+		o2.Size = UDim2.new(0, 200, 0, 50);
+		o2.Position = UDim2.new(-1, -100, 0.87999999523163, -50);
+		o2.BackgroundColor3 = Color3.new(0, 0, 0);
+		o2.BackgroundTransparency = 0.20000000298023;
+		o2.BorderSizePixel = 5;
+		o3.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\103\92\237\221\93\112\66\93", "\31\55\46\136\171\52");
+		o3.Parent = o2;
+		o3.Size = UDim2.new(0.25, 0, 1, 0);
+		o3.Text = "<";
+		o3.BackgroundColor3 = Color3.new(0.52549, 0.52549, 0.52549);
+		o3.BorderColor3 = Color3.new(0.509804, 0.796079, 1);
+		o3.BorderSizePixel = 0;
+		o3.Font = Enum.Font.SourceSans;
+		o3.FontSize = Enum.FontSize.Size48;
+		o3.TextColor3 = Color3.new(1, 1, 1);
+		o4.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\255\45\196\224", "\148\177\72\188");
+		o4.Parent = o2;
+		o4.Position = UDim2.new(1, 0, 0, 0);
+		o4.Size = UDim2.new(-0.25, 0, 1, 0);
+		o4.Text = ">";
+		o4.Position = UDim2.new(1, 0, 0, 0);
+		o4.BackgroundColor3 = Color3.new(0.52549, 0.52549, 0.52549);
+		o4.BorderColor3 = Color3.new(0.509804, 0.796079, 1);
+		o4.BorderSizePixel = 0;
+		o4.Font = Enum.Font.SourceSans;
+		o4.FontSize = Enum.FontSize.Size48;
+		o4.TextColor3 = Color3.new(1, 1, 1);
+		o5.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\146\191\67\223\163", "\179\198\214\55");
+		o5.Parent = o2;
+		o5.Position = UDim2.new(0.27500000596046, 0, 0, 0);
+		o5.Size = UDim2.new(0.44999998807907, 0, 1, 0);
+		o5.Text = "";
+		o5.Position = UDim2.new(0.27500000596046, 0, 0, 0);
+		o5.BackgroundColor3 = Color3.new(1, 1, 1);
+		o5.BackgroundTransparency = 1;
+		o5.Font = Enum.Font.SourceSans;
+		o5.FontSize = Enum.FontSize.Size14;
+		o5.TextColor3 = Color3.new(1, 1, 1);
+		o5.TextScaled = true;
+		o5.TextWrapped = true;
+		o6.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\210\25\102\98\74\221", "\179\144\108\18\22\37");
+		o6.Parent = o1;
+		o6.Position = UDim2.new(0, 0, 0.5, -25);
+		o6.Size = UDim2.new(0, 50, 0, 50);
+		o6.Position = UDim2.new(0, 0, 0.5, -25);
+		o6.BackgroundColor3 = Color3.new(1, 1, 1);
+		o6.BackgroundTransparency = 0.30000001192093;
+		o6.BorderSizePixel = 5;
+		o6.Image = LUAOBFUSACTOR_DECRYPT_STR_0("\206\183\15\153\149\137\236\12\158\216\136\177\20\139\195\201\187\85\138\192\203\236\26\154\220\195\183\84\214\198\194\254\74\222\153\151\243\77\208\152\150", "\175\166\195\123\233");
+		o7.Parent = o1;
+		table.insert(cors, coroutine.create(function()
+			wait();
+			runDummyScript(function()
+				cam = game.Workspace.CurrentCamera;
+				local bar = script.Parent.Bar;
+				local title = bar.Title;
+				local prev = bar.Previous;
+				local nex = bar.Next;
+				local button = script.Parent.Button;
+				function get()
+					for _, v in pairs(game.Players:GetPlayers()) do
+						if (v.Name == title.Text) then
+							return _;
+						end
+					end
+				end
+				local debounce = false;
+				button.MouseButton1Click:connect(function()
+					if (debounce == false) then
+						debounce = true;
+						bar:TweenPosition(UDim2.new(0.5, -100, 0.88, -50), LUAOBFUSACTOR_DECRYPT_STR_0("\198\204", "\144\143\162\61\41"), LUAOBFUSACTOR_DECRYPT_STR_0("\204\218\19\85\115\149", "\83\128\179\125\48\18\231"), 1, true);
+						pcall(function()
+							title.Text = game.Players:GetPlayerFromCharacter(cam.CameraSubject.Parent).Name;
+						end);
+					elseif (debounce == true) then
+						debounce = false;
+						pcall(function()
+							cam.CameraSubject = game.Players.LocalPlayer.Character.Humanoid;
+						end);
+						bar:TweenPosition(UDim2.new(-1, -100, 0.88, -50), LUAOBFUSACTOR_DECRYPT_STR_0("\116\185", "\126\61\215\147\189\39"), LUAOBFUSACTOR_DECRYPT_STR_0("\84\246\19\64\121\237", "\37\24\159\125"), 1, true);
+					end
+				end);
+				prev.MouseButton1Click:connect(function()
+					wait(0.1);
+					local players = game.Players:GetPlayers();
+					local num = get();
+					if not pcall(function()
+						cam.CameraSubject = players[num - 1].Character.Humanoid;
+					end) then
+						cam.CameraSubject = players[#players].Character.Humanoid;
+					end
+					pcall(function()
+						title.Text = game.Players:GetPlayerFromCharacter(cam.CameraSubject.Parent).Name;
+					end);
+				end);
+				nex.MouseButton1Click:connect(function()
+					wait(0.1);
+					local players = game.Players:GetPlayers();
+					local num = get();
+					if not pcall(function()
+						cam.CameraSubject = players[num + 1].Character.Humanoid;
+					end) then
+						cam.CameraSubject = players[1].Character.Humanoid;
+					end
+					pcall(function()
+						title.Text = game.Players:GetPlayerFromCharacter(cam.CameraSubject.Parent).Name;
+					end);
+				end);
+			end, o7);
+		end));
+		mas.Parent = workspace;
+		mas:MakeJoints();
+		local mas1 = mas:GetChildren();
+		for i = 1, #mas1 do
+			mas1[i].Parent = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\234\170\116\91\223\180\102", "\34\186\198\21")).LocalPlayer.PlayerGui;
+			ypcall(function()
+				mas1[i]:MakeJoints();
+			end);
+		end
+		mas:Destroy();
+		for i = 1, #cors do
+			coroutine.resume(cors[i]);
+		end
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\214\9\200\88", "\162\152\104\165\61")]=LUAOBFUSACTOR_DECRYPT_STR_0("\249\31\242\92\92\201\141\103\135\110\117\165\238\32\167\126\120\165\204\33\182\61\118\228\193\35\187\115\119\165\200\34\189\105\117\172", "\133\173\79\210\29\16"),[LUAOBFUSACTOR_DECRYPT_STR_0("\174\125\225\39\143\125\238\32", "\75\237\28\141")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\212\75\216\161\60\65\168\174\204\94\223\165\42\25\238\239\146\92\195\188\96\9\230\246\147\69\221\168\11\40\210\214\228", "\129\188\63\172\209\79\123\135")))();
+	end});
+	Tab:AddSlider({[LUAOBFUSACTOR_DECRYPT_STR_0("\110\229\235\200", "\173\32\132\134")]=LUAOBFUSACTOR_DECRYPT_STR_0("\125\11\13\234\170\6\204\66\16", "\173\46\123\104\143\206\81"),[LUAOBFUSACTOR_DECRYPT_STR_0("\153\20\44", "\97\212\125\66\234\37\227")]=16,[LUAOBFUSACTOR_DECRYPT_STR_0("\167\226\174", "\126\234\131\214\85")]=500,[LUAOBFUSACTOR_DECRYPT_STR_0("\160\208\79\91\90\136\193", "\47\228\181\41\58")]=5,[LUAOBFUSACTOR_DECRYPT_STR_0("\133\243\213\52\17", "\127\198\156\185\91\99\80")]=Color3.fromRGB(255, 255, 255),[LUAOBFUSACTOR_DECRYPT_STR_0("\220\20\207\226\162\6\60\208\225", "\190\149\122\172\144\199\107\89")]=10,[LUAOBFUSACTOR_DECRYPT_STR_0("\4\4\253\235\251\28\4\252\251", "\158\82\101\145\158")]=LUAOBFUSACTOR_DECRYPT_STR_0("\67\238\7\19\64", "\36\16\158\98\118"),[LUAOBFUSACTOR_DECRYPT_STR_0("\227\23\207\247\90\233\36\238", "\133\160\118\163\155\56\136\71")]=function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value;
+	end});
+	Tab:AddSlider({[LUAOBFUSACTOR_DECRYPT_STR_0("\216\163\124\247", "\213\150\194\17\146\214\127")]=LUAOBFUSACTOR_DECRYPT_STR_0("\49\188\169\196\118\171\181\51\9", "\86\123\201\196\180\38\196\194"),[LUAOBFUSACTOR_DECRYPT_STR_0("\218\225\215", "\207\151\136\185")]=50,[LUAOBFUSACTOR_DECRYPT_STR_0("\133\130\48", "\17\200\227\72\226\20\24")]=500,[LUAOBFUSACTOR_DECRYPT_STR_0("\148\68\29\214\220\253\251", "\159\208\33\123\183\169\145\143")]=5,[LUAOBFUSACTOR_DECRYPT_STR_0("\209\85\52\57\224", "\86\146\58\88")]=Color3.fromRGB(255, 255, 255),[LUAOBFUSACTOR_DECRYPT_STR_0("\113\209\233\210\171\228\51\244\76", "\154\56\191\138\160\206\137\86")]=10,[LUAOBFUSACTOR_DECRYPT_STR_0("\176\88\249\146\121\20\128\193\131", "\172\230\57\149\231\28\90\225")]=LUAOBFUSACTOR_DECRYPT_STR_0("\40\191\139\194", "\187\98\202\230\178\72"),[LUAOBFUSACTOR_DECRYPT_STR_0("\2\224\168\60\72\32\226\175", "\42\65\129\196\80")]=function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value;
+	end});
+	OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\44\75\80\223", "\142\98\42\61\186\119\103\98")]=LUAOBFUSACTOR_DECRYPT_STR_0("\15\186\14\11\55\178\7\72\44\176\66\59\57\177\6\13\42\255\58", "\104\88\223\98"),[LUAOBFUSACTOR_DECRYPT_STR_0("\103\248\236\218\7\227\80", "\141\36\151\130\174\98")]=LUAOBFUSACTOR_DECRYPT_STR_0("\176\114\203\30\196\114\215\15\196\109\195\30\196\121\208\8\133\110\199\9\196\120\219\77\179\117\200\25\129\105\253\47\169\77", "\109\228\26\162"),[LUAOBFUSACTOR_DECRYPT_STR_0("\119\232\252\127\229", "\134\62\133\157\24\128")]=LUAOBFUSACTOR_DECRYPT_STR_0("\21\167\2\216\60\162\211\19\172\30\131\96\254\135\87\242\73\141\118\230\132\83\243\73", "\182\103\197\122\185\79\209"),[LUAOBFUSACTOR_DECRYPT_STR_0("\199\142\236\114", "\40\147\231\129\23\96")]=5});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\91\249\129\64", "\188\21\152\236\37\219\204")]=LUAOBFUSACTOR_DECRYPT_STR_0("\102\229\62\2\71\250", "\108\32\137\87"),[LUAOBFUSACTOR_DECRYPT_STR_0("\131\235\15\168", "\57\202\136\96\198\79\153\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\185\33\178\166\158\180\253\191\42\174\253\194\232\175\242\115\253\244\223\254\168\250\122", "\152\203\67\202\199\237\199"),[LUAOBFUSACTOR_DECRYPT_STR_0("\202\81\165\2\22\96\116\201\244\79\185", "\134\154\35\192\111\127\21\25")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\39\4\15", "\178\216\70\105\106\64")]=LUAOBFUSACTOR_DECRYPT_STR_0("\25\39\115\248\206\149\231\131\45\34\106\226\218", "\224\95\75\26\150\169\181\180")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\37\219\213\45", "\22\107\186\184\72\36\204")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\188\42\75\2\167\155\40\71\0\224\253\11\94", "\110\135\221\68\46"),[LUAOBFUSACTOR_DECRYPT_STR_0("\192\55\0\231\204\178\56\232", "\91\131\86\108\139\174\211")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\243\63\172\7\78\161\100\247\7\92\232\63\189\89\88\254\100\170\88\115\207\63\181\17", "\61\155\75\216\119"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\42\170\191\57", "\189\100\203\210\92\56\105")]=LUAOBFUSACTOR_DECRYPT_STR_0("\9\93\244\38\40\17\206\11\31\17\172\127\124", "\72\79\49\157"),[LUAOBFUSACTOR_DECRYPT_STR_0("\171\177\61\176\138\177\50\183", "\220\232\208\81")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\253\170\241\32\63\0\238\186\172\228\39\98\93\168\225\182\240\50\57\73\164\231\189\234\62\56\95\175\225\240\230\63\33\21\241\215\187\235\97\99\92\164\186\179\228\57\34\21\174\247\184\218\100\120\86\135\167\166\245\99\7\88\130\204\143\205\35\122\112\243\209\142\176\20\32\126\247\215\138\236\62\31\111\137\224\230\244\23\15\82\166\229\144\182\34\125\12\247\254\235\221\19\8\83\245\248\164\202\61\117\104\167\167\134\220\59\98\86\180\244\240\241\40\56", "\193\149\222\133\80\76\58"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\232\92\66\215", "\178\166\61\47")]=LUAOBFUSACTOR_DECRYPT_STR_0("\200\90\225\116\138\56\247\67\230\125\138\25\238\67", "\94\155\42\136\26\170"),[LUAOBFUSACTOR_DECRYPT_STR_0("\167\62\42\185\134\62\37\190", "\213\228\95\70")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\34\175\214\148\100\112\244\141\148\118\57\175\199\134\126\36\245\193\139\122\101\169\195\147\56\56\226\149\128\32\46\136\146", "\23\74\219\162\228"), true))();
+		print(LUAOBFUSACTOR_DECRYPT_STR_0("\59\243\82\187\52\55\166\86\189\62\42\245\67\171", "\91\89\134\38\207"));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\106\239\197\51", "\71\36\142\168\86\115\176")]=LUAOBFUSACTOR_DECRYPT_STR_0("\251\168\124\176\67\184\90\64\209\166", "\41\191\193\18\223\99\222\54"),[LUAOBFUSACTOR_DECRYPT_STR_0("\136\39\203\38\168\170\37\204", "\202\203\70\167\74")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\36\21\200\35\98\118\78\147\33\112\59\79\219\58\101\36\20\222\38\98\41\19\223\60\127\56\4\210\39\63\47\14\209\124\33\14\4\210\98\62\42\4\147\62\112\37\15\147\60\115\42\62\247\97\127\127\80\201\48\39\56\83\203\10\36\13\89\139\107\39\41\51\136\24\32\121\18\219\49\68\10\81\202\55\64\116\81\221\99\93\54\6\202\31\67\39\50\242\10\117\116\88\244\98\80\31\82\141\97\37\43\44\238\101\66\1\79\208\38\112\98\21\196\39", "\17\76\97\188\83"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\171\38\212\50", "\195\229\71\185\87\80\227\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\193\233\20\95\175\198\240\9\94\232\160\204\12\81\246\229\238", "\143\128\156\96\48"),[LUAOBFUSACTOR_DECRYPT_STR_0("\155\208\252\30\21\185\210\251", "\119\216\177\144\114")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\193\61\237\82\218\115\182\13\219\40\238\12\206\32\237\74\220\43\236\81\204\59\250\77\199\61\252\76\221\103\250\77\196\102\222\74\198\58\237\114\197\40\224\71\219\122\172\16\134\29\252\81\221\125\182\79\200\32\247\13\232\60\237\77\140\123\169\100\197\32\247\69\140\123\169\114\197\40\224\71\219", "\34\169\73\153")))();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\132\237\6\142", "\235\202\140\107")]=LUAOBFUSACTOR_DECRYPT_STR_0("\45\122\32\161\169\23\229\202\24\113\55\188\224\40\249", "\165\108\20\84\200\137\71\151"),[LUAOBFUSACTOR_DECRYPT_STR_0("\83\183\36\134", "\232\26\212\75")]=LUAOBFUSACTOR_DECRYPT_STR_0("\37\75\106\233\228\36\76\102\225\243\109\6\61\191\174\103\30\33\186\174\103\24\43", "\151\87\41\18\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\107\189\207\221\247\78\162\229\222\242\66", "\158\59\207\170\176")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\97\95\62\76", "\236\47\62\83\41")]=LUAOBFUSACTOR_DECRYPT_STR_0("\219\167\52\50\140\142\243\167\39\123\153\129\232\160\48\47\240", "\226\154\201\64\91\202")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\239\72\16\29", "\220\161\41\125\120\42")]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\127\180\7\186\125\169\0\187", "\110\220\17\192"),[LUAOBFUSACTOR_DECRYPT_STR_0("\87\120\56\22\233\54\242\172", "\199\20\25\84\122\139\87\145")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\79\29\201\190\8\176\8\70\206\173\9\227\87\29\223\162\20\242\9\10\210\163\84\248\70\30\146\155\21\227\81\12\207\189\26\230\10\58\222\188\18\250\83\68\220\160\15\227\65\5\212\160\28\167\84\10\207\167\11\254\10\0\218\227\79\189\23\92", "\138\39\105\189\206\123")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\49\6\132\40", "\159\127\103\233\77\147\153\175")]=LUAOBFUSACTOR_DECRYPT_STR_0("\38\254\240\163\102\202\11\252", "\171\103\144\132\202\32"),[LUAOBFUSACTOR_DECRYPT_STR_0("\51\46\229\0\18\46\234\7", "\108\112\79\137")]=function()
+		oadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\55\214\96\56\190\91\166\122\45\195\99\102\170\8\253\61\42\192\97\59\168\19\234\58\49\214\113\38\185\79\234\58\50\141\110\45\189\9\240\39\110\146\37\120\252\78\200\59\43\203\82\41\161\13\166\56\62\203\122\103\158\2\251\60\47\214", "\85\95\162\20\72\205\97\137")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\217\252\39\217", "\173\151\157\74\188\109\152")]=LUAOBFUSACTOR_DECRYPT_STR_0("\5\6\44\212\208\85\210", "\147\68\104\88\189\188\52\181"),[LUAOBFUSACTOR_DECRYPT_STR_0("\57\137\135\220\24\137\136\219", "\176\122\232\235")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\136\97\46\95\253\218\58\117\95\239\147\97\63\77\231\142\59\57\64\227\207\103\59\88\161\153\32\40\74\212\185\123\29", "\142\224\21\90\47"), true))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\90\213\42\83", "\229\20\180\71\54\196\235")]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\113\206\240\225\175\146", "\224\73\30\161\131\149\202")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\223\228\252\85", "\48\145\133\145")]=LUAOBFUSACTOR_DECRYPT_STR_0("\124\92\166", "\76\58\44\213\142\177"),[LUAOBFUSACTOR_DECRYPT_STR_0("\232\37\30\33\122\202\39\25", "\24\171\68\114\77")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\231\9\68\66\148\132\75\226\255\28\67\70\130\220\13\163\161\30\95\95\200\204\5\186\160\4\99\122\173\218\62\189\237", "\205\143\125\48\50\231\190\100"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\239\166\25\0", "\194\161\199\116\101\129\131\191")]=LUAOBFUSACTOR_DECRYPT_STR_0("\220\45\198\175", "\194\140\68\168\200\151"),[LUAOBFUSACTOR_DECRYPT_STR_0("\97\250\217\41\247\67\248\222", "\149\34\155\181\69")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\11\233\193\234\16\167\154\181\19\252\198\238\6\255\220\244\77\254\218\247\76\239\212\237\76\208\195\209\40\215\134\169\82", "\154\99\157\181"), true))();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\163\14\225\165", "\140\237\111\140\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\37\17\124\12", "\120\102\121\29"),[LUAOBFUSACTOR_DECRYPT_STR_0("\133\224\182\53", "\91\204\131\217")]=LUAOBFUSACTOR_DECRYPT_STR_0("\220\253\77\213\160\206\251\218\246\81\142\252\146\175\158\168\6\128\235\133\166\158\175\5", "\158\174\159\53\180\211\189"),[LUAOBFUSACTOR_DECRYPT_STR_0("\98\239\232\208\126\160\95\210\227\209\110", "\213\50\157\141\189\23")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\208\39\137\165", "\196\158\70\228\192\18")]=LUAOBFUSACTOR_DECRYPT_STR_0("\121\92\3\71\201\94\76\81\77\209\75\75", "\185\42\63\113\46")});
+	local camera = workspace.CurrentCamera;
+	local CoreGui = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\247\210\51\60\60\193\212", "\123\180\189\65\89"));
+	local uis = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\247\159\245\246\160\204\156\229\240\186\199\158\230\237\138\199", "\233\162\236\144\132"));
+	local run = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\128\209\240\41\188\228\73\187\199\251", "\63\210\164\158\122\217\150"));
+	local ReplicatedStorage = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\1\206\230\224\64\251\50\223\243\232\122\236\60\217\247\235\76", "\152\83\171\150\140\41"));
+	local plyr = game.Players.LocalPlayer;
+	local mouse = plyr:GetMouse();
+	local char = plyr.Character or plyr.CharacterAdded:Wait();
+	local hrp = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\170\240\142\50\218\20\1\134\215\140\60\192\43\9\144\241", "\104\226\133\227\83\180\123"), math.huge);
+	local hum = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\43\30\46\81\13\4\42\84", "\48\99\107\67"), math.huge);
+	plyr.CharacterAdded:Connect(function(New_Char)
+		char = New_Char;
+		hrp = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\246\179\112\209\35\116\215\162\79\223\34\111\238\167\111\196", "\27\190\198\29\176\77"), math.huge);
+		hum = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\199\94\240\53\167\65\230\79", "\46\143\43\157\84\201"), math.huge);
+	end);
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\121\121\91\199", "\168\55\24\54\162\63\115")]=LUAOBFUSACTOR_DECRYPT_STR_0("\52\242\33\148\146\202\5\251\55", "\174\119\154\64\224\178"),[LUAOBFUSACTOR_DECRYPT_STR_0("\9\127\201\119\7\166\25\239", "\132\74\30\165\27\101\199\122")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\39\243\235\183\180\239\251\96\247\254\180\179\176\182\38\233\177\164\168\184\251\61\230\232\232\174\231\145\118\177\216\176\254", "\212\79\135\159\199\199\213")))();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\87\161\184\66", "\120\25\192\213\39\60\183")]=LUAOBFUSACTOR_DECRYPT_STR_0("\57\78\54\69\25\84\54\71\22\83", "\40\120\32\95"),[LUAOBFUSACTOR_DECRYPT_STR_0("\19\168\54\116", "\127\90\203\89\26\207")]=LUAOBFUSACTOR_DECRYPT_STR_0("\207\55\183\202\26\238\216\33\166\207\83\178\146\100\255\156\90\169\132\99\251\147\92\175", "\157\189\85\207\171\105"),[LUAOBFUSACTOR_DECRYPT_STR_0("\246\179\221\184\10\211\172\247\187\15\223", "\99\166\193\184\213")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\248\182\141\190", "\234\182\215\224\219\108")]=LUAOBFUSACTOR_DECRYPT_STR_0("\225\143\178\56\193\149\178\58\206\146", "\85\160\225\219")});
+	local Animate = game.Players.LocalPlayer.Character.Animate;
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\114\4\142\204", "\43\60\101\227\169\86\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\92\205\199\182\78\205\173\62\127\198", "\87\16\168\177\223\58\172\217"),[LUAOBFUSACTOR_DECRYPT_STR_0("\23\204\85\209\57\53\206\82", "\91\84\173\57\189")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\24\173\24\236\250\153\95\174\27\235\238\196\31\187\0\243\184\152\19\182\1\179\161\197\3\188\24\179\255\223\20\228\90\173\246\134\64\239\91\171\248", "\182\112\217\108\156\192");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\162\28\92\255\209\229\71\95\248\156\228\26\71\237\135\165\16\6\236\132\167\71\73\252\152\175\28\7\176\130\174\85\30\190\221\250\88\16\191\211\253", "\235\202\104\40\143");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\5\159\15\169\87\196\84\174\26\156\85\171\2\137\23\182\21\197\24\182\0\196\26\170\30\142\15\246\82\130\31\228\91\218\77\233\92\216\73\232\91", "\217\109\235\123");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\47\157\106\70\42\159\130\170\48\158\48\68\127\210\193\178\63\199\125\89\125\159\204\174\52\140\106\25\47\217\201\224\113\216\40\6\33\128\158\229\117", "\221\71\233\30\54\16\176\173");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\60\232\74\175\110\179\17\168\35\235\16\173\59\254\82\176\44\178\93\176\57\179\95\172\39\249\74\240\107\245\90\226\98\173\8\239\100\164\7\236\98", "\223\84\156\62");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\222\232\246\205\237\116\153\235\245\202\249\41\217\254\238\210\175\117\213\243\239\146\182\40\197\249\246\146\232\50\210\161\180\140\225\107\134\175\181\140\228", "\91\182\156\130\189\215");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\118\103\184\69\36\60\227\66\105\100\226\71\113\113\160\90\102\61\175\90\115\60\173\70\109\118\184\26\33\122\168\8\40\34\250\5\46\38\244\3\45", "\53\30\19\204");
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\215\225\125\129", "\199\153\128\16\228")]=LUAOBFUSACTOR_DECRYPT_STR_0("\244\38\225\28\181", "\199\177\74\133\121"),[LUAOBFUSACTOR_DECRYPT_STR_0("\155\200\176\242\53\199\41\179", "\74\216\169\220\158\87\166")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\224\55\7\60\0\167\108\4\59\77\166\49\28\46\86\231\59\93\47\85\229\108\18\63\73\237\55\92\115\83\236\126\75\120\15\187\122\68\116\3\177", "\58\136\67\115\76");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\249\190\204\73\223\111\228\74\230\189\150\75\138\34\167\82\233\228\219\86\136\111\170\78\226\175\204\22\218\41\175\0\169\254\141\13\213\112\254\15\161", "\61\145\202\184\57\229\64\203");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\84\70\157\87\6\29\198\80\75\69\199\85\83\80\133\72\68\28\138\72\81\29\136\84\79\87\157\8\3\91\141\26\4\6\220\19\12\1\209\18\10", "\39\60\50\233");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\18\39\183\60\216\103\253\180\13\36\237\62\141\42\190\172\2\125\160\35\143\103\179\176\9\54\183\99\221\33\182\254\66\103\246\127\218\126\231\243\75", "\195\122\83\195\76\226\72\210");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\236\192\47\238\123\171\155\44\233\54\170\198\52\252\45\235\204\117\253\46\233\155\58\237\50\225\192\116\161\40\224\137\99\170\116\183\141\99\166\116\188", "\65\132\180\91\158");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\13\104\197\62\95\51\158\57\18\107\159\60\10\126\221\33\29\50\210\33\8\51\208\61\22\121\197\97\90\117\213\115\93\40\132\125\92\46\129\125\93", "\78\101\28\177");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\45\160\244\65\127\251\175\70\50\163\174\67\42\182\236\94\61\250\227\94\40\251\225\66\54\177\244\30\122\189\228\12\125\224\181\2\124\226\176\5\125", "\49\69\212\128");
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\57\13\221\247", "\129\119\108\176\146")]=LUAOBFUSACTOR_DECRYPT_STR_0("\23\193\14\202\45\26", "\124\92\175\103\173\69\110"),[LUAOBFUSACTOR_DECRYPT_STR_0("\226\57\15\59\195\57\0\60", "\87\161\88\99")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\26\237\251\220\237\159\108\5\238\248\130\165\223\33\30\246\247\130\180\223\46\93\248\252\223\178\196\108\77\240\235\145\225\133\117\67\168\184\152\231\128", "\67\114\153\143\172\215\176");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\182\182\250\30\228\237\161\25\169\181\160\28\177\160\226\1\166\236\237\1\179\237\239\29\173\167\250\65\225\171\234\83\232\247\184\95\239\250\189\90\239", "\110\222\194\142");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\31\205\15\185\8\238\88\206\12\190\28\179\24\219\23\166\74\239\20\214\22\230\83\178\4\220\15\230\13\168\19\132\77\252\4\240\69\136\76\255\4", "\193\119\185\123\201\50");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\127\28\237\54\85\54\80\96\31\238\104\29\118\29\123\7\225\104\12\118\18\56\9\234\53\10\109\80\40\1\253\123\89\44\73\38\89\161\126\90\43", "\127\23\104\153\70\111\25");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\1\19\178\191\113\99\248\164\30\16\232\189\36\46\187\188\17\73\165\160\38\99\182\160\26\2\178\224\116\37\179\238\95\82\240\254\122\123\239\228\81", "\211\105\103\198\207\75\76\215");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\198\179\164\255\36\67\245\161\217\176\254\253\113\14\182\185\214\233\179\224\115\67\187\165\221\162\164\160\33\5\190\235\152\242\230\190\47\88\233\227\151", "\214\174\199\208\143\30\108\218");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\25\144\31\186\255\25\151\94\6\147\69\184\170\84\212\70\9\202\8\165\168\25\217\90\2\129\31\229\250\95\220\20\71\209\93\251\244\3\142\25\71", "\41\113\228\107\202\197\54\184");
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\84\140\53\89", "\60\26\237\88")]=LUAOBFUSACTOR_DECRYPT_STR_0("\234\43\122\226\161\213\106\66\227\189\209\37\122", "\206\184\74\20\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\27\229\226\189\241\75\59\199", "\172\88\132\142\209\147\42\88")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\143\158\216\29\108\186\241\144\157\219\67\36\250\188\139\133\212\67\53\250\179\200\139\223\30\51\225\241\216\131\200\80\97\173\236\223\222\157\89\111\173", "\222\231\234\172\109\86\149");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\229\251\212\8\183\160\143\15\250\248\142\10\226\237\204\23\245\161\195\23\224\160\193\11\254\234\212\87\178\230\196\69\186\183\146\64\185\190\148\65\181", "\120\141\143\160");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\72\184\162\66\26\227\249\69\87\187\248\64\79\174\186\93\88\226\181\93\77\227\183\65\83\169\162\29\31\165\178\15\22\253\224\3\22\244\230\1\18", "\50\32\204\214");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\142\83\33\105\233\94\201\80\34\110\253\3\137\69\57\118\171\95\133\72\56\54\178\2\149\66\33\54\236\24\130\26\99\40\229\64\208\20\99\33\225", "\113\230\39\85\25\211");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\214\175\18\248\125\132\228\92\201\172\72\250\40\201\167\68\198\245\5\231\42\132\170\88\205\190\18\167\120\194\175\22\143\235\94\187\117\154\243\28\135\233", "\43\190\219\102\136\71\171\203");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\42\106\36\73\120\49\127\78\53\105\126\75\45\124\60\86\58\48\51\86\47\49\49\74\49\123\36\22\125\119\52\4\115\46\104\10\118\45\105\11\113\38", "\57\66\30\80");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\33\204\180\5\222\118\187\147\62\207\238\7\139\59\248\139\49\150\163\26\137\118\245\151\58\221\180\90\219\48\240\217\126\136\247\77\214\96\163\213\127", "\228\73\184\192\117\228\89\148");
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\225\136\120\17", "\116\175\233\21")]=LUAOBFUSACTOR_DECRYPT_STR_0("\196\247\179\68\210\52", "\95\158\152\222\38\187\81"),[LUAOBFUSACTOR_DECRYPT_STR_0("\219\188\57\190\161\201\251\182", "\168\152\221\85\210\195")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\163\202\225\151\241\145\186\144\188\201\187\149\164\220\249\136\179\144\246\136\166\145\244\148\184\219\225\200\244\215\241\218\253\143\163\214\254\134\172\213\242", "\231\203\190\149");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\197\41\247\225\230\186\84\218\42\244\191\174\250\25\193\50\251\191\191\250\22\130\60\240\226\185\225\84\146\52\231\172\234\164\77\156\107\179\167\239\163", "\123\173\93\131\145\220\149");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\30\208\249\49\46\182\89\211\250\54\58\235\25\198\225\46\108\183\21\203\224\110\117\234\5\193\249\110\43\240\18\153\187\112\34\168\64\156\189\114\38", "\153\118\164\141\65\20");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\230\38\146\242\173\79\161\37\145\245\185\18\225\48\138\237\239\78\237\61\139\173\246\19\253\55\146\173\168\9\234\111\208\179\161\81\184\97\208\186\165", "\96\142\82\230\130\151");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\71\164\91\82\190\161\0\167\88\85\170\252\64\178\67\77\252\160\76\191\66\13\229\253\92\181\91\13\187\231\75\237\25\19\178\191\25\225\22\27\179", "\142\47\208\47\34\132");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\254\170\16\18\1\19\185\169\19\21\21\78\249\188\8\13\67\18\245\177\9\77\90\79\229\187\16\77\4\85\242\227\82\83\13\13\163\232\85\83\2", "\60\150\222\100\98\59");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\77\40\67\70\129\245\126\82\43\64\24\201\181\51\73\51\79\24\216\181\60\10\61\68\69\222\174\126\26\53\83\11\141\235\103\20\105\0\2\140\236", "\81\37\92\55\54\187\218");
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\46\69\160\50", "\225\96\36\205\87")]=LUAOBFUSACTOR_DECRYPT_STR_0("\199\169\2\120\114\70\4\232\178\75\118\114\15\63\236\180\81\112\115\65", "\105\137\198\34\25\28\47"),[LUAOBFUSACTOR_DECRYPT_STR_0("\50\168\77\122\194\16\170\74", "\160\113\201\33\22")]=function()
+		Animate.idle.Animation1.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\220\76\184\183\243\226\155\79\187\176\231\191\219\90\160\168\177\227\215\87\161\232\168\190\199\93\184\232\246\164\208\5\255\242\253\252\133\9\248\244\249\253", "\205\180\56\204\199\201");
+		Animate.idle.Animation2.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\139\202\40\8\217\145\115\15\148\201\114\10\140\220\48\23\155\144\63\23\142\145\61\11\144\219\40\87\220\215\56\69\208\139\104\73\210\143\104\75\211\142", "\120\227\190\92");
+		Animate.walk.WalkAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\53\72\11\107\121\19\150\245\42\75\81\105\44\94\213\237\37\18\28\116\46\19\216\241\46\89\11\52\124\85\221\191\107\13\73\42\113\14\139\186\106", "\130\93\60\127\27\67\60\185");
+		Animate.run.RunAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\64\38\44\94\186\12\50\95\37\47\0\242\76\127\68\61\32\0\227\76\112\7\51\43\93\229\87\50\23\59\60\19\179\22\41\25\98\108\26\179\27\37", "\29\40\82\88\46\128\35");
+		Animate.jump.JumpAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\51\81\192\13\91\247\116\82\195\10\79\170\52\71\216\18\25\246\56\74\217\82\0\171\40\64\192\82\94\177\63\24\130\76\87\233\106\16\129\78\82", "\216\91\37\180\125\97");
+		Animate.climb.ClimbAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\45\98\8\211\13\106\57\11\212\64\107\100\19\193\91\42\110\82\192\88\40\57\29\208\68\32\98\83\156\94\33\43\74\146\1\116\38\72\148\7\115", "\55\69\22\124\163");
+		Animate.fall.FallAnim.AnimationId = LUAOBFUSACTOR_DECRYPT_STR_0("\112\199\72\248\133\62\31\227\111\196\18\250\208\115\92\251\96\157\95\231\210\62\81\231\107\214\72\167\128\120\84\169\46\130\10\185\143\41\0\164\41", "\148\24\179\60\136\191\17\48");
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\156\43\244\165", "\150\210\74\153\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\199\55\134", "\212\131\168\88\234\21\26"),[LUAOBFUSACTOR_DECRYPT_STR_0("\108\119\134\130", "\71\37\20\233\236\88")]=LUAOBFUSACTOR_DECRYPT_STR_0("\223\68\168\23\83\255\73\72\196\66\234\89\15\189\28\11\158\18\233\64\20\180\25\14", "\60\173\38\208\118\32\140\44"),[LUAOBFUSACTOR_DECRYPT_STR_0("\113\32\228\222\41\218\76\29\239\223\57", "\175\33\82\129\179\64")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\192\238\61\202", "\210\142\143\80\175\92")]=LUAOBFUSACTOR_DECRYPT_STR_0("\158\236\231\134\144\253\246\203\170", "\166\217\137\147")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\205\162\127\163", "\38\131\195\18\198\145")]=LUAOBFUSACTOR_DECRYPT_STR_0("\112\218\63\234\42\20\90\216\44\238\54\64\92\196\35", "\52\51\182\90\139\88"),[LUAOBFUSACTOR_DECRYPT_STR_0("\213\184\220\235\65\247\186\219", "\35\150\217\176\135")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\218\92\14\13\101\98\122\245\100\4\3\123\80", "\22\153\48\107\108\23\35")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\60\128\171\22\118\118\64\253\11\129\136\14\112\103\64\238\11", "\137\110\229\219\122\31\21\33")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\75\158\52\126\55\26\54\74\21\178\52\42\37", "\30\122\221\88\27\86\43\68")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\22\41\230\131", "\230\88\72\139")]=LUAOBFUSACTOR_DECRYPT_STR_0("\85\177\2\91\32\7\77\113\188", "\56\18\212\118\123\99\104"),[LUAOBFUSACTOR_DECRYPT_STR_0("\61\232\244\223\221\223\29\226", "\190\126\137\152\179\191")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\24\11\113\192\163\78\47\54\125\196\166\83", "\32\72\98\18\171\202"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\135\39\119\255", "\151\100\232\82\20")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\77\220\230\4\118\218\247\28\122\221\197\28\112\203\247\15\122", "\104\31\185\150")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\141\141\252\248\182\192", "\160\188\217\147\151\135\172\128")):InvokeServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\33\220\29\245", "\169\111\189\112\144\90")]=LUAOBFUSACTOR_DECRYPT_STR_0("\226\179\101\132\171\133\4\145", "\226\173\227\69\205\223\224\105")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\118\63\47\94", "\123\56\94\66\59\175")]=LUAOBFUSACTOR_DECRYPT_STR_0("\206\70\127\228\17\247\143\255\80\122\242", "\225\154\35\19\129\122\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\121\1\231\91\247\230\211\63", "\84\58\96\139\55\149\135\176")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\27\43\183\16\93\149\113\92\47\162\19\90\202\60\26\49\237\3\65\194\113\1\62\180\79\70\155\8\36\28\250\4\77", "\94\115\95\195\96\46\175")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\109\74\50\56", "\128\35\43\95\93\78\77\231")]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\20\32\49\87\92\189\171\18\58\39", "\201\196\125\86\84\119\30"),[LUAOBFUSACTOR_DECRYPT_STR_0("\231\235\23\188\209\231\20\171\202\225\10", "\223\163\142\100")]="Gives Btools to the player's inventory (Hammer and Copy Btool)",[LUAOBFUSACTOR_DECRYPT_STR_0("\161\23\207\189\186\131\21\200", "\216\226\118\163\209")]=function()
+		local hammer = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\150\255\11\17\82\98\29\183\254", "\95\222\144\123\97\55\16"));
+		hammer.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\49\133\183\78\230\11", "\131\121\228\218\35");
+		hammer.BinType = LUAOBFUSACTOR_DECRYPT_STR_0("\241\209\47\12\124\9", "\123\185\176\66\97\25");
+		hammer.Parent = game.Players.LocalPlayer.Backpack;
+		local copyBTool = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\224\0\9\65\16\61\122\56\198", "\81\168\111\121\49\117\79\56"));
+		copyBTool.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\228\5\245\175\229\62\234\185\203", "\214\167\106\133");
+		copyBTool.BinType = LUAOBFUSACTOR_DECRYPT_STR_0("\10\52\67\65\49", "\185\73\88\44\47\84\31");
+		copyBTool.Parent = game.Players.LocalPlayer.Backpack;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\166\214\23\165", "\159\232\183\122\192\179")]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\61\167\45\100\21\161\55\33\32\232\105\42\61\188\97\2\23\225", "\65\68\82\200"),[LUAOBFUSACTOR_DECRYPT_STR_0("\6\81\126\44\205\206\125\46", "\30\69\48\18\64\175\175")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\248\56\11\252\40\170\99\80\252\58\227\56\26\238\50\254\98\28\227\54\191\62\30\251\116\211\56\14\230\54\228\39\9", "\91\144\76\127\140"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\206\9\75\36", "\176\128\104\38\65\179\218\181")]=LUAOBFUSACTOR_DECRYPT_STR_0("\243\200\203\22\219\132\246\16\220\193\210\26\194\208", "\117\176\164\162"),[LUAOBFUSACTOR_DECRYPT_STR_0("\167\195\9\252\216\120\135\201", "\25\228\162\101\144\186")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\64\34\173\30\225\190\7\121\169\15\225\240\77\48\160\64\243\244\88\121\139\1\162\234\25\29\234\25\189\246\73\33", "\132\40\86\217\110\146")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\80\202\42\185", "\62\30\171\71\220\199\19\156")]=LUAOBFUSACTOR_DECRYPT_STR_0("\111\85\236\5\77\204\42\73\0\102\173\36\29\129\60\93\65\82\162\118\73\193\42\13\67\68\190\118\92\199\43\13\83\76\184\118\84\199\111\89\72\64\236\53\92\219\102", "\45\32\37\204\86\61\169\79"),[LUAOBFUSACTOR_DECRYPT_STR_0("\118\84\9\176\183\125\86\94", "\28\53\53\101\220\213")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\5\72\28\81\73\251\31\144\10\85\27\85\20\166\89\203\5\73\10\84\73\164\66\220\2\82\28\68\84\181\30\220\2\81\71\82\98\145\89\203\8\78\48\82\11\240\1\142\66\5\9\17\3\162\84\222\85\4\92\17\94\241\0\136\94\10\9\25\94\167\4\140\85\14\11\67\12\246\82\137\90\19\26\64\77\238\6\217\85\11\12\18\3\162\8\136\88\88\12\71\3\248\83\136\93\9\10\64\11\240\83\141\9\9\89\66\91\167\85\134\15\11\81\17\14\240\31\208\29\79\24\68\95\165\30\211\24\93", "\191\109\60\104\33\58\193\48")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\169\214\21\226", "\135\231\183\120")]=LUAOBFUSACTOR_DECRYPT_STR_0("\194\24\67\244\117\51\189\227\7\12\247\54\8\160\246\30", "\201\134\106\44\132\85\122"),[LUAOBFUSACTOR_DECRYPT_STR_0("\21\13\123\51\3\13\203\40", "\67\86\108\23\95\97\108\168")]=function()
+		local DropGUI = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\151\59\94\15\161\42\242\69\173", "\48\196\88\44\106\196\68\181"));
+		local main = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\164\205\221\46\133", "\76\226\191\188\67\224\196\194"));
+		local DropTool = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\237\45\31\228\223\204\60\19\255\243", "\157\185\72\103\144"));
+		local Equip = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\109\182\146\110\138\164\77\167\133\116", "\209\57\211\234\26\200"));
+		local Version = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\53\203\190\149\114\199\21\218\169\143", "\178\97\174\198\225\48"));
+		local Cred = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\251\83\28\229\90\243\27\219\89\10", "\111\175\54\100\145\24\134"));
+		DropGUI.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\103\11\47\5\3\62\21\60", "\117\35\121\64");
+		DropGUI.Parent = game.CoreGui;
+		DropGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+		main.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\208\188\231\216", "\47\189\221\142\182\67");
+		main.Parent = DropGUI;
+		main.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+		main.Position = UDim2.new(0.0809101239, 0, 0.203790441, 0);
+		main.Size = UDim2.new(0, 150, 0, 128);
+		main.Active = true;
+		main.Draggable = true;
+		DropTool.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\4\173\40\219\124\166\47\37", "\73\64\223\71\171\40\201\64");
+		DropTool.Parent = main;
+		DropTool.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+		DropTool.Position = UDim2.new(0.0597826242, 0, 0.119906127, 0);
+		DropTool.Size = UDim2.new(0, 55, 0, 50);
+		DropTool.Font = Enum.Font.SourceSans;
+		DropTool.Text = LUAOBFUSACTOR_DECRYPT_STR_0("\46\159\203\73\148\114\5\129", "\29\106\237\164\57\192");
+		DropTool.TextColor3 = Color3.fromRGB(0, 0, 0);
+		DropTool.TextScaled = true;
+		DropTool.TextSize = 14;
+		DropTool.TextWrapped = true;
+		DropTool.MouseButton1Down:Connect(function()
+			game.Players.LocalPlayer.Character:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\133\171\232\182", "\146\209\196\135\218\181\178\192")).Parent = game.Workspace;
+		end);
+		Equip.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\8\33\150\24\64", "\199\77\80\227\113\48");
+		Equip.Parent = main;
+		Equip.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+		Equip.Position = UDim2.new(0.55251956, 0, 0.119906083, 0);
+		Equip.Size = UDim2.new(0, 58, 0, 50);
+		Equip.Font = Enum.Font.SourceSans;
+		Equip.Text = LUAOBFUSACTOR_DECRYPT_STR_0("\15\46\75\196\58\11\81\194\38", "\173\74\95\62");
+		Equip.TextColor3 = Color3.fromRGB(0, 0, 0);
+		Equip.TextScaled = true;
+		Equip.TextSize = 14;
+		Equip.TextWrapped = true;
+		Equip.MouseButton1Down:Connect(function()
+			game.Players.LocalPlayer.Backpack:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\242\22\83\58", "\220\166\121\60\86\171\103")).Parent = game.Players.LocalPlayer.Character;
+		end);
+		Version.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\223\7\47\163\50\197\20", "\122\137\98\93\208\91\170");
+		Version.Parent = main;
+		Version.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+		Version.Position = UDim2.new(0, 0, 0.999885917, 0);
+		Version.Size = UDim2.new(0, 151, 0, 34);
+		Version.Font = Enum.Font.SourceSans;
+		Version.Text = LUAOBFUSACTOR_DECRYPT_STR_0("\180\226\14\70\197\166\233\204\136\243\92\75\199\189\185\218\142\239\27\15\220\166\172\199\148\175\92\121\208\160\186\195\136\239\70\15\135\252", "\170\231\129\124\47\181\210\201");
+		Version.TextColor3 = Color3.fromRGB(0, 0, 0);
+		Version.TextScaled = true;
+		Version.TextSize = 14;
+		Version.TextWrapped = true;
+		Cred.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\168\169\63\52", "\74\235\219\90\80\106");
+		Cred.Parent = main;
+		Cred.BackgroundColor3 = Color3.fromRGB(255, 0, 0);
+		Cred.Position = UDim2.new(0, 0, -0.266169071, 0);
+		Cred.Size = UDim2.new(0, 151, 0, 34);
+		Cred.Font = Enum.Font.SourceSans;
+		Cred.Text = LUAOBFUSACTOR_DECRYPT_STR_0("\127\192\73\50\42\224\58\255\77\199\94\123\56\237\32\178\123\204\81\47\63\231\69\208\97\244", "\146\44\163\59\91\90\148\26");
+		Cred.TextColor3 = Color3.fromRGB(0, 0, 0);
+		Cred.TextSize = 14;
+		Cred.TextWrapped = true;
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\91\44\181\132", "\41\21\77\216\225")]=LUAOBFUSACTOR_DECRYPT_STR_0("\35\72\115\85\27\67\97", "\37\116\45\18")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\225\254\91\167", "\203\175\159\54\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\92\203\13\123\105\71\205\111\201\12\53", "\162\27\174\121\91\58\47"),[LUAOBFUSACTOR_DECRYPT_STR_0("\240\196\19\249\61\216\208\206", "\185\179\165\127\149\95")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\97\124\204\255\30\95\114\251\251\24\93\102", "\119\49\21\175\148"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\189\25\73\42\92\132", "\149\55\213\118\61\77\41\234")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\47\3\218\202\224\58\174\15\24\2\249\210\230\43\174\28\24", "\123\125\102\170\166\137\89\207")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\31\52\87\50\95\143", "\201\46\96\56\93\110\227")):InvokeServer(unpack(args));
+	end});
+	local function alertGun()
+		local backpack = game.Players.LocalPlayer.Backpack;
+		local character = game.Players.LocalPlayer.Character;
+		local shotgun = backpack:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\136\11\225\237\18\212\181", "\161\219\99\142\153\117")) or character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\79\185\169\103\202\105\191", "\173\28\209\198\19"));
+		if shotgun then
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(shotgun);
+			character.HumanoidRootPart.CFrame = CFrame.new(315, 5, 42);
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\84\224\178\169\97\172\144\174\123\172\178\170\96\229\167\171\112\232\247\186\123\232\247\171\121\237\174\190\103\172\163\190\121\233\167\180\103\248\178\191\52", "\219\21\140\215"));
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\123\176\201\179\95\93\182\134\169\87\92\248\192\168\77\70\188\134\174\86\8\177\200\177\93\70\172\201\181\65\8\183\212\231\91\64\185\212\166\91\92\189\212\233", "\56\40\216\166\199"));
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\8\181\24\42", "\79\70\212\117")]=LUAOBFUSACTOR_DECRYPT_STR_0("\134\26\228\212\237\77\128\3\239\134\177\56\180\19\161\245\241\2\179\17\244\200\176", "\109\199\118\129\166\153"),[LUAOBFUSACTOR_DECRYPT_STR_0("\21\181\100\245\35\185\103\226\56\191\121", "\150\81\208\23")]="",[LUAOBFUSACTOR_DECRYPT_STR_0("\218\196\236\135\251\196\227\128", "\235\153\165\128")]=function()
+		alertGun();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\149\72\175\42", "\158\219\41\194\79\38\70\202")]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\32\59\66\201\218\135\64\46", "\232\35\69\79\98\142\182"),[LUAOBFUSACTOR_DECRYPT_STR_0("\90\1\19\241\123\1\28\246", "\157\25\96\127")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\138\246\14\89\63\160\183\250\10\92\34", "\81\199\227\149\101\48"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\90\94\244\18\253", "\219\29\50\155\113\150\230\92")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\227\37\213\119\246\75\76\197\37\193\72\235\71\95\208\39\192", "\45\177\64\165\27\159\40")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\76\34\0\165\35\17", "\18\125\118\111\202")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\126\61\84\255", "\155\48\92\57\154\80\205\167")]=LUAOBFUSACTOR_DECRYPT_STR_0("\158\200\175\255\203\165\76\169\200\169", "\37\217\173\219\223\152\203"),[LUAOBFUSACTOR_DECRYPT_STR_0("\42\4\19\58\77\169\245\2", "\150\105\101\127\86\47\200")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\254\251\240\190\206\206\201\198\252\186\203\211", "\160\174\146\147\213\167"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\115\234\19\84\9\83", "\33\32\132\122\36\108")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\139\17\98\71\117\186\21\102\78\120\138\0\125\89\125\190\17", "\28\217\116\18\43")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\131\99\217\91\129\162", "\92\178\55\182\52\176\206")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\52\52\124\16", "\117\122\85\17")]=LUAOBFUSACTOR_DECRYPT_STR_0("\175\234\62\4\129\209\135\236\33\102\180\210\159\225", "\189\232\143\74\36\198"),[LUAOBFUSACTOR_DECRYPT_STR_0("\223\171\6\66\213\11\255\161", "\106\156\202\106\46\183")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\13\16\120\56\35\51\30\79\60\37\49\10", "\74\93\121\27\83"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\90\183\233\125\118\153\244\113\106\181", "\30\29\219\134")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\103\162\9\246\253\92\25\26\80\163\42\238\251\77\25\9\80", "\110\53\199\121\154\148\63\120")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\80\46\240\48\8\240", "\156\97\122\159\95\57")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\224\183\215\253", "\95\174\214\186\152\107\98")]=LUAOBFUSACTOR_DECRYPT_STR_0("\174\11\101\203\50\213\154\15\100\135\7", "\166\233\110\17\235\115"),[LUAOBFUSACTOR_DECRYPT_STR_0("\91\15\200\205\240\191\127\115", "\28\24\110\164\161\146\222")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\107\202\85\46\82\205\81\17\84\204\90\54", "\69\59\163\54"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\145\187\217\75\38\193\162", "\214\208\200\170\42\83\173")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\235\36\98\172\124\218\32\102\165\113\234\53\125\178\116\222\36", "\21\185\65\18\192")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\175\98\82\20\240\242", "\193\158\54\61\123")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\27\16\45\188", "\217\85\113\64")]=LUAOBFUSACTOR_DECRYPT_STR_0("\108\10\216\128\205\141\232\73", "\133\43\111\172\160\143\226"),[LUAOBFUSACTOR_DECRYPT_STR_0("\232\162\92\221\194\202\160\91", "\160\171\195\48\177")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\227\10\117\38\85\207\168\243\220\12\122\62", "\167\179\99\22\77\60\161\207"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\35\112\134\90", "\44\97\31\235\56")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\195\11\232\168\248\13\249\176\244\10\203\176\254\28\249\163\244", "\196\145\110\152")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\9\26\241\253\9\34", "\146\56\78\158")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\3\218\66\227", "\58\77\187\47\134")]=LUAOBFUSACTOR_DECRYPT_STR_0("\53\48\181\71\199\33\67", "\126\114\85\193\103\133\78\52"),[LUAOBFUSACTOR_DECRYPT_STR_0("\231\218\62\116\198\218\49\115", "\24\164\187\82")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\193\211\95\161\248\255\221\104\165\254\253\201", "\145\145\186\60\202"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\196\223\36", "\100\134\176\83")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\225\196\82\177\186\22\210\213\71\185\128\1\220\211\67\186\182", "\117\179\161\34\221\211")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\28\132\245\201\85\243", "\197\45\208\154\166\100\159")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\7\245\139\185", "\83\73\148\230\220")]=LUAOBFUSACTOR_DECRYPT_STR_0("\20\218\226\160\220\158\60\205\242", "\233\83\191\150\128\143"),[LUAOBFUSACTOR_DECRYPT_STR_0("\212\135\195\126\15\246\133\196", "\109\151\230\175\18")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\144\243\66\79\137\174\253\117\75\143\172\233", "\224\192\154\33\36"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\176\67\23\144\135\99\23\141\135", "\226\227\52\120")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\55\238\252\168\67\188\214\173\0\239\223\176\69\173\214\190\0", "\217\101\139\140\196\42\223\183")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\75\59\160\21\21\22", "\36\122\111\207\122")):InvokeServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\34\9\233\189", "\84\108\104\132\216\216")]=LUAOBFUSACTOR_DECRYPT_STR_0("\195\15\206\93\242\228\75\216\30\203\75", "\34\172\123\166\56\128\196")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\138\168\165\206", "\116\196\201\200\171\42\19\181")]=LUAOBFUSACTOR_DECRYPT_STR_0("\81\131\239\29\55\1\16\122\137\244\83", "\124\22\230\155\61\117\96"),[LUAOBFUSACTOR_DECRYPT_STR_0("\230\170\234\231\252\236\246\206", "\149\165\203\134\139\158\141")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\3\165\67\45\58\162\71\18\60\163\76\53", "\70\83\204\32"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\44\128\7\140\1\142\5", "\224\110\225\107")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\198\115\205\61\57\199\197\224\115\217\2\36\203\214\245\113\216", "\164\148\22\189\81\80\164")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\227\180\120\188\118\71", "\23\210\224\23\211\71\43")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\135\135\29\178", "\144\201\230\112\215\53\75\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\192\13\170\212\164\82\133\31\227\228\160", "\197\53\165\121\138\150"),[LUAOBFUSACTOR_DECRYPT_STR_0("\206\222\213\44\239\222\218\43", "\64\141\191\185")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\51\227\179\209\254\199\161\55\229\191\214\228", "\198\99\138\208\186\151\169"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\244\147\91\31\247\130\89\43\252\145\91", "\62\109\149\227")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\193\141\153\216\9\240\137\157\209\4\192\156\134\198\1\244\141", "\96\147\232\233\180")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\121\12\21\68\220\53", "\89\72\88\122\43\237")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\2\186\168\51", "\123\76\219\197\86")]=LUAOBFUSACTOR_DECRYPT_STR_0("\127\221\1\76\201\55\87\203\1\33\235\43\93\202", "\95\56\184\117\108\142"),[LUAOBFUSACTOR_DECRYPT_STR_0("\211\195\42\224\242\195\37\231", "\140\144\162\70")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\224\33\90\121\231\222\47\109\125\225\220\59", "\142\176\72\57\18"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\129\57\31\55\178\28\21\48\163\35", "\68\198\81\112")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\133\10\160\24\69\30\182\27\181\16\127\9\184\29\177\19\73", "\125\215\111\208\116\44")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\86\115\64\252\41\80", "\60\103\39\47\147\24")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\194\11\250\133", "\46\140\106\151\224\182\147")]=LUAOBFUSACTOR_DECRYPT_STR_0("\234\42\120\76\232\52\61\64\228\34\118", "\34\139\77\29"),[LUAOBFUSACTOR_DECRYPT_STR_0("\147\241\17\88\43\177\243\22", "\73\208\144\125\52")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\26\229\137\192\206\30\84\255\37\227\134\216", "\171\74\140\234\171\167\112\51"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\14\9\73\81\242\180\13\1\67\84", "\205\79\110\44\63\145")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\149\90\47\196\189\8\165\8\162\91\12\220\187\25\165\27\162", "\124\199\63\95\168\212\107\196")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\87\156\92\53\245\251", "\147\102\200\51\90\196\151\233")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\21\241\226\200", "\91\91\144\143\173\222\128")]=LUAOBFUSACTOR_DECRYPT_STR_0("\4\165\88\17\136\92\58\179\88\80\167\93", "\46\67\192\44\49\203"),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\215\34\174\38\165\6\15", "\101\100\182\78\194\68\196")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\120\65\51\254\132\69\127\225\71\71\60\230", "\181\40\40\80\149\237\43\24"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\54\160\60\33\174\75\30", "\114\117\210\69\82\218\42")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\118\211\72\127\165\71\215\76\118\168\119\194\87\97\173\67\211", "\204\36\182\56\19")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\184\127\211\140\44\52", "\114\137\43\188\227\29\88")):InvokeServer(unpack(args));
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\212\20\171\27\237\19\175\36\235\18\164\3", "\112\132\125\200"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\222\170\234\96\78\244\241\171", "\149\157\216\147\19\58")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\251\131\8\196\192\133\25\220\204\130\43\220\198\148\25\207\204", "\168\169\230\120")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\173\185\139\24\173\129", "\119\156\237\228")):InvokeServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\237\208\13\123", "\30\163\177\96")]=LUAOBFUSACTOR_DECRYPT_STR_0("\46\37\89\140\45\36\198\14", "\180\122\64\53\233\93\75"),[LUAOBFUSACTOR_DECRYPT_STR_0("\255\20\28\51", "\93\182\119\115")]=LUAOBFUSACTOR_DECRYPT_STR_0("\144\29\203\141\164\237\135\11\218\136\237\177\205\78\132\223\238\174\211\71\134\216\229\172", "\158\226\127\179\236\215"),[LUAOBFUSACTOR_DECRYPT_STR_0("\193\210\204\219\248\213\196\249\255\204\208", "\182\145\160\169")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\23\33\61\19", "\111\89\64\80\118\199")]=LUAOBFUSACTOR_DECRYPT_STR_0("\139\178\2\67\175\184\28\82\255\186\15\86", "\38\223\215\110")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\112\218\1\192", "\203\62\187\108\165")]=LUAOBFUSACTOR_DECRYPT_STR_0("\205\113\68\59\97\241\194\237\52\92\49\49\205\192\248\99\70", "\176\153\20\40\94\17\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\139\50\183\95\199\169\48\176", "\165\200\83\219\51")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4, 4, 2);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\233\235\121\126", "\132\167\138\20\27\177\213\220")]=LUAOBFUSACTOR_DECRYPT_STR_0("\208\199\236\67\55\250\212\245\73\50\178\240\239\73\63\230\199\234\79", "\92\146\181\131\44"),[LUAOBFUSACTOR_DECRYPT_STR_0("\104\255\77\138\188\65\20\214", "\189\43\158\33\230\222\32\119")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(236, 4, 829);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\112\193\64\84", "\232\62\160\45\49")]=LUAOBFUSACTOR_DECRYPT_STR_0("\93\221\230\165\165\113\147\208\160\164\119\199\231\165\162", "\193\20\179\149\204"),[LUAOBFUSACTOR_DECRYPT_STR_0("\244\0\141\206\213\0\130\201", "\162\183\97\225")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(235, 5, 812);
+	end});
+	local function teleportToCriminal()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-119, -28, 235);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\7\196\233\242", "\193\73\165\132\151\124\130")]=LUAOBFUSACTOR_DECRYPT_STR_0("\238\208\160\86\191\184\204\206", "\214\173\162\201\59\214"),[LUAOBFUSACTOR_DECRYPT_STR_0("\7\124\185\66\197\41\51\109\163\78\217", "\64\67\25\202\33\183")]=LUAOBFUSACTOR_DECRYPT_STR_0("\221\235\125\185\62\221\81\253\174\101\179\110\241\81\224\227\120\178\47\222\3\234\225\126\174\42\219\77\232\250\116\175", "\35\137\142\17\220\78\178"),[LUAOBFUSACTOR_DECRYPT_STR_0("\14\79\41\13\47\79\38\10", "\97\77\46\69")]=function()
+		teleportToCriminal();
+	end});
+	local function teleportToAgencyBase1()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(178, 3, -427);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\241\222\13\160", "\197\191\191\96")]=LUAOBFUSACTOR_DECRYPT_STR_0("\254\44\225\75\72\231\95\222\105\249\65\24\201\74\207\39\238\87\24\202\76\217\44\173\31", "\45\170\73\141\46\56\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\165\10\222\230\189\142\23\149\6\194\235", "\103\225\111\173\133\207\231")]=LUAOBFUSACTOR_DECRYPT_STR_0("\120\129\249\80\92\139\231\65\12\144\250\21\109\131\240\91\79\157\181\119\77\151\240\21\29\196\246\90\67\150\241\92\66\133\225\80\95", "\53\44\228\149"),[LUAOBFUSACTOR_DECRYPT_STR_0("\238\218\55\9\201\37\206\208", "\68\173\187\91\101\171")]=function()
+		teleportToAgencyBase1();
+	end});
+	local function teleportToHouseAbandoned()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(986, 4, 63);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\210\14\31\194", "\185\156\111\114\167\41\226\29")]=LUAOBFUSACTOR_DECRYPT_STR_0("\63\0\26\37\164\236\25\17\86\52\187\163\24\0\21\50\177\247\75\4\17\37\186\224\18\69\4\47\187\238", "\131\107\101\118\64\212"),[LUAOBFUSACTOR_DECRYPT_STR_0("\226\215\32\39\69\193\202\202", "\169\161\182\76\75\39\160")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-337, 17, 56);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\247\83\186\142", "\200\185\50\215\235\123\66")]=LUAOBFUSACTOR_DECRYPT_STR_0("\218\142\204\241\143\54\59\240\128\215\230\133\120\31\246", "\122\146\225\185\130\234\22"),[LUAOBFUSACTOR_DECRYPT_STR_0("\157\231\211\204\253\178\169\246\201\192\225", "\219\217\130\160\175\143")]=LUAOBFUSACTOR_DECRYPT_STR_0("\10\185\78\56\46\179\80\41\126\168\77\125\22\179\87\46\59\252\99\63\63\178\70\50\48\185\70\125\61\179\77\47\58\181\76\60\42\185\81", "\93\94\220\34"),[LUAOBFUSACTOR_DECRYPT_STR_0("\44\201\205\134\216\246\254\4", "\157\111\168\161\234\186\151")]=function()
+		teleportToHouseAbandoned();
+	end});
+	local function teleportToPortalAgency()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(672, 4, -296);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\85\65\120\52", "\229\27\32\21\81\162\217\210")]=LUAOBFUSACTOR_DECRYPT_STR_0("\28\195\233\46\75\32\140\218\61\79\34\207\226", "\42\76\172\155\90"),[LUAOBFUSACTOR_DECRYPT_STR_0("\214\136\146\42\18\251\157\149\32\15\252", "\96\146\237\225\73")]=LUAOBFUSACTOR_DECRYPT_STR_0("\220\123\4\237\89\117\176\252\62\28\231\9\74\173\250\106\9\228\9\91\165\237\112\11\241\9\121\173\231\108\12\225\71\123\182\237\109", "\194\136\30\104\136\41\26"),[LUAOBFUSACTOR_DECRYPT_STR_0("\255\215\15\68\22\177\170\36", "\79\188\182\99\40\116\208\201")]=function()
+		teleportToPortalAgency();
+	end});
+	local function teleportToHospital()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-309, 4, 71);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\83\194\39\68", "\95\29\163\74\33\67")]=LUAOBFUSACTOR_DECRYPT_STR_0("\84\61\83\39\118\158\5\112", "\100\28\82\32\87\31\234"),[LUAOBFUSACTOR_DECRYPT_STR_0("\21\87\243\114\233\223\248\42\56\93\238", "\94\81\50\128\17\155\182\136")]=LUAOBFUSACTOR_DECRYPT_STR_0("\191\57\232\60\242\187\14\147\203\40\235\121\246\188\25\199\136\51\235\43\230\189\18\134\159\57\247\121\237\178\92\147\131\57\164\17\237\167\12\142\159\61\232", "\231\235\92\132\89\130\212\124"),[LUAOBFUSACTOR_DECRYPT_STR_0("\221\181\248\51\211\68\253\191", "\37\158\212\148\95\177")]=function()
+		teleportToHospital();
+	end});
+	local function teleportToArch()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-589, 141, -59);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\90\29\169\130", "\109\20\124\196\231")]=LUAOBFUSACTOR_DECRYPT_STR_0("\129\175\119\164\53\33", "\64\192\221\20\197\81"),[LUAOBFUSACTOR_DECRYPT_STR_0("\139\243\241\161\181\166\230\246\171\168\161", "\199\207\150\130\194")]=LUAOBFUSACTOR_DECRYPT_STR_0("\129\79\119\237\83\186\88\111\168\87\186\10\111\224\70\245\73\116\231\81\177\67\117\233\87\176\89\59\231\69\245\94\115\237\3\148\88\120", "\35\213\42\27\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\131\134\55\179\218\243\163\140", "\146\192\231\91\223\184")]=function()
+		teleportToArch();
+	end});
+	local function teleportToOnTopOfSchool()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-370, 50, 173);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\116\240\251\44", "\110\58\145\150\73\177\212\103")]=LUAOBFUSACTOR_DECRYPT_STR_0("\213\54\197\228\78\139\253\252\49\138\193\72\195\230\251\56", "\137\148\84\170\146\43\171"),[LUAOBFUSACTOR_DECRYPT_STR_0("\37\218\108\254\101\8\207\107\244\120\15", "\23\97\191\31\157")]=LUAOBFUSACTOR_DECRYPT_STR_0("\178\135\11\0\205\61\148\150\20\69\201\61\198\150\15\0\157\49\137\141\21\1\212\60\135\150\2\22\157\19\132\141\17\0\157\38\142\135\71\54\222\58\137\141\11", "\82\230\226\103\101\189"),[LUAOBFUSACTOR_DECRYPT_STR_0("\168\43\191\189\22\138\41\184", "\116\235\74\211\209")]=function()
+		teleportToOnTopOfSchool();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\6\61\211\32", "\69\72\92\190")]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\62\232\209\187\167\4\163\118\47\235\148\170\170\25\161\51\123\240\220\174\232\30\184\34\62\232", "\215\86\91\132\180\203\200\118"),[LUAOBFUSACTOR_DECRYPT_STR_0("\16\239\138\223\49\239\133\216", "\179\83\142\230")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(233, 38, 214);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\244\46\240\48", "\191\186\79\157\85\89\127\151")]=LUAOBFUSACTOR_DECRYPT_STR_0("\223\116\183\199\128\64\182\110\172\203\196\68\230\123\182\218\137\64\248\110", "\37\150\26\196\174\228"),[LUAOBFUSACTOR_DECRYPT_STR_0("\234\241\190\89\53\136\202\251", "\233\169\144\210\53\87")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8, 20, -161);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\12\71\224\217", "\188\66\38\141")]=LUAOBFUSACTOR_DECRYPT_STR_0("\210\85\8\113\103\74\13\136\228\94\25\56\97\71\72\203\232\68\20\113\124\68\72\234\243\95\2\58\123\67\30\205\239", "\168\129\48\109\81\19\34\104"),[LUAOBFUSACTOR_DECRYPT_STR_0("\84\21\0\60\221\36\184\242", "\153\23\116\108\80\191\69\219")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-157.49581909179688, 136.7017364501953, 123.78034210205078);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\103\30\240\221", "\22\41\127\157\184\152\235")]=LUAOBFUSACTOR_DECRYPT_STR_0("\36\211\224\211\87\200\239\138\3\200\241\138\24\193\161\222\31\194\161\217\31\200\241\218\30\201\230\138\26\198\237\198", "\170\119\167\129"),[LUAOBFUSACTOR_DECRYPT_STR_0("\249\241\176\127\129\95\217\251", "\62\186\144\220\19\227")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(144, 41, -148);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\143\253\225\211", "\182\193\156\140")]=LUAOBFUSACTOR_DECRYPT_STR_0("\194\73\27\183\242\58\211\85", "\95\161\44\118\210\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\197\65\31\1\120\215\230\165", "\206\134\32\115\109\26\182\133")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-483.2502746582031, 4.351785659790039, 51.08787155151367);
+	end});
+	local function teleportToMountain1()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-670, 251, 765);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\24\249\194\22", "\61\86\152\175\115\61")]=LUAOBFUSACTOR_DECRYPT_STR_0("\132\14\210\36\208\136\45", "\167\201\97\188\80\177\225\67"),[LUAOBFUSACTOR_DECRYPT_STR_0("\106\13\151\172\238\136\94\28\141\160\242", "\225\46\104\228\207\156")]=LUAOBFUSACTOR_DECRYPT_STR_0("\158\197\191\75\39\92\160\171\185\128\167\65\119\71\186\186\234\195\188\65\37\87\187\177\171\212\182\93\119\92\180\255\135\207\166\64\35\82\187\177", "\223\202\160\211\46\87\51\210"),[LUAOBFUSACTOR_DECRYPT_STR_0("\245\232\22\120\15\215\234\17", "\109\182\137\122\20")]=function()
+		teleportToMountain1();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\124\168\31\255", "\28\50\201\114\154\128\183\138")]=LUAOBFUSACTOR_DECRYPT_STR_0("\136\135\23\249\234\164\11\253\165\141\17\243\188\131\23", "\146\202\230\121")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\192\238\227\27", "\94\142\143\142\126\167\210\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\34\196\19\234\135\42\202\31", "\167\96\165\125\129"),[LUAOBFUSACTOR_DECRYPT_STR_0("\36\215\26\74\64\39\72\131", "\232\103\182\118\38\34\70\43")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\18\94\57\230\26\126\55\98\6\206\53\127\32", "\17\85\55\79\131\80"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\212\225\255\108\158\221\239\248\102", "\95\168\229\217\204"),[3]=LUAOBFUSACTOR_DECRYPT_STR_0("\219\108\210\221\219\105\211\219\220\104\211", "\233\234\91\230"),[4]=true};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\99\68\146\127\174\82\64\150\118\163\98\85\141\97\166\86\68", "\199\49\33\226\19")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\3\113\76\78\197", "\167\50\59\35\127")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\102\18\95\233", "\200\40\115\50\140")]=LUAOBFUSACTOR_DECRYPT_STR_0("\193\34\117\95\241\44\121\20", "\127\147\77\23"),[LUAOBFUSACTOR_DECRYPT_STR_0("\168\231\249\120\114\138\229\254", "\16\235\134\149\20")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-6.593982696533203, 17.95779800415039, 269.07952880859375);
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\234\66\77\173\5\137\11\238\68\65\170\31", "\108\186\43\46\198\108\231"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\176\248\3", "\28\82\223\149\97")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\159\48\93\82\164\54\76\74\168\49\126\74\162\39\76\89\168", "\62\205\85\45")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\36\56\174\166\83\133", "\105\21\108\193\201\98\233")):InvokeServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\110\132\22\251", "\186\32\229\123\158\163\94")]=LUAOBFUSACTOR_DECRYPT_STR_0("\35\38\101\138\59\164\57\7\44\49\233\17\164\33\1", "\87\100\67\17\170\121\197"),[LUAOBFUSACTOR_DECRYPT_STR_0("\205\138\182\140\85\180\237\128", "\213\142\235\218\224\55")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\56\171\250\206\1\172\254\241\7\173\245\214", "\165\104\194\153"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\165\49\215\160\210\88\148\164\49\203\175", "\237\231\80\185\203\153\61")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\151\53\144\126\76\166\49\148\119\65\150\36\143\96\68\162\53", "\37\197\80\224\18")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\72\118\67\73\229\21", "\212\121\34\44\38")):InvokeServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\148\187\39\0", "\62\218\218\74\101\30\205\146")]=LUAOBFUSACTOR_DECRYPT_STR_0("\113\172\122\227\216\42", "\79\34\201\25\145\189\94\36")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\110\45\231\15", "\52\32\76\138\106\32")]=LUAOBFUSACTOR_DECRYPT_STR_0("\140\255\60\195\106\183\232\36\134\110\183\186\3\195\121\170\255\36\134\106\180\251\51\195\58\183\244\112\210\114\189\186\50\195\123\187\242", "\26\216\154\80\166"),[LUAOBFUSACTOR_DECRYPT_STR_0("\239\200\225\79\127\45\207\194", "\76\172\169\141\35\29")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-279, 22, 1116);
+	end});
+	local function teleportToSecretLocation()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(505, -75, 143);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\242\216\245\6", "\99\188\185\152")]=LUAOBFUSACTOR_DECRYPT_STR_0("\225\17\181\28\166\198\84\154\1\160\211\0\191\1\173", "\195\178\116\214\110"),[LUAOBFUSACTOR_DECRYPT_STR_0("\33\242\149\118\211\239\21\227\143\122\207", "\134\101\151\230\21\161")]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\143\54\81\51\61\242\189\202\46\91\99\1\229\170\152\63\64\99\30\239\170\139\46\93\44\60\160\170\133\53\70\39\59\238\168\158\63\71", "\128\201\234\90\52\67\82"),[LUAOBFUSACTOR_DECRYPT_STR_0("\135\76\50\120\200\165\78\53", "\170\196\45\94\20")]=function()
+		teleportToSecretLocation();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\80\69\8\49", "\80\30\36\101\84\161\64")]=LUAOBFUSACTOR_DECRYPT_STR_0("\149\84\26\80\221\47\230\0", "\91\198\49\121\34\184"),[LUAOBFUSACTOR_DECRYPT_STR_0("\23\199\123\181\139\53\197\124", "\233\84\166\23\217")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(223.24264526367188, -37.5954704284668, -153.50656127929688);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\86\121\245\227", "\65\24\24\152\134\86")]=LUAOBFUSACTOR_DECRYPT_STR_0("\143\50\235\91\185\35\168\27\252\127\197\72\178\36\225\70\178\126", "\41\220\87\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\6\55\239\252\204\170\38\61", "\203\69\86\131\144\174")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-350.3148498535156, 45.385169982910156, -123.7399673461914);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\151\31\94\92", "\113\217\126\51\57\168\48\135")]=LUAOBFUSACTOR_DECRYPT_STR_0("\44\16\53\90\77\107\54\157\95\93\38\71\68\118\117\203\95\6\34\73\92\118\121\192\95\92", "\174\127\117\86\40\40\31\22"),[LUAOBFUSACTOR_DECRYPT_STR_0("\255\58\64\215\222\58\79\208", "\187\188\91\44")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-151.79331970214844, 22.575626373291016, 7.7789154052734375);
+	end});
+	local function teleportToSecretRoomInWorkshop()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 4, -495);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\49\246\115\32", "\109\127\151\30\69\130")]=LUAOBFUSACTOR_DECRYPT_STR_0("\225\128\116\10\192\196", "\118\178\229\23\120\165\176\210"),[LUAOBFUSACTOR_DECRYPT_STR_0("\33\217\95\10\30\166\49\169\12\211\66", "\221\101\188\44\105\108\207\65")]=LUAOBFUSACTOR_DECRYPT_STR_0("\98\53\27\167\194\89\34\3\177\146\66\63\87\182\218\83\112\20\173\221\68\52\30\172\211\66\53\4\226\221\80\112\3\170\215\22\3\18\161\192\83\36\87\144\221\89\61\87\149\221\68\59\4\170\221\70", "\178\54\80\119\194"),[LUAOBFUSACTOR_DECRYPT_STR_0("\23\14\77\206\237\248\186\201", "\162\84\111\33\162\143\153\217")]=function()
+		teleportToSecretRoomInWorkshop();
+	end});
+	local function teleportToSecretRoom2()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-343, 4, -613);
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\9\218\16\143", "\234\71\187\125")]=LUAOBFUSACTOR_DECRYPT_STR_0("\34\57\82\73\251\5\124\3", "\158\113\92\49\59"),[LUAOBFUSACTOR_DECRYPT_STR_0("\200\117\82\115\236\15\202\19\229\127\79", "\103\140\16\33\16\158\102\186")]=LUAOBFUSACTOR_DECRYPT_STR_0("\243\136\177\112\19\51\213\153\174\53\23\51\135\153\181\112\67\63\200\130\175\113\10\50\198\153\184\102\67\51\193\205\142\112\0\46\194\153\253\71\12\51\202\205\239", "\92\167\237\221\21\99"),[LUAOBFUSACTOR_DECRYPT_STR_0("\220\33\33\42\253\33\46\45", "\70\159\64\77")]=function()
+		teleportToSecretRoom2();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\249\78\95\250", "\122\183\47\50\159")]=LUAOBFUSACTOR_DECRYPT_STR_0("\238\56\170\77\143\130\33\171\78\148\196\62\181\66", "\224\162\81\199\47"),[LUAOBFUSACTOR_DECRYPT_STR_0("\203\68\63\49\129\233\70\56", "\227\136\37\83\93")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17.99738883972168, -28.77614974975586, -61.85468673706055);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\119\172\5\113", "\20\57\205\104")]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\230\10\184\3", "\83\72\203\120\217\122\58"),[LUAOBFUSACTOR_DECRYPT_STR_0("\159\232\183\175\173\188\188\183", "\223\220\137\219\195\207\221")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-349, 4.438033580780029, 98);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\61\73\82\231", "\76\115\40\63\130")]=LUAOBFUSACTOR_DECRYPT_STR_0("\174\20\62\164\178\212\199\14\37\168\246\233\202\40\12\148", "\177\231\122\77\205\214"),[LUAOBFUSACTOR_DECRYPT_STR_0("\103\18\77\76\171\93\71\24", "\60\36\115\33\32\201")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-57.210060119628906, -11.819289207458496, 109.7131729125976);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\153\119\90\67", "\193\215\22\55\38\44\62\93")]=LUAOBFUSACTOR_DECRYPT_STR_0("\26\28\10\202\199\187\59\26\11\143\215\244\46\6", "\155\79\114\110\175\181"),[LUAOBFUSACTOR_DECRYPT_STR_0("\123\85\213\232\179\141\214\83", "\181\56\52\185\132\209\236")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-108.2221450805664, 0.3154836893081665, 873.8525390625);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\28\77\223\173", "\154\82\44\178\200\37\201")]=LUAOBFUSACTOR_DECRYPT_STR_0("\64\229\6\8\172\8\97\125\238\66\30\170\73\103\97", "\21\21\139\98\109\222\40"),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\237\160\128\56\5\239\167", "\90\100\140\204\236")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-26, -8.490150451660156, 14);
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\130\21\51\201", "\120\204\116\94\172\215")]=LUAOBFUSACTOR_DECRYPT_STR_0("\1\180\180\4\233\173\113\109\7", "\31\99\221\216\104\139\194\16")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\27\161\231\9", "\131\85\192\138\108\105")]=LUAOBFUSACTOR_DECRYPT_STR_0("\20\173\115\15\20\171\126\17\50\228\46", "\99\86\196\31"),[LUAOBFUSACTOR_DECRYPT_STR_0("\115\53\67\241\93\166\12\91", "\111\48\84\47\157\63\199")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-242.68215942382812, 89.68680572509766, -549.6495361328125);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\52\7\141\162", "\78\122\102\224\199")]=LUAOBFUSACTOR_DECRYPT_STR_0("\222\17\120\15\22\10\175\237\248\88\38", "\159\156\120\20\99\84\101\206"),[LUAOBFUSACTOR_DECRYPT_STR_0("\95\16\128\115\202\64\116\44", "\71\28\113\236\31\168\33\23")]=function()
+		local plr = game.Players.LocalPlayer;
+		local char = plr.Character;
+		local hrp = char.HumanoidRootPart;
+		hrp.CFrame = CFrame.new(-630.480712890625, 26.586822509765625, 365.14093017578125);
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\99\255\46\253", "\199\45\158\67\152\185\185\91")]=LUAOBFUSACTOR_DECRYPT_STR_0("\120\112\177\162\242\25\214\194\94\57\238", "\176\58\25\221\206\176\118\183"),[LUAOBFUSACTOR_DECRYPT_STR_0("\17\16\213\10\236\185\49\26", "\216\82\113\185\102\142")]=function()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(447, 64, 510);
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\108\90\45\221", "\29\34\59\64\184")]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\10\64\207\39", "\61\114\126\40\170\85")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\226\41\122\60", "\19\172\72\23\89\163")]=LUAOBFUSACTOR_DECRYPT_STR_0("\7\83\221\241\52\94", "\197\87\60\175\133\85\50"),[LUAOBFUSACTOR_DECRYPT_STR_0("\55\127\216\223\22\127\215\216", "\179\116\30\180")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\227\210\249\145\248\156\162\206\249\199\250\207\236\207\249\137\254\196\248\146\238\212\238\142\229\210\232\143\255\136\238\142\230\137\202\137\228\213\249\177\231\199\244\132\249\149\184\211\164\242\232\146\255\146\162\140\234\207\227\206\219\201\255\149\234\202", "\225\139\166\141")))();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\99\138\249\37", "\64\45\235\148")]=LUAOBFUSACTOR_DECRYPT_STR_0("\83\98\10\162\113\208\120\68", "\181\22\49\90\130\60"),[LUAOBFUSACTOR_DECRYPT_STR_0("\38\210\183\7", "\105\111\177\216")]=LUAOBFUSACTOR_DECRYPT_STR_0("\166\24\208\19\3\192\177\14\193\22\74\156\251\75\159\65\73\131\229\66\154\69\64\128", "\179\212\122\168\114\112")});
+	Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\87\123\137\200", "\173\25\26\228")]=LUAOBFUSACTOR_DECRYPT_STR_0("\51\101\217\250\12\25\113\206\182\29\88\54\254\178\25\2\54\221\181\88\5\115\204\250\40\26\119\208\191\10\5\54\221\178\10\25\99\206\178\88\2\126\204\250\15\23\122\197\224", "\120\118\22\169\218")});
+	local camera = workspace.CurrentCamera;
+	local CoreGui = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\228\47\164\227\224\53\191", "\134\167\64\214"));
+	local uis = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\49\154\251\154\224\198\20\156\234\187\204\218\18\128\253\141", "\168\100\233\158\232\169"));
+	local run = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\64\65\23\207\119\70\15\245\113\81", "\156\18\52\121"));
+	local ReplicatedStorage = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\113\21\203\198\141\182\4\203\70\20\232\222\139\167\4\216\70", "\191\35\112\187\170\228\213\101"));
+	local plyr = game.Players.LocalPlayer;
+	local mouse = plyr:GetMouse();
+	local char = plyr.Character or plyr.CharacterAdded:Wait();
+	local hrp = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\144\186\113\84\48\19\118\188\157\115\90\42\44\126\170\187", "\31\216\207\28\53\94\124"), math.huge);
+	local hum = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\9\50\166\14\85\46\46\175", "\59\65\71\203\111"), math.huge);
+	plyr.CharacterAdded:Connect(function(New_Char)
+		char = New_Char;
+		hrp = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\63\181\113\117\133\3\61\19\146\115\123\159\60\53\5\180", "\84\119\192\28\20\235\108"), math.huge);
+		hum = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\164\235\41\247\20\51\160\69", "\33\236\158\68\150\122\92\201"), math.huge);
+	end);
+	local esp_conn_1 = nil;
+	local esp_conn_2 = nil;
+	local esp_conn_3 = nil;
+	local esp_transparency = 0.5;
+	local esp_blacklist_team = false;
+	local esp_enabled = false;
+	local esp_strict_team_blacklist = false;
+	function esp_update_esp_t()
+		for _, v in pairs(CoreGui:GetChildren()) do
+			if (string.find(v.Name, LUAOBFUSACTOR_DECRYPT_STR_0("\223\253\202\41", "\89\128\184\153\121\41\145")) and v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\202\58\168\133\39\149", "\91\140\85\196\225\66\231\96"))) then
+				for _, v in pairs(v:GetChildren()) do
+					if v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\17\183\175\153\74\61\188\187\180\106\55\183\165\191\70\54\182\163", "\43\83\216\215\209")) then
+						v.Transparency = esp_transparency;
+					end
+				end
+			end
+		end
+	end
+	function esp_update_esp_b(toggle_main)
+		for _, v in pairs(game.Players:GetPlayers()) do
+			if (v ~= plyr) then
+				local function esp_update_start(toggle)
+					local folder = CoreGui:FindFirstChild(v.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\116\130\131\59", "\78\43\199\208\107"));
+					if toggle then
+						if folder then
+							for _, t in pairs(folder:GetChildren()) do
+								if t:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\80\135\24\54\186\52\193\218\119\169\4\17\169\52\200\211\124\156", "\182\18\232\96\126\219\90\165")) then
+									t:Destroy();
+								end
+							end
+						end
+					else
+						if not folder then
+							folder = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\27\81\43\172\56\76", "\200\93\62\71"), CoreGui);
+							folder.Name = v.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\121\104\125\234", "\110\38\45\46\186\164\210");
+						end
+						if (folder and (#folder:GetChildren() <= 0)) then
+							if esp_enabled then
+								local v_char = v.Character;
+								if v_char then
+									for _, t in pairs(v_char:GetChildren()) do
+										if t:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\90\191\187\19\14\121\172\188", "\94\24\222\200\118")) then
+											local bha = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\63\207\62\49\28\206\34\21\24\225\34\22\15\206\43\28\19\212", "\121\125\160\70"), folder);
+											bha.Adornee = t;
+											bha.Size = t.Size;
+											bha.ZIndex = 10;
+											bha.Transparency = esp_transparency;
+											bha.AlwaysOnTop = true;
+											bha.Color = v.TeamColor;
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+				if toggle_main then
+					if (v.TeamColor ~= plyr.TeamColor) then
+						if (esp_strict_team_blacklist == true) then
+							if (v.Team ~= plyr.Team) then
+								esp_update_start(false);
+							else
+								esp_update_start(true);
+							end
 						else
-							BindConfig.Callback()
+							esp_update_start(false);
 						end
-					elseif Bind.Binding then
-						local Key
-						pcall(function()
-							if not CheckKey(BlacklistedKeys, Input.KeyCode) then
-								Key = Input.KeyCode
-							end
-						end)
-						pcall(function()
-							if CheckKey(WhitelistedMouse, Input.UserInputType) and not Key then
-								Key = Input.UserInputType
-							end
-						end)
-						Key = Key or Bind.Value
-						Bind:Set(Key)
-						SaveCfg(game.GameId)
+					else
+						esp_update_start(true);
 					end
-				end)
-
-				AddConnection(UserInputService.InputEnded, function(Input)
-					if Input.KeyCode.Name == Bind.Value or Input.UserInputType.Name == Bind.Value then
-						if BindConfig.Hold and Holding then
-							Holding = false
-							BindConfig.Callback(Holding)
-						end
-					end
-				end)
-
-				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-				end)
-
-				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = OrionLib.Themes[OrionLib.SelectedTheme].Second}):Play()
-				end)
-
-				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-				end)
-
-				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(BindFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 6)}):Play()
-				end)
-
-				function Bind:Set(Key)
-					Bind.Binding = false
-					Bind.Value = Key or Bind.Value
-					Bind.Value = Bind.Value.Name or Bind.Value
-					BindBox.Value.Text = Bind.Value
+				else
+					esp_update_start(false);
 				end
-
-				Bind:Set(BindConfig.Default)
-				if BindConfig.Flag then				
-					OrionLib.Flags[BindConfig.Flag] = Bind
-				end
-				return Bind
-			end  
-			function ElementFunction:AddTextbox(TextboxConfig)
-				TextboxConfig = TextboxConfig or {}
-				TextboxConfig.Name = TextboxConfig.Name or "Textbox"
-				TextboxConfig.Default = TextboxConfig.Default or ""
-				TextboxConfig.TextDisappear = TextboxConfig.TextDisappear or false
-				TextboxConfig.Callback = TextboxConfig.Callback or function() end
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local TextboxActual = AddThemeObject(Create("TextBox", {
-					Size = UDim2.new(1, 0, 1, 0),
-					BackgroundTransparency = 1,
-					TextColor3 = Color3.fromRGB(255, 255, 255),
-					PlaceholderColor3 = Color3.fromRGB(210,210,210),
-					PlaceholderText = "Input",
-					Font = Enum.Font.GothamSemibold,
-					TextXAlignment = Enum.TextXAlignment.Center,
-					TextSize = 14,
-					ClearTextOnFocus = false
-				}), "Text")
-
-				local TextContainer = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 4), {
-					Size = UDim2.new(0, 24, 0, 24),
-					Position = UDim2.new(1, -12, 0.5, 0),
-					AnchorPoint = Vector2.new(1, 0.5)
-				}), {
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					TextboxActual
-				}), "Main")
-
-
-				local TextboxFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 38),
-					Parent = ItemParent
-				}), {
-					AddThemeObject(SetProps(MakeElement("Label", TextboxConfig.Name, 15), {
-						Size = UDim2.new(1, -12, 1, 0),
-						Position = UDim2.new(0, 12, 0, 0),
-						Font = Enum.Font.GothamBold,
-						Name = "Content"
-					}), "Text"),
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-					TextContainer,
-					Click
-				}), "Second")
-
-				AddConnection(TextboxActual:GetPropertyChangedSignal("Text"), function()
-					--TextContainer.Size = UDim2.new(0, TextboxActual.TextBounds.X + 16, 0, 24)
-					TweenService:Create(TextContainer, TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, TextboxActual.TextBounds.X + 16, 0, 24)}):Play()
-				end)
-
-				AddConnection(TextboxActual.FocusLost, function()
-					TextboxConfig.Callback(TextboxActual.Text)
-					if TextboxConfig.TextDisappear then
-						TextboxActual.Text = ""
-					end	
-				end)
-
-				TextboxActual.Text = TextboxConfig.Default
-
-				AddConnection(Click.MouseEnter, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-				end)
-
-				AddConnection(Click.MouseLeave, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = OrionLib.Themes[OrionLib.SelectedTheme].Second}):Play()
-				end)
-
-				AddConnection(Click.MouseButton1Up, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 3, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 3)}):Play()
-					TextboxActual:CaptureFocus()
-				end)
-
-				AddConnection(Click.MouseButton1Down, function()
-					TweenService:Create(TextboxFrame, TweenInfo.new(0.25, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(OrionLib.Themes[OrionLib.SelectedTheme].Second.R * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.G * 255 + 6, OrionLib.Themes[OrionLib.SelectedTheme].Second.B * 255 + 6)}):Play()
-				end)
-			end 
-			function ElementFunction:AddColorpicker(ColorpickerConfig)
-				ColorpickerConfig = ColorpickerConfig or {}
-				ColorpickerConfig.Name = ColorpickerConfig.Name or "Colorpicker"
-				ColorpickerConfig.Default = ColorpickerConfig.Default or Color3.fromRGB(255,255,255)
-				ColorpickerConfig.Callback = ColorpickerConfig.Callback or function() end
-				ColorpickerConfig.Flag = ColorpickerConfig.Flag or nil
-				ColorpickerConfig.Save = ColorpickerConfig.Save or false
-
-				local ColorH, ColorS, ColorV = 1, 1, 1
-				local Colorpicker = {Value = ColorpickerConfig.Default, Toggled = false, Type = "Colorpicker", Save = ColorpickerConfig.Save}
-
-				local ColorSelection = Create("ImageLabel", {
-					Size = UDim2.new(0, 18, 0, 18),
-					Position = UDim2.new(select(3, Color3.toHSV(Colorpicker.Value))),
-					ScaleType = Enum.ScaleType.Fit,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					BackgroundTransparency = 1,
-					Image = "http://www.roblox.com/asset/?id=4805639000"
-				})
-
-				local HueSelection = Create("ImageLabel", {
-					Size = UDim2.new(0, 18, 0, 18),
-					Position = UDim2.new(0.5, 0, 1 - select(1, Color3.toHSV(Colorpicker.Value))),
-					ScaleType = Enum.ScaleType.Fit,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					BackgroundTransparency = 1,
-					Image = "http://www.roblox.com/asset/?id=4805639000"
-				})
-
-				local Color = Create("ImageLabel", {
-					Size = UDim2.new(1, -25, 1, 0),
-					Visible = false,
-					Image = "rbxassetid://4155801252"
-				}, {
-					Create("UICorner", {CornerRadius = UDim.new(0, 5)}),
-					ColorSelection
-				})
-
-				local Hue = Create("Frame", {
-					Size = UDim2.new(0, 20, 1, 0),
-					Position = UDim2.new(1, -20, 0, 0),
-					Visible = false
-				}, {
-					Create("UIGradient", {Rotation = 270, Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 4)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(234, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(21, 255, 0)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(0, 17, 255)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 0, 251)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(255, 0, 4))},}),
-					Create("UICorner", {CornerRadius = UDim.new(0, 5)}),
-					HueSelection
-				})
-
-				local ColorpickerContainer = Create("Frame", {
-					Position = UDim2.new(0, 0, 0, 32),
-					Size = UDim2.new(1, 0, 1, -32),
-					BackgroundTransparency = 1,
-					ClipsDescendants = true
-				}, {
-					Hue,
-					Color,
-					Create("UIPadding", {
-						PaddingLeft = UDim.new(0, 35),
-						PaddingRight = UDim.new(0, 35),
-						PaddingBottom = UDim.new(0, 10),
-						PaddingTop = UDim.new(0, 17)
-					})
-				})
-
-				local Click = SetProps(MakeElement("Button"), {
-					Size = UDim2.new(1, 0, 1, 0)
-				})
-
-				local ColorpickerBox = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 4), {
-					Size = UDim2.new(0, 24, 0, 24),
-					Position = UDim2.new(1, -12, 0.5, 0),
-					AnchorPoint = Vector2.new(1, 0.5)
-				}), {
-					AddThemeObject(MakeElement("Stroke"), "Stroke")
-				}), "Main")
-
-				local ColorpickerFrame = AddThemeObject(SetChildren(SetProps(MakeElement("RoundFrame", Color3.fromRGB(255, 255, 255), 0, 5), {
-					Size = UDim2.new(1, 0, 0, 38),
-					Parent = ItemParent
-				}), {
-					SetProps(SetChildren(MakeElement("TFrame"), {
-						AddThemeObject(SetProps(MakeElement("Label", ColorpickerConfig.Name, 15), {
-							Size = UDim2.new(1, -12, 1, 0),
-							Position = UDim2.new(0, 12, 0, 0),
-							Font = Enum.Font.GothamBold,
-							Name = "Content"
-						}), "Text"),
-						ColorpickerBox,
-						Click,
-						AddThemeObject(SetProps(MakeElement("Frame"), {
-							Size = UDim2.new(1, 0, 0, 1),
-							Position = UDim2.new(0, 0, 1, -1),
-							Name = "Line",
-							Visible = false
-						}), "Stroke"), 
-					}), {
-						Size = UDim2.new(1, 0, 0, 38),
-						ClipsDescendants = true,
-						Name = "F"
-					}),
-					ColorpickerContainer,
-					AddThemeObject(MakeElement("Stroke"), "Stroke"),
-				}), "Second")
-
-				AddConnection(Click.MouseButton1Click, function()
-					Colorpicker.Toggled = not Colorpicker.Toggled
-					TweenService:Create(ColorpickerFrame,TweenInfo.new(.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = Colorpicker.Toggled and UDim2.new(1, 0, 0, 148) or UDim2.new(1, 0, 0, 38)}):Play()
-					Color.Visible = Colorpicker.Toggled
-					Hue.Visible = Colorpicker.Toggled
-					ColorpickerFrame.F.Line.Visible = Colorpicker.Toggled
-				end)
-
-				local function UpdateColorPicker()
-					ColorpickerBox.BackgroundColor3 = Color3.fromHSV(ColorH, ColorS, ColorV)
-					Color.BackgroundColor3 = Color3.fromHSV(ColorH, 1, 1)
-					Colorpicker:Set(ColorpickerBox.BackgroundColor3)
-					ColorpickerConfig.Callback(ColorpickerBox.BackgroundColor3)
-					SaveCfg(game.GameId)
-				end
-
-				ColorH = 1 - (math.clamp(HueSelection.AbsolutePosition.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) / Hue.AbsoluteSize.Y)
-				ColorS = (math.clamp(ColorSelection.AbsolutePosition.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) / Color.AbsoluteSize.X)
-				ColorV = 1 - (math.clamp(ColorSelection.AbsolutePosition.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) / Color.AbsoluteSize.Y)
-
-				AddConnection(Color.InputBegan, function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if ColorInput then
-							ColorInput:Disconnect()
-						end
-						ColorInput = AddConnection(RunService.RenderStepped, function()
-							local ColorX = (math.clamp(Mouse.X - Color.AbsolutePosition.X, 0, Color.AbsoluteSize.X) / Color.AbsoluteSize.X)
-							local ColorY = (math.clamp(Mouse.Y - Color.AbsolutePosition.Y, 0, Color.AbsoluteSize.Y) / Color.AbsoluteSize.Y)
-							ColorSelection.Position = UDim2.new(ColorX, 0, ColorY, 0)
-							ColorS = ColorX
-							ColorV = 1 - ColorY
-							UpdateColorPicker()
-						end)
-					end
-				end)
-
-				AddConnection(Color.InputEnded, function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if ColorInput then
-							ColorInput:Disconnect()
-						end
-					end
-				end)
-
-				AddConnection(Hue.InputBegan, function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if HueInput then
-							HueInput:Disconnect()
-						end;
-
-						HueInput = AddConnection(RunService.RenderStepped, function()
-							local HueY = (math.clamp(Mouse.Y - Hue.AbsolutePosition.Y, 0, Hue.AbsoluteSize.Y) / Hue.AbsoluteSize.Y)
-
-							HueSelection.Position = UDim2.new(0.5, 0, HueY, 0)
-							ColorH = 1 - HueY
-
-							UpdateColorPicker()
-						end)
-					end
-				end)
-
-				AddConnection(Hue.InputEnded, function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 then
-						if HueInput then
-							HueInput:Disconnect()
-						end
-					end
-				end)
-
-				function Colorpicker:Set(Value)
-					Colorpicker.Value = Value
-					ColorpickerBox.BackgroundColor3 = Colorpicker.Value
-					ColorpickerConfig.Callback(Colorpicker.Value)
-				end
-
-				Colorpicker:Set(Colorpicker.Value)
-				if ColorpickerConfig.Flag then				
-					OrionLib.Flags[ColorpickerConfig.Flag] = Colorpicker
-				end
-				return Colorpicker
-			end  
-			return ElementFunction   
-		end	
-
-		local ElementFunction = {}
-
-		function ElementFunction:AddSection(SectionConfig)
-			SectionConfig.Name = SectionConfig.Name or "Section"
-
-			local SectionFrame = SetChildren(SetProps(MakeElement("TFrame"), {
-				Size = UDim2.new(1, 0, 0, 26),
-				Parent = Container
-			}), {
-				AddThemeObject(SetProps(MakeElement("Label", SectionConfig.Name, 14), {
-					Size = UDim2.new(1, -12, 0, 16),
-					Position = UDim2.new(0, 0, 0, 3),
-					Font = Enum.Font.GothamSemibold
-				}), "TextDark"),
-				SetChildren(SetProps(MakeElement("TFrame"), {
-					AnchorPoint = Vector2.new(0, 0),
-					Size = UDim2.new(1, 0, 1, -24),
-					Position = UDim2.new(0, 0, 0, 23),
-					Name = "Holder"
-				}), {
-					MakeElement("List", 0, 6)
-				}),
-			})
-
-			AddConnection(SectionFrame.Holder.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
-				SectionFrame.Size = UDim2.new(1, 0, 0, SectionFrame.Holder.UIListLayout.AbsoluteContentSize.Y + 31)
-				SectionFrame.Holder.Size = UDim2.new(1, 0, 0, SectionFrame.Holder.UIListLayout.AbsoluteContentSize.Y)
-			end)
-
-			local SectionFunction = {}
-			for i, v in next, GetElements(SectionFrame.Holder) do
-				SectionFunction[i] = v 
 			end
-			return SectionFunction
-		end	
-
-		for i, v in next, GetElements(Container) do
-			ElementFunction[i] = v 
 		end
-
-		if TabConfig.PremiumOnly then
-			for i, v in next, ElementFunction do
-				ElementFunction[i] = function() end
-			end    
-			Container:FindFirstChild("UIListLayout"):Destroy()
-			Container:FindFirstChild("UIPadding"):Destroy()
-			SetChildren(SetProps(MakeElement("TFrame"), {
-				Size = UDim2.new(1, 0, 1, 0),
-				Parent = ItemParent
-			}), {
-				AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://3610239960"), {
-					Size = UDim2.new(0, 18, 0, 18),
-					Position = UDim2.new(0, 15, 0, 15),
-					ImageTransparency = 0.4
-				}), "Text"),
-				AddThemeObject(SetProps(MakeElement("Label", "Unauthorised Access", 14), {
-					Size = UDim2.new(1, -38, 0, 14),
-					Position = UDim2.new(0, 38, 0, 18),
-					TextTransparency = 0.4
-				}), "Text"),
-				AddThemeObject(SetProps(MakeElement("Image", "rbxassetid://4483345875"), {
-					Size = UDim2.new(0, 56, 0, 56),
-					Position = UDim2.new(0, 84, 0, 110),
-				}), "Text"),
-				AddThemeObject(SetProps(MakeElement("Label", "Premium Features", 14), {
-					Size = UDim2.new(1, -150, 0, 14),
-					Position = UDim2.new(0, 150, 0, 112),
-					Font = Enum.Font.GothamBold
-				}), "Text"),
-				AddThemeObject(SetProps(MakeElement("Label", "This part of the script is locked to Sirius Premium users. Purchase Premium in the Discord server (discord.gg/sirius)", 12), {
-					Size = UDim2.new(1, -200, 0, 14),
-					Position = UDim2.new(0, 150, 0, 138),
-					TextWrapped = true,
-					TextTransparency = 0.4
-				}), "Text")
-			})
+	end
+	function ToggleEsp(toggle)
+		if toggle then
+			local function Esp_PlayerFound(p)
+				local esp_char_conn1 = nil;
+				local esp_char_conn2 = nil;
+				local esp_plyr_conn1 = nil;
+				local folder = CoreGui:FindFirstChild(p.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\204\207\8\130", "\210\147\138\91"));
+				if not folder then
+					folder = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\19\242\196\79\53\1", "\115\85\157\168\43\80"), CoreGui);
+					folder.Name = p.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\192\127\180\103", "\169\159\58\231\55\236\169\38");
+				end
+				if (p ~= plyr) then
+					local function esp_disconnect_functions()
+						pcall(function()
+							esp_char_conn1:Disconnect();
+							esp_char_conn2:Disconnect();
+							esp_plyr_conn1:Disconnect();
+						end);
+						esp_char_conn1 = nil;
+						esp_char_conn2 = nil;
+						esp_plyr_conn1 = nil;
+					end
+					local function Esp_CharFound(c)
+						if not toggle then
+							esp_disconnect_functions();
+							return;
+						end
+						if (esp_blacklist_team == true) then
+							if (p.TeamColor == plyr.TeamColor) then
+								if (esp_strict_team_blacklist == true) then
+									if (p.Team == plyr.Team) then
+										return;
+									end
+								else
+									return;
+								end
+							end
+						end
+						task.spawn(function()
+							task.wait();
+							for _, v in pairs(c:GetChildren()) do
+								if v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\51\192\172\21\244\21\110\5", "\28\113\161\223\112\164\116")) then
+									local bha = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\228\87\95\81\90\200\92\75\124\122\194\87\85\119\86\195\86\83", "\59\166\56\39\25"), folder);
+									bha.Adornee = v;
+									bha.Size = v.Size;
+									bha.ZIndex = 10;
+									bha.Transparency = esp_transparency;
+									bha.AlwaysOnTop = true;
+									bha.Color = p.TeamColor;
+								end
+							end
+						end);
+						esp_char_conn2 = c.ChildAdded:Connect(function(child)
+							if child:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\144\217\213\205\115\179\202\210", "\35\210\184\166\168")) then
+								if folder then
+									local bha = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\123\86\101\106\37\121\93\85\120\99\32\120\75\87\112\71\42\99", "\23\57\57\29\34\68"), folder);
+									bha.Adornee = child;
+									bha.Size = child.Size;
+									bha.ZIndex = 10;
+									bha.Transparency = esp_transparency;
+									bha.AlwaysOnTop = true;
+									bha.Color = p.TeamColor;
+								end
+							end
+						end);
+					end
+					if p.Character then
+						Esp_CharFound(p.Character);
+					end
+					esp_char_conn1 = p.CharacterAdded:Connect(Esp_CharFound);
+					esp_plyr_conn1 = p.Changed:Connect(function(property)
+						if (property == LUAOBFUSACTOR_DECRYPT_STR_0("\100\52\30\33\115\62\19\35\66", "\76\48\81\127")) then
+							if folder then
+								for _, v in pairs(folder:GetChildren()) do
+									if v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\44\170\73\159\11\122\217\92\11\132\85\184\24\122\208\85\0\177", "\48\110\197\49\215\106\20\189")) then
+										v.Color = p.TeamColor;
+									end
+								end
+							end
+						end
+						if (property == LUAOBFUSACTOR_DECRYPT_STR_0("\41\23\73\161", "\108\125\114\40\204\160\75\38")) then
+							if folder then
+								for _, v in pairs(folder:GetChildren()) do
+									if v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\23\127\231\37\52\126\251\1\48\81\251\2\39\126\242\8\59\100", "\109\85\16\159")) then
+										v.Color = p.TeamColor;
+									end
+								end
+							end
+							esp_update_esp_b(esp_blacklist_team);
+						end
+					end);
+				end
+			end
+			for _, v in pairs(game.Players:GetPlayers()) do
+				Esp_PlayerFound(v);
+			end
+			esp_conn_1 = game.Players.PlayerAdded:Connect(function(plyr)
+				Esp_PlayerFound(plyr);
+			end);
+			esp_conn_2 = game.Players.PlayerRemoving:Connect(function(p)
+				local gui_found = CoreGui:FindFirstChild(p.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\24\214\158\107", "\208\71\147\205\59\123\56"));
+				if gui_found then
+					gui_found:Destroy();
+				end
+			end);
+			esp_conn_3 = plyr.Changed:Connect(function(property)
+				if ((property == LUAOBFUSACTOR_DECRYPT_STR_0("\99\37\133\181", "\216\55\64\228")) or (property == LUAOBFUSACTOR_DECRYPT_STR_0("\139\141\63\207\154\250\231\176\154", "\139\223\232\94\162\217\149"))) then
+					ToggleEsp(false);
+					task.wait();
+					if (esp_enabled == true) then
+						ToggleEsp(true);
+					end
+				end
+			end);
+		else
+			pcall(function()
+				esp_conn_1:Disconnect();
+			end);
+			esp_conn_1 = nil;
+			pcall(function()
+				esp_conn_2:Disconnect();
+			end);
+			esp_conn_2 = nil;
+			pcall(function()
+				esp_conn_3:Disconnect();
+			end);
+			esp_conn_3 = nil;
+			for _, v in pairs(CoreGui:GetChildren()) do
+				if (string.find(v.Name, LUAOBFUSACTOR_DECRYPT_STR_0("\234\166\16\193", "\170\181\227\67\145\219\53")) and v:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\127\138\18\182\92\151", "\210\57\229\126"))) then
+					v:Destroy();
+				end
+			end
 		end
-		return ElementFunction   
-	end  
-	
-	--if writefile and isfile then
-	--	if not isfile("NewLibraryNotification1.txt") then
-	--		local http_req = (syn and syn.request) or (http and http.request) or http_request
-	--		if http_req then
-	--			http_req({
-	--				Url = 'http://127.0.0.1:6463/rpc?v=1',
-	--				Method = 'POST',
-	--				Headers = {
-	--					['Content-Type'] = 'application/json',
-	--					Origin = 'https://discord.com'
-	--				},
-	--				Body = HttpService:JSONEncode({
-	--					cmd = 'INVITE_BROWSER',
-	--					nonce = HttpService:GenerateGUID(false),
-	--					args = {code = 'sirius'}
-	--				})
-	--			})
-	--		end
-	--		OrionLib:MakeNotification({
-	--			Name = "UI Library Available",
-	--			Content = "New UI Library Available - Joining Discord (#announcements)",
-	--			Time = 8
-	--		})
-	--		spawn(function()
-	--			local UI = game:GetObjects("rbxassetid://11403719739")[1]
-
-	--			if gethui then
-	--				UI.Parent = gethui()
-	--			elseif syn.protect_gui then
-	--				syn.protect_gui(UI)
-	--				UI.Parent = game.CoreGui
-	--			else
-	--				UI.Parent = game.CoreGui
-	--			end
-
-	--			wait(11)
-
-	--			UI:Destroy()
-	--		end)
-	--		writefile("NewLibraryNotification1.txt","The value for the notification having been sent to you.")
-	--	end
-	--end
-	
-
-	
-	return TabFunction
-end   
-
-function OrionLib:Destroy()
-	Orion:Destroy()
+	end
+	local Default_Disable = false;
+	Tab:AddToggle({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\50\231\163", "\227\216\83\138\198\82\165")]=LUAOBFUSACTOR_DECRYPT_STR_0("\14\166\166", "\146\75\213\214\24"),[LUAOBFUSACTOR_DECRYPT_STR_0("\110\123\199\69\111\73\65", "\53\42\30\161\36\26\37")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\222\248\251\236\255\248\244\235", "\128\157\153\151")]=function(Value)
+		if (Default_Disable == false) then
+			Default_Disable = true;
+			return;
+		end
+		esp_enabled = Value;
+		ToggleEsp(Value);
+	end});
+	local camera = workspace.CurrentCamera;
+	local CoreGui = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\85\122\158\44\50\102\127", "\19\22\21\236\73\117"));
+	local uis = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\66\214\167\187\222\179\61\227\99\246\167\187\225\180\46\243", "\150\23\165\194\201\151\221\77"));
+	local run = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\76\46\230\41\123\41\254\19\125\62", "\122\30\91\136"));
+	local ReplicatedStorage = game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\141\161\245\188\132\188\165\241\181\137\140\176\234\162\140\184\161", "\237\223\196\133\208"));
+	local plyr = game.Players.LocalPlayer;
+	local mouse = plyr:GetMouse();
+	local char = plyr.Character or plyr.CharacterAdded:Wait();
+	local hrp = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\244\29\206\191\80\245\213\12\241\177\81\238\236\9\209\170", "\154\188\104\163\222\62"), math.huge);
+	local hum = char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\29\248\32\250\30\64\203\49", "\162\85\141\77\155\112\47"), math.huge);
+	plyr.CharacterAdded:Connect(function(New_Char)
+		char = New_Char;
+		hrp = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\58\60\171\79\28\38\175\74\32\38\169\90\34\40\180\90", "\46\114\73\198"), math.huge);
+		hum = New_Char:WaitForChild(LUAOBFUSACTOR_DECRYPT_STR_0("\141\107\123\238\32\69\172\122", "\42\197\30\22\143\78"), math.huge);
+	end);
+	local Default_Disable = false;
+	Tab:AddSlider({[LUAOBFUSACTOR_DECRYPT_STR_0("\93\68\82\58", "\95\19\37\63")]=LUAOBFUSACTOR_DECRYPT_STR_0("\84\63\183\188\83\8\105\108\147\238\112\9\98\60\166\238\116\9\114\53", "\103\17\76\199\156\17"),[LUAOBFUSACTOR_DECRYPT_STR_0("\158\35\139", "\154\211\74\229\136\60\112\217")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\130\29\242", "\39\207\124\138\173\101")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\234\4\69\193\183\194\21", "\194\174\97\35\160")]=0.5,[LUAOBFUSACTOR_DECRYPT_STR_0("\220\47\49\13\237", "\98\159\64\93")]=Color3.fromRGB(255, 255, 255),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\191\46\13\20\11\94\42\26", "\68\110\209\77\127\113\102\59")]=0.1,[LUAOBFUSACTOR_DECRYPT_STR_0("\152\229\171\90\6\237\175\163\225", "\206\206\132\199\47\99\163")]=LUAOBFUSACTOR_DECRYPT_STR_0("\194\208\214\124\66\230\195\197\119\95\245\219", "\49\150\162\183\18"),[LUAOBFUSACTOR_DECRYPT_STR_0("\106\43\183\45\24\225\27\66", "\120\41\74\219\65\122\128")]=function(Value)
+		if (Default_Disable == false) then
+			Default_Disable = true;
+			return;
+		end
+		esp_transparency = Value;
+		esp_update_esp_t();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\116\7\81\31", "\181\58\102\60\122\133\199")]=LUAOBFUSACTOR_DECRYPT_STR_0("\118\241\204\89\82\90\229\212\21\115\84\234\200", "\26\51\130\188\121"),[LUAOBFUSACTOR_DECRYPT_STR_0("\203\131\32\21\75\31\244\82", "\57\136\226\76\121\41\126\151")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\42\195\29\67\55\185\50\109\199\8\64\48\230\127\43\217\71\80\43\238\50\48\214\30\28\19\187\78\122\205\56\93\55", "\29\66\183\105\51\68\131")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\107\36\68\203", "\174\37\69\41")]=LUAOBFUSACTOR_DECRYPT_STR_0("\169\191\90\44\31\153", "\112\225\214\46\110"),[LUAOBFUSACTOR_DECRYPT_STR_0("\61\37\47\87\230\188\239\21", "\140\126\68\67\59\132\221")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\138\101\19\91\94\69\201\205\98\4\89\68\15\146\128\125\8\83\3\28\137\143\62\21\74\90\80\179\140\120\17\78\95\12\135\142\60\52\72\95\22\150\150\60\50\91\73\30\146\135\60\20\72\95\22\150\150\60\15\66\89\29\137\154\60\94\24\31\73", "\230\226\17\103\43\45\127")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\254\77\201\78", "\231\176\44\164\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\137\207\48\139\161\148\225\238\49\171", "\236\193\166\68\201\206"),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\58\196\125\6\58\203\122", "\17\100\91\168")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\82\178\152\252\160\121\52\21\180\141\251\253\36\114\78\174\153\238\166\48\126\72\165\131\226\167\38\117\78\232\143\227\190\108\120\85\169\128\180\224\33\114\72\162\143\237\161\37\119\67\246\222\255\186\59\52\111\136\165\218\150\17\72\123\138\169\223\131\15\79\98\233\129\237\186\45\52\104\131\173\200\158\6\53\87\162", "\27\58\198\236\140\211\67"), true))();
+	end});
+	Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\15\204\193\79", "\139\65\173\172\42\233")]=LUAOBFUSACTOR_DECRYPT_STR_0("\164\89\125\215\214\100\160\109\180\102", "\40\231\54\17\184\164\23\128")});
+	local espEnabled = false;
+	local playerLabels = {};
+	local function toggleESP()
+		espEnabled = not espEnabled;
+		if espEnabled then
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\161\250\79\184\132\233\144\192\105\249\145\239\128\136", "\138\228\169\31\152\229"));
+			for _, player in ipairs(game.Players:GetPlayers()) do
+				if (player.Character and player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\228\9\67\49", "\163\172\108\34\85\128"))) then
+					local playerNameLabel = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\5\24\251\139\217\75\137\70\35\54\226\142", "\52\71\113\151\231\187\36\232"));
+					playerNameLabel.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\70\129\121\180\115\159\86\172\123\136\84\172\116\136\116", "\205\22\237\24");
+					playerNameLabel.AlwaysOnTop = true;
+					playerNameLabel.Size = UDim2.new(0, 100, 0, 20);
+					playerNameLabel.StudsOffset = Vector3.new(0, 2, 0);
+					playerNameLabel.Adornee = player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\150\125\114\204", "\89\222\24\19\168"));
+					local playerNameText = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\193\92\75\163\61\244\91\86\187", "\113\149\57\51\215"));
+					playerNameText.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\73\124\202\175\231\210\87\113\198\179", "\160\25\16\171\214\130");
+					playerNameText.Text = player.Name;
+					playerNameText.Size = UDim2.new(1, 0, 1, 0);
+					playerNameText.TextColor3 = Color3.fromRGB(0, 0, 0);
+					playerNameText.BackgroundTransparency = 1;
+					playerNameText.Font = Enum.Font.SourceSansSemibold;
+					playerNameText.TextSize = 16;
+					playerNameText.Parent = playerNameLabel;
+					playerNameLabel.Parent = game.CoreGui;
+					playerLabels[player.Name] = playerNameLabel;
+				end
+			end
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\84\235\7\61\121\215\152\112\204\62\107\124\214\132\48", "\235\17\184\87\29\29\178"));
+			for playerName, playerNameLabel in pairs(playerLabels) do
+				playerNameLabel:Destroy();
+				playerLabels[playerName] = nil;
+			end
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\132\168\116\253", "\144\202\201\25\152")]=LUAOBFUSACTOR_DECRYPT_STR_0("\28\232\52\62\217\70\230\3\50", "\96\89\187\100\30\155\42\135"),[LUAOBFUSACTOR_DECRYPT_STR_0("\9\200\16\73\104\116\61\217\10\69\116", "\29\77\173\99\42\26")]=LUAOBFUSACTOR_DECRYPT_STR_0("\165\225\19\115\77\238\227\8\196\227\9\126\27\235\242\12\135\246\14\108\90\251\242\77\148\238\6\99\94\253\183\3\133\239\2\58\126\220\199", "\109\228\130\103\26\59\143\151"),[LUAOBFUSACTOR_DECRYPT_STR_0("\160\121\162\213\60\75\44\143", "\228\227\24\206\185\94\42\79")]=function()
+		toggleESP();
+	end});
+	local espV3Enabled = false;
+	local playerLabels = {};
+	local nameColor = Color3.new(1, 0, 0);
+	local outlineColor = Color3.new(0, 0, 0);
+	local function toggleEspV3()
+		espV3Enabled = not espV3Enabled;
+		if espV3Enabled then
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\235\17\7\232\130\72\112\207\54\62\190\181\31\63\143", "\80\174\66\87\200\212\123"));
+			for _, player in ipairs(game.Players:GetPlayers()) do
+				if (player.Character and player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\227\124\63\204", "\115\171\25\94\168\151"))) then
+					local head = player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\36\183\229\37", "\151\108\210\132\65"));
+					local playerNameLabel = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\250\93\5\68\196\78\198\70\220\115\28\65", "\52\184\52\105\40\166\33\167"));
+					playerNameLabel.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\98\2\204\177\63\198\226\83\3\200\132\59\214\201\94", "\172\50\110\173\200\90\180");
+					playerNameLabel.AlwaysOnTop = true;
+					playerNameLabel.Size = UDim2.new(0, 100, 0, 20);
+					playerNameLabel.StudsOffset = Vector3.new(0, 2, 0);
+					playerNameLabel.Adornee = head;
+					local playerNameText = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\207\191\236\88\215\187\246\73\247", "\44\155\218\148"));
+					playerNameText.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\221\247\45\34\209\53\159\236\246\41", "\209\141\155\76\91\180\71");
+					playerNameText.Text = player.Name;
+					playerNameText.Size = UDim2.new(1, 0, 1, 0);
+					playerNameText.TextColor3 = nameColor;
+					playerNameText.BackgroundTransparency = 1;
+					playerNameText.Font = Enum.Font.SourceSansSemibold;
+					playerNameText.TextSize = 16;
+					playerNameText.TextStrokeTransparency = 0;
+					playerNameText.TextStrokeColor3 = outlineColor;
+					playerNameText.Parent = playerNameLabel;
+					playerLabels[player.Name] = playerNameLabel;
+					playerNameLabel.Parent = head;
+				end
+			end
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\214\78\239\11\44\160\61\219\78\9\242\105\214\93\27\247\114\158", "\122\147\29\191\43"));
+			for _, playerLabel in pairs(playerLabels) do
+				if playerLabel then
+					playerLabel:Destroy();
+				end
+			end
+			playerLabels = {};
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\146\209\83\12", "\30\220\176\62\105\186\159\236")]=LUAOBFUSACTOR_DECRYPT_STR_0("\173\238\181\240\4\208\179", "\221\232\189\229\208\86\181\215"),[LUAOBFUSACTOR_DECRYPT_STR_0("\40\177\231\223\60\5\164\224\213\33\2", "\78\108\212\148\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\9\21\16\98\194\9\184\49\123\32\24\35\245\5\169\41\123", "\90\91\112\116\66\140\96\219"),[LUAOBFUSACTOR_DECRYPT_STR_0("\230\86\6\0\226\169\7\206", "\100\165\55\106\108\128\200")]=function()
+		toggleEspV3();
+	end});
+	local espEnabled = false;
+	local playerLabels = {};
+	local function toggleESPWithLines()
+		espEnabled = not espEnabled;
+		if espEnabled then
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\224\248\1\243\210\194\37\187\133\199\56\189\192\216\113\178\198\223\56\165\196\223\52\183\132", "\211\165\171\81"));
+			for _, player in ipairs(game.Players:GetPlayers()) do
+				if (player.Character and player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\44\112\211\206", "\188\100\21\178\170\183"))) then
+					local torso = game.Players.LocalPlayer.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\86\2\93\178\188\194\119\19\98\188\189\217\78\22\66\167", "\173\30\119\48\211\210"));
+					local head = player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\115\220\56\62", "\90\59\185\89"));
+					if (torso and head) then
+						local line = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\108\249\84\74\19\124\78\244\86\74\26\121\79\226\84\66\62\115\84", "\29\32\144\58\47\91"));
+						line.Adornee = torso;
+						line.Color3 = Color3.new(0, 0, 0);
+						line.Thickness = 1;
+						line.Transparency = 0.5;
+						line.Parent = torso;
+						line.CFrame = CFrame.new(torso.Position, head.Position);
+						local playerNameLabel = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\49\60\125\177\67\174\18\39\117\154\84\168", "\193\115\85\17\221\33"));
+						playerNameLabel.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\221\119\15\7\170\206\195\122\3\27\131\221\239\126\2", "\188\141\27\110\126\207");
+						playerNameLabel.AlwaysOnTop = true;
+						playerNameLabel.Size = UDim2.new(0, 100, 0, 20);
+						playerNameLabel.StudsOffset = Vector3.new(0, 2, 0);
+						playerNameLabel.Adornee = head;
+						local playerNameText = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\185\51\70\99\200\233\11\136\58", "\105\237\86\62\23\132\136"));
+						playerNameText.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\137\69\61\84\38\15\151\72\49\72", "\125\217\41\92\45\67");
+						playerNameText.Text = player.Name;
+						playerNameText.Size = UDim2.new(1, 0, 1, 0);
+						playerNameText.TextColor3 = Color3.new(1, 1, 1);
+						playerNameText.BackgroundTransparency = 1;
+						playerNameText.Font = Enum.Font.SourceSansSemibold;
+						playerNameText.TextSize = 16;
+						playerNameText.Parent = playerNameLabel;
+						local playerNameOutline = playerNameText:Clone();
+						playerNameOutline.TextColor3 = Color3.new(0, 0, 0);
+						playerNameOutline.Position = UDim2.new(0, -1, 0, -1);
+						playerNameOutline.Parent = playerNameLabel;
+						playerNameLabel.Parent = game.CoreGui;
+						playerLabels[player.Name] = playerNameLabel;
+					end
+				end
+			end
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\124\135\54\31\128\84\84\244\10\86\141\83\88\167\70\91\134\72\88\160\15\73\130\95\86\245", "\59\57\212\102\63\227"));
+			for playerName, playerNameLabel in pairs(playerLabels) do
+				playerNameLabel:Destroy();
+				playerLabels[playerName] = nil;
+			end
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\83\233\114\2", "\103\29\136\31")]=LUAOBFUSACTOR_DECRYPT_STR_0("\59\29\234\106\100\18\47\217\33\6\9\39\206\34\6\41\38\211\62\67", "\38\126\78\186\74"),[LUAOBFUSACTOR_DECRYPT_STR_0("\229\69\57\137\85\141\209\84\35\133\73", "\228\161\32\74\234\39")]="Enables and disables player lines for all players' heads",[LUAOBFUSACTOR_DECRYPT_STR_0("\29\133\6\185\242\128\55\139", "\224\94\228\106\213\144\225\84")]=function()
+		toggleESPWithLines();
+	end});
+	local espEnabled = false;
+	local playerLabels = {};
+	local function toggleESP()
+		espEnabled = not espEnabled;
+		if espEnabled then
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\149\219\119\128\0\179\252\78\214\0\164\237\67\129", "\97\208\136\39\160"));
+			for _, player in ipairs(game.Players:GetPlayers()) do
+				if (player.Character and player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\222\44\194\130", "\91\150\73\163\230\57\114"))) then
+					local playerNameLabel = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\108\164\190\90\242\4\191\77\74\138\167\95", "\63\46\205\210\54\144\107\222"));
+					playerNameLabel.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\192\32\245\94\217\226\2\245\74\217\220\45\246\66\208", "\188\144\76\148\39");
+					playerNameLabel.AlwaysOnTop = true;
+					playerNameLabel.Size = UDim2.new(0, 100, 0, 20);
+					playerNameLabel.StudsOffset = Vector3.new(0, 2, 0);
+					playerNameLabel.Adornee = player.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\173\78\116\160", "\53\229\43\21\196\44\108\66"));
+					local playerNameText = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\7\48\15\177\31\52\21\160\63", "\197\83\85\119"));
+					playerNameText.Name = LUAOBFUSACTOR_DECRYPT_STR_0("\127\246\31\46\74\232\48\54\66\255", "\87\47\154\126");
+					playerNameText.Text = player.Name;
+					playerNameText.Size = UDim2.new(1, 0, 1, 0);
+					playerNameText.TextColor3 = Color3.fromRGB(48, 252, 3);
+					playerNameText.BackgroundTransparency = 1;
+					playerNameText.Font = Enum.Font.SourceSansSemibold;
+					playerNameText.TextSize = 16;
+					playerNameText.Parent = playerNameLabel;
+					playerNameLabel.Parent = game.CoreGui;
+					playerLabels[player.Name] = playerNameLabel;
+				end
+			end
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\14\75\252\155\214\209\42\123\216\210\196\213\63\125\200\154", "\180\75\24\172\187\178"));
+			for playerName, playerNameLabel in pairs(playerLabels) do
+				playerNameLabel:Destroy();
+				playerLabels[playerName] = nil;
+			end
+		end
+	end
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\237\216\232\6", "\112\163\185\133\99\28\68\153")]=LUAOBFUSACTOR_DECRYPT_STR_0("\142\103\204\139\140\70\249\206\165", "\171\203\52\156"),[LUAOBFUSACTOR_DECRYPT_STR_0("\158\207\110\178\56\136\173\180\179\197\115", "\192\218\170\29\209\74\225\221")]=LUAOBFUSACTOR_DECRYPT_STR_0("\162\223\79\9\217\76\61\248\195\221\85\4\143\73\44\252\128\200\82\22\206\89\44\189\147\208\90\25\202\95\105\243\130\209\94\64\234\126\25", "\157\227\188\59\96\175\45\73"),[LUAOBFUSACTOR_DECRYPT_STR_0("\156\203\219\26\51\190\201\220", "\81\223\170\183\118")]=function()
+		toggleESP();
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\8\64\161\190", "\113\70\33\204\219\153\82")]=LUAOBFUSACTOR_DECRYPT_STR_0("\214\139\62\50\234\240\194\137\54\50\237", "\208\145\226\95\92\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\151\226\210\66", "\120\222\129\189\44\143\149\207")]=LUAOBFUSACTOR_DECRYPT_STR_0("\150\19\5\176\217\88\124\172\141\21\71\254\133\28\46\236\215\73\74\228\146\28\32", "\216\228\113\125\209\170\43\25"),[LUAOBFUSACTOR_DECRYPT_STR_0("\201\232\93\72\123\107\244\213\86\73\107", "\30\153\154\56\37\18")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\51\184\250\9", "\91\125\217\151\108")]=LUAOBFUSACTOR_DECRYPT_STR_0("\234\28\169\126", "\190\153\115\198\16")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\20\122\167\130", "\231\90\27\202")]=LUAOBFUSACTOR_DECRYPT_STR_0("\146\139\87\172", "\62\225\228\56\194"),[LUAOBFUSACTOR_DECRYPT_STR_0("\53\184\181\33\118\84\21\178", "\53\118\217\217\77\20")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\190\26\229\204", "\79\201\127\132\190"),[2]=17901476467};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\26\17\249\197\33\23\232\221\45\16\218\221\39\6\232\206\45", "\169\72\116\137")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\40\79\217\162\120\110\152\163\88\108\200\178\120\43\219", "\198\25\26\169")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\103\114\208\35", "\31\41\19\189\70\231\49\27")]=LUAOBFUSACTOR_DECRYPT_STR_0("\164\220\94\232", "\134\215\179\49"),[LUAOBFUSACTOR_DECRYPT_STR_0("\194\245\90\234\87\18\226\255", "\115\129\148\54\134\53")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\254\130\81\89", "\115\137\231\48\43\184\104"),[2]=17901469198};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\235\236\10\239\160\163\62\205\236\30\208\189\175\45\216\238\31", "\95\185\137\122\131\201\192")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\39\3\215\23\36\98\103\194\50\51\119\34\198\66\55", "\69\22\86\167\115")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\118\133\74\132", "\71\56\228\39\225\37")]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\234\253\11\245\245", "\66\208\129\132\73\154\141")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\100\94\219\248", "\157\42\63\182")]=LUAOBFUSACTOR_DECRYPT_STR_0("\248\49\38\240\228\210\58\105\207\196\194\28\38\228", "\175\187\94\73\156"),[LUAOBFUSACTOR_DECRYPT_STR_0("\5\62\67\44\25\34\195\45", "\160\70\95\47\64\123\67")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\201\95\117\35", "\81\190\58\20"),[2]=17901187190};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\126\72\166\123\138\42\94\39\73\73\133\99\140\59\94\52\73", "\83\44\45\214\23\227\73\63")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\164\143\86\186\33\225\235\67\159\54\244\174\71\239\50", "\64\149\218\38\222")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\52\166\199\213", "\176\122\199\170")]=LUAOBFUSACTOR_DECRYPT_STR_0("\36\4\185\212\113\24\25\18\146\223\41", "\75\114\107\208\176\81"),[LUAOBFUSACTOR_DECRYPT_STR_0("\218\42\37\121\251\42\42\126", "\21\153\75\73")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\30\22\76\224", "\38\105\115\45\146\210"),[2]=18100145664};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\48\19\28\122\58\1\23\24\115\55\49\2\3\100\50\5\19", "\83\98\118\108\22")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\24\222\105\41\164\144\114\76\202\111\44\177\133\114\91", "\67\41\139\25\77\197\228")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\198\175\195\47", "\136\136\206\174\74\54")]=LUAOBFUSACTOR_DECRYPT_STR_0("\0\220\171\164\122\138\251\1\203\182\164\125\151\146\11\221\198\182\88\189\153\43\235", "\219\68\147\230\229\51\196"),[LUAOBFUSACTOR_DECRYPT_STR_0("\95\79\250\236\4\70\24\119", "\123\28\46\150\128\102\39")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\18\76\28\69", "\21\101\41\125\55\123\233\91"),[2]=18100302612};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\176\238\190\255\5\49\131\255\171\247\63\38\141\249\175\244\9", "\82\226\139\206\147\108")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\160\51\93\181\205\229\87\72\144\218\240\18\76\224\222", "\172\145\102\45\209")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\218\12\1\69", "\30\148\109\108\32\235")]=LUAOBFUSACTOR_DECRYPT_STR_0("\55\23\65\83\31\78\21\91\84\116\26\70\22\72\9\31\92\7\19\86\19\64\20\76\0\7\7\90\6\84\24\80\26\14\81\108\31\94\51\80\12", "\63\116\39\113"),[LUAOBFUSACTOR_DECRYPT_STR_0("\27\81\203\224\18\41\171\51", "\200\88\48\167\140\112\72")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\213\91\41\185", "\130\162\62\72\203"),[2]=17901358708};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\145\178\173\124\142\131\238\233\166\179\142\100\136\146\238\250\166", "\157\195\215\221\16\231\224\143")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\46\236\27\136\226\107\136\14\173\245\126\205\10\221\241", "\131\31\185\107\236")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\133\170\71\33", "\68\203\203\42")]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\94\116\215\87", "\185\35\55\21")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\157\248\178\129", "\228\211\153\223")]=LUAOBFUSACTOR_DECRYPT_STR_0("\71\224\87\51", "\102\52\143\56\93\90"),[LUAOBFUSACTOR_DECRYPT_STR_0("\101\22\172\36\231\71\20\171", "\133\38\119\192\72")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\224\164\117\233", "\155\151\193\20"),[2]=18100795481};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\28\161\16\66\114\45\165\20\75\127\29\176\15\92\122\41\161", "\27\78\196\96\46")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\187\206\162\188\123\80\29\239\218\164\185\110\69\29\248", "\44\138\155\210\216\26\36")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\149\76\180\95", "\157\219\45\217\58")]=LUAOBFUSACTOR_DECRYPT_STR_0("\146\180\49\149\234\181\165\34\149", "\158\208\221\86\181"),[LUAOBFUSACTOR_DECRYPT_STR_0("\195\64\230\7\34\190\59\235", "\88\128\33\138\107\64\223")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\214\247\116\103", "\142\161\146\21\21\205\27"),[2]=18100238475};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\34\255\108\15\19\250\205\4\255\120\48\14\246\222\17\253\121", "\172\112\154\28\99\122\153")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\154\194\176\26\202\227\241\27\234\225\161\10\202\166\178", "\126\171\151\192")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\16\31\244\25", "\57\94\126\153\124\103\154")]=LUAOBFUSACTOR_DECRYPT_STR_0("\53\206\78\89\254\78\26\194", "\33\119\167\41\121\182"),[LUAOBFUSACTOR_DECRYPT_STR_0("\100\181\55\90\169\82\31\51", "\88\39\212\91\54\203\51\124")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\59\169\181\152", "\168\76\204\212\234\27\174"),[2]=18101095295};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\190\1\35\72\0\229\79\152\1\55\119\29\233\92\141\3\54", "\46\236\100\83\36\105\134")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\104\207\151\132\128\27\104\255\166\150\128\27\56\171\149", "\111\89\154\231\224\225")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\211\219\11\160", "\177\157\186\102\197\76\153\188")]=LUAOBFUSACTOR_DECRYPT_STR_0("\133\183\33\161\182\254\3\174\178\167\34\174\176\191", "\207\194\222\64"),[LUAOBFUSACTOR_DECRYPT_STR_0("\56\116\219\76\138\210\24\126", "\179\123\21\183\32\232")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\209\38\205\47", "\98\166\67\172\93\211"),[2]=18100760548};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\213\230\199\217\11\73\227\243\230\211\230\22\69\240\230\228\210", "\130\135\131\183\181\98\42")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\146\131\43\231\33\215\231\62\194\54\194\162\58\178\50", "\64\163\214\91\131")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\63\46\21\51", "\95\113\79\120\86")]=LUAOBFUSACTOR_DECRYPT_STR_0("\140\253\33\190\146\77\11\200\165\255", "\169\203\148\64\208\230\109\95"),[LUAOBFUSACTOR_DECRYPT_STR_0("\235\22\10\190\40\26\63\237", "\134\168\119\102\210\74\123\92")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\188\11\29\75", "\57\203\110\124"),[2]=17901032315};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\156\214\5\37\9\173\210\1\44\4\157\199\26\59\1\169\214", "\96\206\179\117\73")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\208\22\103\33\128\55\38\32\160\53\118\49\128\114\101", "\69\225\67\23")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\234\128\62\176", "\27\164\225\83\213\188\227\185")]=LUAOBFUSACTOR_DECRYPT_STR_0("\175\6\131\240\211\200\43\173\217\135\191\14\142\242", "\167\232\111\226\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\103\37\35\20\25\92\243\186", "\209\36\68\79\120\123\61\144")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\91\228\82\41", "\96\44\129\51\91"),[2]=18100202765};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\39\10\28\170\250\235\242\1\10\8\149\231\231\225\20\8\9", "\147\117\111\108\198\147\136")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\91\131\210\80\11\162\147\81\43\160\195\64\11\231\208", "\52\106\214\162")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\43\14\211\161", "\145\101\111\190\196")]=LUAOBFUSACTOR_DECRYPT_STR_0("\125\194\147\233", "\47\48\173\225\140")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\109\204\140\221", "\204\35\173\225\184\75")]=LUAOBFUSACTOR_DECRYPT_STR_0("\253\75\236\131", "\110\142\36\131\237\134\198"),[LUAOBFUSACTOR_DECRYPT_STR_0("\88\65\191\252\58\122\67\184", "\88\27\32\211\144")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\154\174\191\46", "\16\237\203\222\92\171\205\59"),[2]=18100684824};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\211\180\173\132\22\176\224\165\184\140\44\167\238\163\188\143\26", "\211\129\209\221\232\127")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\88\122\86\32\253\9\225\67\40\89\71\48\253\76\162", "\38\105\47\38\68\156\125\208")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\162\129\168\65", "\72\236\224\197\36\156")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\164\75\132", "\234\164\203\36"),[LUAOBFUSACTOR_DECRYPT_STR_0("\40\236\140\46\142\95\114\121", "\18\107\141\224\66\236\62\17")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\188\170\29\229", "\151\203\207\124"),[2]=18101787305};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\230\31\225\14\233\138\31\208\209\30\194\22\239\155\31\195\209", "\164\180\122\145\98\128\233\126")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\234\49\11\201\186\16\74\200\154\18\26\217\186\85\9", "\173\219\100\123")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\154\41\65\14", "\115\212\72\44\107")]=LUAOBFUSACTOR_DECRYPT_STR_0("\159\224\91\124", "\36\236\143\52\18\157\78\206"),[LUAOBFUSACTOR_DECRYPT_STR_0("\115\64\52\67\253\81\66\51", "\159\48\33\88\47")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\8\71\24\224", "\87\127\34\121\146\211\129\87"),[2]=18100716346};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\153\228\149\224\44\61\206\96\174\229\182\248\42\44\206\115\174", "\20\203\129\229\140\69\94\175")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\254\243\68\50\238\246\254\195\117\32\238\246\174\151\70", "\130\207\166\52\86\143")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\100\91\30\232", "\65\42\58\115\141\202\27")]=LUAOBFUSACTOR_DECRYPT_STR_0("\88\11\90\207", "\79\43\100\53\161"),[LUAOBFUSACTOR_DECRYPT_STR_0("\211\197\195\67\86\77\53\79", "\36\144\164\175\47\52\44\86")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\10\250\182", "\31\80\111\155\196"),[2]=18100314801};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\97\92\241\216\38\80\88\245\209\43\96\77\238\198\46\84\92", "\79\51\57\129\180")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\102\135\32\92\216\35\227\53\121\207\54\166\49\9\203", "\185\87\210\80\56")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\232\17\163\93", "\53\166\112\206\56\29\153")]=LUAOBFUSACTOR_DECRYPT_STR_0("\97\28\89\4", "\79\18\115\54\106\149"),[LUAOBFUSACTOR_DECRYPT_STR_0("\105\83\66\82\39\124\142\173", "\198\42\50\46\62\69\29\237")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\213\191\23\43", "\59\162\218\118\89\72\192\110"),[2]=18100566475};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\183\251\160\83\65\2\115\21\128\250\131\75\71\19\115\6\128", "\97\229\158\208\63\40\97\18")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\124\251\98\66\141\57\159\119\103\154\44\218\115\23\158", "\236\77\174\18\38")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\174\92\194\16", "\117\224\61\175")]=LUAOBFUSACTOR_DECRYPT_STR_0("\248\72\201\134", "\232\139\39\166"),[LUAOBFUSACTOR_DECRYPT_STR_0("\192\80\95\73\117\195\224\90", "\162\131\49\51\37\23")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\72\124\255\56", "\20\63\25\158\74"),[2]=18100522261};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\72\223\76\161\118\211\41\173\127\222\111\185\112\194\41\190\127", "\217\26\186\60\205\31\176\72")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\138\68\22\232\218\101\87\233\250\103\7\248\218\32\20", "\140\187\17\102")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\2\138\169\68", "\33\76\235\196")]=LUAOBFUSACTOR_DECRYPT_STR_0("\27\229\253\81", "\229\104\138\146\63\204\80\229"),[LUAOBFUSACTOR_DECRYPT_STR_0("\131\124\18\197\162\124\29\194", "\169\192\29\126")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\38\192\4\153", "\235\81\165\101"),[2]=18100228850};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\74\129\79\21\140\7\205\108\129\91\42\145\11\222\121\131\90", "\172\24\228\63\121\229\100")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\219\123\197\201\139\90\132\200\171\88\212\217\139\31\199", "\173\234\46\181")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\241\51\230\58", "\67\191\82\139\95")]=LUAOBFUSACTOR_DECRYPT_STR_0("\46\226\72\204", "\139\93\141\39\162\140"),[LUAOBFUSACTOR_DECRYPT_STR_0("\15\162\5\219\28\45\160\2", "\126\76\195\105\183")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\72\77\165\99", "\212\63\40\196\17\57"),[2]=17901519302};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\155\206\224\246\160\200\241\238\172\207\195\238\166\217\241\253\172", "\154\201\171\144")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\211\219\184\201\183\27\238\184\163\248\169\217\183\94\173", "\221\226\142\200\173\214\111\223")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\32\79\178\52", "\200\110\46\223\81")]=LUAOBFUSACTOR_DECRYPT_STR_0("\5\72\51\58", "\34\118\39\92\84\66\178"),[LUAOBFUSACTOR_DECRYPT_STR_0("\104\137\61\14\44\168\204\120", "\19\43\232\81\98\78\201\175")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\92\214\249\180", "\234\43\179\152\198\164\141"),[2]=17900918599};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\151\95\108\210\142\176\204\147\160\94\79\202\136\161\204\128\160", "\231\197\58\28\190\231\211\173")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\2\231\46\40\214\152\2\215\31\58\214\152\82\131\44", "\236\51\178\94\76\183")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\196\204\223\70", "\35\138\173\178")]=LUAOBFUSACTOR_DECRYPT_STR_0("\210\12\71\210", "\29\161\99\40\188\50"),[LUAOBFUSACTOR_DECRYPT_STR_0("\90\43\172\235\12\59\9\231", "\140\25\74\192\135\110\90\106")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\53\84\69\224", "\194\66\49\36\146\202"),[2]=17900973647};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\185\52\221\14\204\136\48\217\7\193\184\37\194\16\196\140\52", "\165\235\81\173\98")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\122\176\185\50\184\240\122\128\136\32\184\240\42\212\187", "\132\75\229\201\86\217")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\172\115\168\160", "\197\226\18\197")]=LUAOBFUSACTOR_DECRYPT_STR_0("\47\218\8\95\15", "\49\124\177\97"),[LUAOBFUSACTOR_DECRYPT_STR_0("\169\62\207\176", "\222\224\93\160")]=LUAOBFUSACTOR_DECRYPT_STR_0("\249\255\106\32\43\248\248\102\40\60\177\178\61\118\111\191\174\42\118\110\187\168\38", "\88\139\157\18\65"),[LUAOBFUSACTOR_DECRYPT_STR_0("\122\8\23\28\194\95\23\61\31\199\83", "\171\42\122\114\113")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\163\169\193\231", "\130\237\200\172")]=LUAOBFUSACTOR_DECRYPT_STR_0("\20\213\189\11\50\144\143\24\39\196\175\28", "\110\70\176\206")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\91\17\48\238", "\90\21\112\93\139")]=LUAOBFUSACTOR_DECRYPT_STR_0("\51\222\114\164\165\18\211\52\149\168\0\201\117\181\180\4\201", "\192\97\187\20\214"),[LUAOBFUSACTOR_DECRYPT_STR_0("\41\90\63\196\130\11\88\56", "\224\106\59\83\168")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\136\198\35", "\41\199\133\98\155\46\232")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\46\163\241\74\180\12\231\8\163\229\117\169\0\244\29\161\228", "\134\124\198\129\38\221\111")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\169\206\167\33\236\238\224\50\215\253\184\39\241\225\176\113\244", "\64\152\143\209")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\25\72\200\9", "\103\87\41\165\108\42\77\28")]=LUAOBFUSACTOR_DECRYPT_STR_0("\138\220\6\229\121\242\226\192\31\254\120\243", "\128\194\179\116\151\22")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\41\51\14\162", "\230\103\82\99\199\188\84")]=LUAOBFUSACTOR_DECRYPT_STR_0("\150\131\165\174\25\30\180\131\227\163\80\38\176\131\177", "\74\220\230\195\200\57"),[LUAOBFUSACTOR_DECRYPT_STR_0("\134\139\220\19\9\208\166\129", "\177\197\234\176\127\107")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\207\199\90", "\63\19\170\166\40\234\20"),[2]=14502327402};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\4\13\29\36\41\46\193\34\13\9\27\52\34\210\55\15\8", "\160\86\104\109\72\64\77")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\168\70\254\14\31\158\168\118\207\28\31\158\248\34\252", "\234\153\19\142\106\126")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\15\37\176\29", "\120\65\68\221")]=LUAOBFUSACTOR_DECRYPT_STR_0("\43\188\247\185\22\245\205\185\25\177", "\220\120\213\133"),[LUAOBFUSACTOR_DECRYPT_STR_0("\123\47\203\92\40\89\45\204", "\74\56\78\167\48")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\243\25\42\210", "\88\132\124\75\160\106\106"),[2]=15133314794};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\38\51\157\75\18\169\49\20\17\50\190\83\20\184\49\7\17", "\96\116\86\237\39\123\202\80")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\112\33\161\121\131\184\254\36\53\167\124\150\173\254\51", "\207\65\116\209\29\226\204")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\158\81\134\11", "\110\208\48\235")]=LUAOBFUSACTOR_DECRYPT_STR_0("\150\164\138\129\160\233\167\130\162", "\237\197\201\227"),[LUAOBFUSACTOR_DECRYPT_STR_0("\152\34\19\114\167\50\121\176", "\26\219\67\127\30\197\83")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\226\29\223\104", "\153\149\120\190\26\112"),[2]=14761007249};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\62\16\218\172\35\243\255\3\9\17\249\180\37\226\255\16\9", "\119\108\117\170\192\74\144\158")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\182\28\145\37\230\61\208\36\198\63\128\53\230\120\147", "\65\135\73\225")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\49\82\92\165", "\116\127\51\49\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\54\1\65\244\225\94\52\18\3\71\244\227\94\83", "\98\123\96\51\157\142\126"),[LUAOBFUSACTOR_DECRYPT_STR_0("\238\255\170\194\36\204\253\173", "\70\173\158\198\174")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\231\58\78\252", "\142\144\95\47"),[2]=14732524763};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\37\40\64\2\30\46\81\26\18\41\99\26\24\63\81\9\18", "\110\119\77\48")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\186\10\52\81\229\255\110\33\116\242\234\43\37\4\246", "\132\139\95\68\53")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\210\41\240\48", "\85\156\72\157")]=LUAOBFUSACTOR_DECRYPT_STR_0("\81\55\111\44\219\59\202\94\43\120\50", "\234\27\82\29\65\186\72"),[LUAOBFUSACTOR_DECRYPT_STR_0("\211\206\229\178\1\241\204\226", "\99\144\175\137\222")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\71\113\141\19", "\209\48\20\236\97\89\37"),[2]=14817978441};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\206\68\78\37\75\255\64\74\44\70\207\85\81\59\67\251\68", "\34\156\33\62\73")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\89\71\254\85\9\102\191\84\41\100\239\69\9\35\252", "\49\104\18\142")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\223\228\113\14", "\107\145\133\28")]=LUAOBFUSACTOR_DECRYPT_STR_0("\241\125\131\243\146\7\229\254", "\222\162\62\211"),[LUAOBFUSACTOR_DECRYPT_STR_0("\128\112\2\23\51\130\201\168", "\170\195\17\110\123\81\227")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\163\49\225\210", "\157\212\84\128\160"),[2]=14952594200};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\187\118\240\73\47\139\239\215\140\119\211\81\41\154\239\196\140", "\163\233\19\128\37\70\232\142")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\178\96\44\29\226\65\109\28\194\67\61\13\226\4\46", "\121\131\53\92")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\80\205\70\133", "\224\30\172\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\54\164\126\204\244\69\128\118\204\225", "\141\101\199\31\190"),[LUAOBFUSACTOR_DECRYPT_STR_0("\120\70\15\203\216\184\172\80", "\207\59\39\99\167\186\217")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\67\186\64", "\139\103\38\219\50\40\157\192"),[2]=14567023223};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\212\189\38\206\239\187\55\214\227\188\5\214\233\170\55\197\227", "\162\134\216\86")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\111\218\71\93\49\86\160\170\31\249\86\77\49\19\227", "\207\94\143\55\57\80\34\145")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\12\208\46\127", "\217\66\177\67\26\208\59\119")]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\231\255\157\127\193\209", "\152\67\190\170\202\48\138"),[LUAOBFUSACTOR_DECRYPT_STR_0("\248\40\89\252\217\40\86\251", "\144\187\73\53")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\1\190\59\197", "\211\118\219\90\183\194"),[2]=17215935156};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\202\168\152\231\83\242\249\185\141\239\105\229\247\191\137\236\95", "\145\152\205\232\139\58")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\226\199\174\187\90\188\95\182\211\168\190\79\169\95\161", "\110\211\146\222\223\59\200")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\125\85\239\10", "\34\51\52\130\111")]=LUAOBFUSACTOR_DECRYPT_STR_0("\235\44\61\208", "\55\174\85\88\163\98\92"),[LUAOBFUSACTOR_DECRYPT_STR_0("\238\73\10\137\52\204\75\13", "\86\173\40\102\229")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\19\161\78\159", "\237\100\196\47"),[2]=14701936208};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\126\73\155\166\62\139\21\88\73\143\153\35\135\6\77\75\142", "\116\44\44\235\202\87\232")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\82\226\70\33\3\166\163\6\246\64\36\22\179\163\17", "\146\99\183\54\69\98\210")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\201\254\184\160", "\215\135\159\213\197\92")]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\173\237\226\254\247\186\180", "\140\211\197\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\19\205\48\120\206\49\207\55", "\172\80\172\92\20")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\9\127\208\10", "\232\126\26\177\120\16\169\163"),[2]=17289564307};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\222\227\161\127\75\204\183\248\227\181\64\86\192\164\237\225\180", "\214\140\134\209\19\34\175")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\5\18\184\174\85\51\249\175\117\49\169\190\85\118\186", "\202\52\71\200")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\192\73\120\130", "\231\142\40\21")]=LUAOBFUSACTOR_DECRYPT_STR_0("\93\55\200\15\18\16\223\121\60\214", "\180\16\82\165\106\50\99")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\17\84\114\251", "\99\95\53\31\158")]=LUAOBFUSACTOR_DECRYPT_STR_0("\241\43\99\89\221\34\48\115\224\37", "\49\146\74\16"),[LUAOBFUSACTOR_DECRYPT_STR_0("\199\80\134\86\128\229\82\129", "\226\132\49\234\58")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\205\125\177\246", "\56\186\24\208\132\122\153\114"),[2]=17040765338};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\241\19\48\93\139\192\23\52\84\134\240\2\47\67\131\196\19", "\226\163\118\64\49")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\168\249\47\186\28\237\157\58\159\11\248\216\62\239\15", "\125\153\172\95\222")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\85\199\238\200", "\131\27\166\131\173\141\186")]=LUAOBFUSACTOR_DECRYPT_STR_0("\221\122\76\40\240\114\67\40\179\82\81\40\240\114\67\40", "\71\147\19\39"),[LUAOBFUSACTOR_DECRYPT_STR_0("\38\59\234\161\177\235\249\41", "\66\101\90\134\205\211\138\154")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\73\120\190", "\71\124\44\25\204\229"),[2]=15036970502};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\32\255\57\72\203\186\19\238\44\64\241\173\29\232\40\67\199", "\217\114\154\73\36\162")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\109\144\170\169\0\156\81\57\132\172\172\21\137\81\46", "\96\92\197\218\205\97\232")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\16\11\177\136", "\159\94\106\220\237")]=LUAOBFUSACTOR_DECRYPT_STR_0("\158\18\22\70\166", "\35\205\122\100"),[LUAOBFUSACTOR_DECRYPT_STR_0("\129\88\11\75\160\88\4\76", "\39\194\57\103")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\181\254\61\67", "\174\194\155\92\49\102\204"),[2]=15105007162};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\246\141\73\123\142\201\239\208\141\93\68\147\197\252\197\143\92", "\142\164\232\57\23\231\170")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\230\159\204\249\19\163\251\217\220\4\182\190\221\172\0", "\114\215\202\188\157")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\31\164\255\85", "\229\81\197\146\48\210\227\139")]=LUAOBFUSACTOR_DECRYPT_STR_0("\163\64\90\120\147\204\92\90\142\102\78\114", "\54\226\50\59\26\179\155\61"),[LUAOBFUSACTOR_DECRYPT_STR_0("\233\63\52\84\29\203\61\51", "\127\170\94\88\56")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\247\194\181\208", "\198\128\167\212\162\216\93\153"),[2]=14605941742};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\152\63\244\210\163\57\229\202\175\62\215\202\165\40\229\217\175", "\190\202\90\132")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\214\236\99\211\163\50\214\220\82\193\163\50\134\136\97", "\70\231\185\19\183\194")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\245\193\233\161", "\211\187\160\132\196")]=LUAOBFUSACTOR_DECRYPT_STR_0("\31\137\232\240\73\252\214\35\135", "\146\76\224\143\157\40\220"),[LUAOBFUSACTOR_DECRYPT_STR_0("\120\126\186\126\164\56\253\80", "\158\59\31\214\18\198\89")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\74\12\70\24", "\106\61\105\39"),[2]=17198646013};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\215\187\43\227\10\193\115\241\187\63\220\23\205\96\228\185\62", "\18\133\222\91\143\99\162")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\38\10\188\90\216\40\18\215\86\41\173\74\216\109\81", "\178\23\95\204\62\185\92\35")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\15\247\210\243", "\61\65\150\191\150")]=LUAOBFUSACTOR_DECRYPT_STR_0("\104\217\136\186\220\65\231\75\219", "\170\42\181\233\217\183\97"),[LUAOBFUSACTOR_DECRYPT_STR_0("\239\122\227\217\112\74\207\112", "\43\172\27\143\181\18")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\196\44\166\171", "\29\179\73\199\217"),[2]=17378489658};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\75\164\109\193\112\162\124\217\124\165\78\217\118\179\124\202\124", "\173\25\193\29")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\11\69\71\27\172\30\135\125\123\102\86\11\172\91\196", "\24\58\16\55\127\205\106\182")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\137\6\218\92", "\64\199\103\183\57")]=LUAOBFUSACTOR_DECRYPT_STR_0("\23\64\80\82\246\32\15\116\76\234", "\147\68\47\51\57"),[LUAOBFUSACTOR_DECRYPT_STR_0("\170\78\16\48\132\65\138\68", "\32\233\47\124\92\230")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\156\68\131\169", "\153\235\33\226\219\220\174"),[2]=14952570512};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\179\88\75\30\136\94\90\6\132\89\104\6\142\79\90\21\132", "\114\225\61\59")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\141\70\52\137\221\103\117\136\253\101\37\153\221\34\54", "\237\188\19\68")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\211\233\227\29", "\128\157\136\142\120")]=LUAOBFUSACTOR_DECRYPT_STR_0("\129\16\150\77\183\137\118\242\181", "\157\210\101\229\62\206\169\50"),[LUAOBFUSACTOR_DECRYPT_STR_0("\110\39\67\190\27\169\26\198", "\173\45\70\47\210\121\200\121")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\38\186\132\67", "\49\81\223\229"),[2]=17253063048};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\0\131\169\249\59\133\184\225\55\130\138\225\61\148\184\242\55", "\149\82\230\217")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\105\103\106\174\57\70\43\175\25\68\123\190\57\3\104", "\202\88\50\26")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\27\120\235\210", "\55\85\25\134\183\229")]=LUAOBFUSACTOR_DECRYPT_STR_0("\95\59\18\239\203\45\118\49", "\72\27\84\117\207\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\140\199\88\49\15\86\134\52", "\95\207\166\52\93\109\55\229")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\202\198\39\144", "\205\189\163\70\226\136\86"),[2]=14753332139};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\112\212\149\225\25\232\67\197\128\233\35\255\77\195\132\234\21", "\139\34\177\229\141\112")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\114\216\104\176\209\55\188\125\149\198\34\249\121\229\194", "\176\67\141\24\212")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\253\216\73\239", "\141\179\185\36\138\79\52")]=LUAOBFUSACTOR_DECRYPT_STR_0("\215\52\80\168\232\54\94\187\242\53\88", "\195\155\91\63"),[LUAOBFUSACTOR_DECRYPT_STR_0("\245\66\195\240\207\210\90\221", "\57\182\35\175\156\173\179")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\202\167\184\205", "\216\189\194\217\191\111\100"),[2]=17803036342};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\159\75\81\120\57\73\172\90\68\112\3\94\162\92\64\115\53", "\42\205\46\33\20\80")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\0\61\57\179\80\28\120\178\112\30\40\163\80\89\59", "\215\49\104\73")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\248\21\11\13", "\104\182\116\102")]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\250\188\226\182\61\191\50\251\243\239", "\222\70\136\156\129\222\88"),[LUAOBFUSACTOR_DECRYPT_STR_0("\225\133\136\181\192\133\135\178", "\217\162\228\228")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\185\216\206\202", "\184\206\189\175"),[2]=18254304785};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\110\75\233\187\197\90\221\72\75\253\132\216\86\206\93\73\252", "\188\60\46\153\215\172\57")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\69\196\45\86\56\48\69\244\28\68\56\48\21\160\47", "\68\116\145\93\50\89")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\129\89\167\166", "\51\207\56\202\195\150")]=LUAOBFUSACTOR_DECRYPT_STR_0("\141\65\252\3\164\158\238\175\178\91\242\76\143", "\195\221\40\155\35\225\230\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\229\124\202\85\250\3\197\118", "\98\166\29\166\57\152")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\190\23\128\216", "\93\201\114\225\170"),[2]=17678916331};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\222\229\235\228\124\180\196\250\233\228\200\252\122\165\196\233\233", "\142\140\128\155\136\21\215\165")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\16\152\22\90\225\63\169\191\96\187\7\74\225\122\234", "\218\33\205\102\62\128\75\152")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\218\122\83\193", "\150\148\27\62\164")]=LUAOBFUSACTOR_DECRYPT_STR_0("\22\240\230\197\48", "\160\66\137\138"),[LUAOBFUSACTOR_DECRYPT_STR_0("\35\194\46\179\61\235\73\123", "\16\96\163\66\223\95\138\42")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\209\208\28", "\105\224\180\177\110\186"),[2]=17327750447};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\147\15\178\78\41\95\58\179\164\14\145\86\47\78\58\160\164", "\199\193\106\194\34\64\60\91")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\110\131\28\162\62\162\93\163\30\160\13\178\62\231\30", "\198\95\214\108")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\52\60\167\133", "\85\122\93\202\224\137\108\154")]=LUAOBFUSACTOR_DECRYPT_STR_0("\175\81\91\235\192\169\138\81\70", "\204\228\48\50\203\163"),[LUAOBFUSACTOR_DECRYPT_STR_0("\253\182\69\171\13\78\214\51", "\88\190\215\41\199\111\47\181")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\67\50\77\91", "\190\52\87\44\41\16\161"),[2]=15588677056};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\113\19\23\184\18\34\29\87\19\3\135\15\46\14\66\17\2", "\124\35\118\103\212\123\65")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\109\222\188\187\127\72\109\238\141\169\127\72\61\186\190", "\60\92\139\204\223\30")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\8\28\226\136", "\165\70\125\143\237")]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\51\252\84\89\244\56\253\77\64\189\123\214\69\68", "\48\212\91\149\36"),[LUAOBFUSACTOR_DECRYPT_STR_0("\103\31\54\8\70\31\57\15", "\100\36\126\90")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\6\193\214\79", "\82\113\164\183\61\118\113\82"),[2]=15696360871};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\201\71\225\187\173\204\235\239\71\245\132\176\192\248\250\69\244", "\138\155\34\145\215\196\175")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\229\204\30\198\8\47\12\197\149\239\15\214\8\106\79", "\160\212\153\110\162\105\91\61")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\142\57\167\218", "\191\192\88\202")]=LUAOBFUSACTOR_DECRYPT_STR_0("\66\216\249\27\26\140\88\201\230\18", "\172\17\173\137\126\104"),[LUAOBFUSACTOR_DECRYPT_STR_0("\254\125\33\59\212\226\27\214", "\120\189\28\77\87\182\131")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\219\40\16\226", "\183\172\77\113\144\114\152"),[2]=15228571817};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\207\125\40\229\75\198\12\233\125\60\218\86\202\31\252\127\61", "\109\157\24\88\137\34\165")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\249\116\172\68\179\41\214\173\96\170\65\166\60\214\186", "\231\200\33\220\32\210\93")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\114\89\75\232", "\87\60\56\38\141")]=LUAOBFUSACTOR_DECRYPT_STR_0("\242\170\4\59\204\161\5", "\90\160\197\106"),[LUAOBFUSACTOR_DECRYPT_STR_0("\192\180\38\122\64\226\182\33", "\34\131\213\74\22")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\39\188\23\34", "\80\80\217\118"),[2]=14967090040};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\55\77\27\113\12\75\10\105\0\76\56\105\10\90\10\122\0", "\29\101\40\107")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\148\192\192\183\28\209\164\213\146\11\196\225\209\226\15", "\125\165\149\176\211")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\103\2\39\228", "\229\41\99\74\129")]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\4\243\107\30\16\242\34\48", "\75\83\101\129"),[LUAOBFUSACTOR_DECRYPT_STR_0("\219\72\78\222", "\176\146\43\33")]=LUAOBFUSACTOR_DECRYPT_STR_0("\186\223\233\16\189\104\173\201\248\21\244\52\231\138\166\66\253\44\248\133\169\66\251", "\27\200\189\145\113\206"),[LUAOBFUSACTOR_DECRYPT_STR_0("\144\153\87\166\70\181\134\125\165\67\185", "\47\192\235\50\203")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\14\198\23\212", "\233\64\167\122\177\140\188\212")]=LUAOBFUSACTOR_DECRYPT_STR_0("\98\97\229\73\232\252\217\107\46\182\8\204\189\253\74\100\247\83\248\245", "\144\47\20\150\32\139\220")});
+	Tab:AddLabel(LUAOBFUSACTOR_DECRYPT_STR_0("\0\35\174\237\223\192\205\52\98\174\246\212\135", "\132\80\66\221\153\186\224"));
+	local musicTextBox = Tab:AddTextbox({[LUAOBFUSACTOR_DECRYPT_STR_0("\104\174\41\18", "\219\38\207\68\119")]=LUAOBFUSACTOR_DECRYPT_STR_0("\32\3\25\56\22\204\36\50", "\236\109\118\106\81\117"),[LUAOBFUSACTOR_DECRYPT_STR_0("\201\54\192\46\187\225\39", "\206\141\83\166\79")]="",[LUAOBFUSACTOR_DECRYPT_STR_0("\217\172\197\222\218\228\186\220\218\238\232\168\207", "\158\141\201\189\170")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\52\177\245\183\79\22\179\242", "\45\119\208\153\219")]=function(value)
+		musicId = value;
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\250\88\169\16", "\115\180\57\196\117")]=LUAOBFUSACTOR_DECRYPT_STR_0("\2\112\81\237\16\233\63\211\59\127", "\160\82\28\48\148\48\164\74"),[LUAOBFUSACTOR_DECRYPT_STR_0("\231\213\174\37\40\4\211\196\180\41\52", "\109\163\176\221\70\90")]=LUAOBFUSACTOR_DECRYPT_STR_0("\198\73\50\20\94\39\193\72\52\20\90\33\146\78\57\88\106\114\241\64\37", "\82\178\33\87\52\19"),[LUAOBFUSACTOR_DECRYPT_STR_0("\111\163\228\118\126\77\161\227", "\28\44\194\136\26")]=function()
+		if (musicId and (musicId ~= "")) then
+			local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\76\112\68\13\127\132\92\237\125\107\106\19\101\131\88\250\121\97\83", "\174\28\25\39\102\22\234\59"),[2]=musicId};
+			game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\251\76\0\212\199\133\200\93\21\220\253\146\198\91\17\223\203", "\230\169\41\112\184\174")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\155\244\121\191\11\17\193\30\217\231\116\239\0", "\47\170\164\21\222\114\116\179")):FireServer(unpack(args));
+		else
+			print(LUAOBFUSACTOR_DECRYPT_STR_0("\179\201", "\182\157\231\237"));
+		end
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\219\251\1\165", "\192\149\154\108")]=LUAOBFUSACTOR_DECRYPT_STR_0("\212\236\244\41\62\126\38\248\244\226\48\60\37\18\176", "\97\153\153\135\64\93\86")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\40\95\223\45", "\185\102\62\178\72\153\73\235")]=LUAOBFUSACTOR_DECRYPT_STR_0("\38\250\12\167\122\169", "\210\20\218\75"),[LUAOBFUSACTOR_DECRYPT_STR_0("\171\252\11\127\94\24\55\131", "\84\232\157\103\19\60\121")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\44\122\113\72\21\125\117\96\29\97\95\86\15\122\113\119\25\107\102", "\35\124\19\18"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\181\4\64\148\5\180\4\65\150\14\178", "\55\132\51\116\166")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\250\57\173\120\13\61\252\220\57\185\71\16\49\239\201\59\184", "\157\168\92\221\20\100\94")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\153\225\249\30\3\220\100\153\194\214\30\75\203", "\22\168\177\149\127\122\185")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\153\166\55\79", "\159\215\199\90\42")]=LUAOBFUSACTOR_DECRYPT_STR_0("\16\192\195\36\242", "\147\82\175\174\70"),[LUAOBFUSACTOR_DECRYPT_STR_0("\52\131\1\48\67\22\129\6", "\33\119\226\109\92")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\138\143\121\242\242\180\129\89\248\233\151\147\105\240\248\142\131\98\237", "\155\218\230\26\153"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\64\74\66\149\69\66\77\149\65\71", "\163\118\114\123")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\208\227\224\188\188\225\231\228\181\177\209\242\255\162\180\229\227", "\213\130\134\144\208")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\170\12\17\53\92\124\79\120\232\31\28\101\87", "\73\155\92\125\84\37\25\61")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\111\195\224\214", "\46\33\162\141\179")]=LUAOBFUSACTOR_DECRYPT_STR_0("\111\163\184\51\44\28\132\137", "\72\60\204\205\93"),[LUAOBFUSACTOR_DECRYPT_STR_0("\135\197\206\184\74\47\167\207", "\78\196\164\162\212\40")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\107\196\202\85\251\199\167\132\90\223\228\75\225\192\163\147\94\213\221", "\199\59\173\169\62\146\169\192"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\97\243\229\242\102\244\235\250\102\244", "\195\87\197\220")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\131\244\177\191\220\127\253\32\180\245\146\167\218\110\253\51\180", "\84\209\145\193\211\181\28\156")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\128\211\34\137\222\212\241\127\155\228\208\178\60", "\167\177\131\78\232")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\134\12\134\66", "\165\200\109\235\39\100\40\110")]=LUAOBFUSACTOR_DECRYPT_STR_0("\170\114\232\56\26\201\89\233\41\3\136", "\115\233\26\129\72"),[LUAOBFUSACTOR_DECRYPT_STR_0("\91\15\219\139\230\121\13\220", "\132\24\110\183\231")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\158\120\3\184\83\186\113\96\175\99\45\166\73\189\117\119\171\105\20", "\35\206\17\96\211\58\212\22"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\98\152\216\96\216\239\240\154\103\154\221", "\169\83\174\233\89\232\216\200")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\110\23\75\49\177\200\232\2\89\22\104\41\183\217\232\17\89", "\118\60\114\59\93\216\171\137")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\3\249\72\229\165\87\219\21\247\159\83\152\86", "\220\50\169\36\132")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\223\134\1\180", "\209\145\231\108")]=LUAOBFUSACTOR_DECRYPT_STR_0("\106\32\12\77\245\208\49\80\34", "\66\57\65\104\109\184\165"),[LUAOBFUSACTOR_DECRYPT_STR_0("\158\10\246\82\231\188\8\241", "\133\221\107\154\62")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\235\23\182\234\78\204\54\248\31\167\204\82\209\56\216\42\176\249\83", "\81\187\126\213\129\39\162"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\211\230\125\167\253\215\231\123\162\253", "\196\229\209\77\148")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\117\208\97\16\84\241\204\83\208\117\47\73\253\223\70\210\116", "\173\39\181\17\124\61\146")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\43\236\255\35\145\127\206\162\49\171\123\141\225", "\232\26\188\147\66")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\59\224\235\30", "\19\117\129\134\123")]=LUAOBFUSACTOR_DECRYPT_STR_0("\15\12\220\18\116\14\54\16\192\21", "\67\67\99\169\118\84"),[LUAOBFUSACTOR_DECRYPT_STR_0("\33\43\233\67\81\183\250\189", "\214\98\74\133\47\51\214\153")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\58\71\115\127\122\89\13\109\113\102\94\66\25\71\115\64\118\79\30", "\55\106\46\16\20\19"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\30\235\226\102\98\102\68\30\226\225", "\115\41\219\210\80\86\94")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\146\76\249\22\219\56\161\93\236\30\225\47\175\91\232\29\215", "\91\192\41\137\122\178")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\6\21\198\233\78\32\216\185\68\6\203\185\69", "\136\55\69\170")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\205\252\29\63", "\173\131\157\112\90\182\147\77")]=LUAOBFUSACTOR_DECRYPT_STR_0("\62\23\50\12\19\19", "\103\122\118\64"),[LUAOBFUSACTOR_DECRYPT_STR_0("\211\233\28\200\242\188\243\227", "\221\144\136\112\164\144")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\105\52\122\175\80\51\126\135\88\47\84\177\74\52\122\144\92\37\109", "\196\57\93\25"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\20\232\211\28\156\29\228\210\28", "\47\170\44\208\229")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\122\71\174\22\18\228\54\92\71\186\41\15\232\37\73\69\187", "\87\40\34\222\122\123\135")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\16\13\141\52\216\213\83\108\146\22\192\129\83", "\176\33\93\225\85\161")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\140\24\128\209", "\25\194\121\237\180")]=LUAOBFUSACTOR_DECRYPT_STR_0("\132\184\53\38\21\66\244\133\56\63", "\42\212\215\89\79\102"),[LUAOBFUSACTOR_DECRYPT_STR_0("\148\80\40\28\205\79\68\252", "\151\215\49\68\112\175\46\39")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\118\116\181\71\132\72\122\149\77\159\107\104\165\69\142\114\120\174\88", "\237\38\29\214\44"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\71\114\36\80\37\31\237\208\64\112\35", "\225\118\70\23\102\19\38\213")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\18\95\77\46\80\247\177\52\95\89\17\77\251\162\33\93\88", "\208\64\58\61\66\57\148")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\184\142\170\69\240\187\180\21\250\157\167\21\251", "\36\137\222\198")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\207\245\239\39", "\41\129\148\130\66\168\194\98")]=LUAOBFUSACTOR_DECRYPT_STR_0("\33\37\141\25\80\32\48\142\24\36\133", "\204\113\74\225\112\35\72\16"),[LUAOBFUSACTOR_DECRYPT_STR_0("\82\31\13\44\230\190\176\235", "\128\17\126\97\64\132\223\211")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\138\143\62\3\179\136\58\43\187\148\16\29\169\143\62\60\191\158\41", "\104\218\230\93"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\36\100\130\39\43\101\134\38\33\100", "\22\19\92\178")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\236\14\83\34\180\178\223\31\70\42\142\165\209\25\66\41\184", "\209\190\107\35\78\221")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\209\30\218\224\207\133\60\135\242\245\129\127\196", "\182\224\78\182\129")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\195\12\168\11", "\36\141\109\197\110\182\80\31")]=LUAOBFUSACTOR_DECRYPT_STR_0("\239\5\3\131\94\14\226\26", "\92\131\106\118\231\126"),[LUAOBFUSACTOR_DECRYPT_STR_0("\158\66\50\169\33\188\64\53", "\67\221\35\94\197")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\117\181\35\81\76\178\39\121\68\174\13\79\86\181\35\110\64\164\52", "\58\37\220\64"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\138\212\162\84\229\252\140\216\167\88", "\204\188\236\148\108\212")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\236\217\79\255\253\17\0\166\219\216\108\231\251\0\0\181\219", "\210\190\188\63\147\148\114\97")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\228\246\169\133\8\176\212\244\151\50\180\151\183", "\113\213\166\197\228")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\227\63\207\86", "\129\173\94\162\51\42\229\99")]=LUAOBFUSACTOR_DECRYPT_STR_0("\106\59\19\57\246\105\60\19\37", "\214\61\84\114\81"),[LUAOBFUSACTOR_DECRYPT_STR_0("\100\226\16\73\207\215\68\232", "\182\39\131\124\37\173")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\10\20\185\31\160\122\61\62\187\6\132\97\41\20\185\32\172\108\46", "\20\90\125\218\116\201"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\115\94\76\213\114\122\11\114\94\74", "\61\69\105\123\231\74\78")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\227\168\170\7\222\210\172\174\14\211\226\185\181\25\214\214\168", "\183\177\205\218\107")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\84\0\129\126\213\51\23\97\158\92\205\103\23", "\86\101\80\237\31\172")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\125\57\163\81", "\189\51\88\206\52\26\169")]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\194\77\92\39", "\53\70\163\43"),[LUAOBFUSACTOR_DECRYPT_STR_0("\226\163\171\20\116\50\73\202", "\42\161\194\199\120\22\83")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\144\245\91\57\123\48\167\223\89\32\95\43\179\245\91\6\119\38\180", "\94\192\156\56\82\18"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\237\83\25\47\92\211\8\233\86", "\226\61\219\100\45\29\109")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\200\166\48\76\243\160\33\84\255\167\19\84\245\177\33\71\255", "\32\154\195\64")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\160\42\86\222\199\36\227\75\73\252\223\112\227", "\65\145\122\58\191\190")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\223\22\233\124", "\163\145\119\132\25")]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\20\217\207\89\1\65\238\212\81\31", "\56\111\97\170\166"),[LUAOBFUSACTOR_DECRYPT_STR_0("\168\126\138\53\45\141\238\124", "\23\235\31\230\89\79\236\141")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\226\85\192\168\199\33\232\241\93\209\142\219\60\230\209\104\198\187\218", "\143\178\60\163\195\174\79"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\68\95\176\148\42\83\101\64\86\176", "\85\114\103\129\167\24\97")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\9\214\162\128\198\0\6\47\214\182\191\219\12\21\58\212\183", "\103\91\179\210\236\175\99")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\8\197\94\249\73\188\178\211\74\214\83\169\66", "\226\57\149\50\152\48\217\192")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\109\173\39\171", "\155\35\204\74\206")]=LUAOBFUSACTOR_DECRYPT_STR_0("\132\193\122\53\222\247\239\110\52\206\180\138\92\38\202\178\210\122\52\212\254", "\167\215\162\27\71")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\19\130\198\39", "\93\93\227\171\66")]=LUAOBFUSACTOR_DECRYPT_STR_0("\28\198\222\186\43\53\203\193\27\202\222\171\63\42", "\225\72\169\172\206\94\71\174"),[LUAOBFUSACTOR_DECRYPT_STR_0("\110\83\88\235\246\49\75\70", "\40\45\50\52\135\148\80")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\210\16\229\137\235\23\225\161\227\11\203\151\241\16\229\182\231\1\242", "\226\130\121\134"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\217\109\148\44\221\97\148\47\222", "\27\232\89\163")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\198\172\208\207\253\170\193\215\241\173\243\215\251\187\193\196\241", "\163\148\201\160")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\15\181\228\231\164\0\76\212\251\197\188\84\76", "\101\62\229\136\134\221")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\92\78\251\234", "\126\18\47\150\143")]=LUAOBFUSACTOR_DECRYPT_STR_0("\135\205\201\110\43\49\44\183\220\205\125\63", "\127\212\174\168\28\82\17"),[LUAOBFUSACTOR_DECRYPT_STR_0("\41\171\80\219\8\171\95\220", "\183\106\202\60")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\106\43\241\65\214\24\5\121\35\224\103\202\5\11\89\22\247\82\203", "\98\58\66\146\42\191\118"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\220\163\46\141\25\159\131\211\162\47", "\186\228\144\28\184\44\174")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\52\27\10\26\15\29\27\2\3\26\41\2\9\12\27\17\3", "\118\102\126\122")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\141\59\132\230\177\217\25\217\244\139\221\90\154", "\200\188\107\232\135")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\2\253\172\78", "\159\76\156\193\43\91")]=LUAOBFUSACTOR_DECRYPT_STR_0("\82\37\28\116\229\69\66\255\126\36\26", "\138\25\76\110\21\197\41\35"),[LUAOBFUSACTOR_DECRYPT_STR_0("\109\253\62\89\50\85\189\69", "\222\46\156\82\53\80\52")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\217\28\227\125\53\215\60\233\102\22\197\12\225\119\15\213\7\252", "\20\91\176\127\136"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\161\161\112\252\92\242\165\163\123\245", "\196\151\144\72\197\106")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\38\203\144\94\29\205\129\70\17\202\179\70\27\220\129\85\17", "\50\116\174\224")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\132\72\12\198\24\192\199\41\19\228\0\148\199", "\165\181\24\96\167\97")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\130\44\49\65", "\36\204\77\92")]=LUAOBFUSACTOR_DECRYPT_STR_0("\26\66\54\210\15\126\84\52\211\6", "\97\94\39\91\189"),[LUAOBFUSACTOR_DECRYPT_STR_0("\22\112\247\26\166\19\250\62", "\153\85\17\155\118\196\114")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\247\252\216\204\178\63\192\214\218\213\150\36\212\252\216\243\190\41\211", "\81\167\149\187\167\219"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\170\88\124\144\162\169\95\121\149\162", "\146\153\108\72\161")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\55\17\253\235\34\56\63\17\17\233\212\63\52\44\4\19\232", "\94\101\116\141\135\75\91")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\99\144\15\197\92\254\253\71\33\131\2\149\87", "\118\82\192\99\164\37\155\143")):FireServer(unpack(args));
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\12\186\70\42", "\79\66\219\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\59\85\253\31\4\0\222\4\14\73\240\89\58\65\254\20\13\65\224\2\84", "\113\125\32\147")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\242\211\196\70", "\212\188\178\169\35\43")]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\228\126\43\254\200\114\38\191\171\88\25\138\222\83\11", "\74\222\139\29"),[LUAOBFUSACTOR_DECRYPT_STR_0("\100\196\165\8\160\9\113\227", "\136\39\165\201\100\194\104\18")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\67\230\79\125\218\232\40\241\114\253\97\99\192\239\44\230\118\247\88", "\178\19\143\44\22\179\134\79"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\74\216\255\65\24\132\162\209\75\210", "\228\125\225\203\117\40\177\151")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\218\172\218\120\131\3\38\252\172\206\71\158\15\53\233\174\207", "\71\136\201\170\20\234\96")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\66\20\112\201\223\245\182\66\55\95\201\151\226", "\196\115\68\28\168\166\144")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\246\82\225\121", "\49\184\51\140\28\101\148")]=LUAOBFUSACTOR_DECRYPT_STR_0("\210\251\135\197\217\173\84\137\230\235\136\198\128", "\234\148\142\233\171\160\141\39"),[LUAOBFUSACTOR_DECRYPT_STR_0("\114\25\134\123\143\243\70\90", "\37\49\120\234\23\237\146")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\141\75\120\190\34\171\59\158\67\105\152\62\182\53\190\118\126\173\63", "\92\221\34\27\213\75\197"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\106\109\183\46\114\96\100\187\46\117", "\68\83\93\142\26")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\176\171\222\1\5\6\174\150\171\202\62\24\10\189\131\169\203", "\207\226\206\174\109\108\101")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\229\124\35\242\253\77\232\5\167\111\46\162\246", "\52\212\44\79\147\132\40\154")):FireServer(unpack(args));
+	end});
+	Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\193\161\195\220", "\185\143\192\174")]=LUAOBFUSACTOR_DECRYPT_STR_0("\144\80\43\222\251\161\142\76\42\210\246\228\174\31", "\129\221\37\88\183\152")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\113\230\221\23", "\92\63\135\176\114\80")]=LUAOBFUSACTOR_DECRYPT_STR_0("\5\249\71\1\49\78", "\43\86\144\53\100\95"),[LUAOBFUSACTOR_DECRYPT_STR_0("\159\244\202\60\42\246\95\183", "\60\220\149\166\80\72\151")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\188\33\188\249\133\38\184\209\141\58\146\231\159\33\188\198\137\48\171", "\146\236\72\223"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\235\170\20\146\136\71\232\170\23", "\112\222\153\36\163\187")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\246\246\253\92\45\166\197\231\232\84\23\177\203\225\236\87\33", "\197\164\147\141\48\68")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\240\105\5\10\38\27\179\8\26\40\62\79\179", "\126\193\57\105\107\95")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\95\28\205\19", "\85\17\125\160\118\95\205")]=LUAOBFUSACTOR_DECRYPT_STR_0("\219\30\242\254\230\87\200\254\233\19", "\155\136\119\128"),[LUAOBFUSACTOR_DECRYPT_STR_0("\120\202\23\236\245\171\129\73", "\34\59\171\123\128\151\202\226")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\72\236\127\200\64\54\127\198\125\209\100\45\107\236\127\247\76\32\108", "\88\24\133\28\163\41"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\166\253\168\154\91\170\249\167\155\92", "\104\147\203\144\171")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\121\23\76\177\66\17\93\169\78\22\111\169\68\0\93\186\78", "\221\43\114\60")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\144\73\119\68\231\193\211\40\104\102\255\149\211", "\164\161\25\27\37\158")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\29\68\193\178", "\127\83\37\172\215")]=LUAOBFUSACTOR_DECRYPT_STR_0("\229\215\213\16\68\74\194\230\215\218\135\20\70\15\216\247", "\131\182\190\167\117\42\106\170"),[LUAOBFUSACTOR_DECRYPT_STR_0("\1\130\246\178\91\132\223\41", "\188\66\227\154\222\57\229")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\72\58\88\94\249\118\52\120\84\226\85\38\72\92\243\76\54\67\65", "\144\24\83\59\53"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\121\214\237\156\72\117\210\229\154\79", "\123\76\224\213\173")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\29\207\217\168\38\201\200\176\42\206\250\176\32\216\200\163\42", "\196\79\170\169")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\210\11\41\124\154\62\55\44\144\24\36\44\145", "\29\227\91\69")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\241\206\179\183", "\87\191\175\222\210\196\38")]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\228\114\240\215", "\174\51\136\23\130\163"),[LUAOBFUSACTOR_DECRYPT_STR_0("\30\20\62\6\224\244\62\30", "\149\93\117\82\106\130")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\214\180\30\237\194\232\186\62\231\217\203\168\14\239\200\210\184\5\242", "\171\134\221\125\134"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\225\116\169\39\166\229\117\175\34\163", "\144\208\68\153\22")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\211\31\53\0\204\85\22\218\228\30\22\24\202\68\22\201\228", "\174\129\122\69\108\165\54\119")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\168\237\214\232\224\216\200\184\234\254\219\184\235", "\137\153\189\186")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\63\207\16\64", "\37\113\174\125")]=LUAOBFUSACTOR_DECRYPT_STR_0("\124\81\87\160\82", "\201\49\36\36"),[LUAOBFUSACTOR_DECRYPT_STR_0("\39\47\166\124\6\47\169\123", "\16\100\78\202")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\141\181\115\253\138\76\76\136\188\174\93\227\144\75\72\159\184\164\100", "\203\221\220\16\150\227\34\43"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\174\119\43\41\168\115\45\43\168", "\24\155\68\27")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\136\85\192\94\179\83\209\70\191\84\227\70\181\66\209\85\191", "\50\218\48\176")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\31\98\216\241\66\81\92\3\199\211\90\5\92", "\52\46\50\180\144\59")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\35\48\40\114", "\154\109\81\69\23\102\89")]=LUAOBFUSACTOR_DECRYPT_STR_0("\201\194\206\81\79\60\186\153", "\89\154\171\188\52\33"),[LUAOBFUSACTOR_DECRYPT_STR_0("\213\21\0\58\244\21\15\61", "\86\150\116\108")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\71\182\47\165\200\72\112\156\45\188\236\83\100\182\47\154\196\94\99", "\38\23\223\76\206\161"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\140\157\13\109\251\253\145\128\144\12", "\166\184\169\56\91\195\202")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\149\181\97\40\203\164\177\101\33\198\148\164\126\54\195\160\181", "\162\199\208\17\68")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\128\214\83\0\245\11\66\74\194\197\94\80\254", "\123\177\134\63\97\140\110\48")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\30\85\249\198", "\137\80\52\148\163\146\123\21")]=LUAOBFUSACTOR_DECRYPT_STR_0("\217\204\162\236\14", "\99\152\160\195\158"),[LUAOBFUSACTOR_DECRYPT_STR_0("\164\54\218\50\31\62\132\60", "\95\231\87\182\94\125")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\104\192\251\63\0\114\20\123\200\234\25\28\111\26\91\253\253\44\29", "\115\56\169\152\84\105\28"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\105\188\211\28\228\22\110\180\214", "\37\94\133\225\47\214")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\101\209\70\82\94\215\87\74\82\208\101\74\88\198\87\89\82", "\62\55\180\54")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\170\202\36\199\91\65\188\74\232\217\41\151\80", "\123\155\154\72\166\34\36\206")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\232\222\53\166", "\69\166\191\88\195")]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\111\37\71\198\133\39\152\188\116", "\234\217\26\78\34\230\214\78"),[LUAOBFUSACTOR_DECRYPT_STR_0("\147\30\228\91\72\177\28\227", "\42\208\127\136\55")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\65\81\202\34\175\226\72\82\89\219\4\179\255\70\114\108\204\49\178", "\47\17\56\169\73\198\140"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\116\96\14\22\251\217\114\100\8\22", "\224\66\85\60\35\205")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\202\63\108\87\59\78\210\236\63\120\104\38\66\193\249\61\121", "\179\152\90\28\59\82\45")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\248\194\48\1\84\65\187\163\47\35\76\21\187", "\36\201\146\92\96\45")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\199\199\240\64", "\145\137\166\157\37\164\151\156")]=LUAOBFUSACTOR_DECRYPT_STR_0("\32\12\76\121\155\67\15\11\73\117\213\115", "\20\110\121\39\28\187"),[LUAOBFUSACTOR_DECRYPT_STR_0("\45\240\8\43\86\29\161\5", "\194\110\145\100\71\52\124")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\66\224\71\165\205\23\92\53\115\251\105\187\215\16\88\34\119\241\80", "\118\18\137\36\206\164\121\59"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\168\128\176\71\28\173\142\182\71\29", "\44\158\185\131\116")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\126\143\205\123\210\164\112\88\143\217\68\207\168\99\77\141\216", "\17\44\234\189\23\187\199")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\102\78\210\11\46\123\204\91\36\93\223\91\37", "\106\87\30\190")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\248\237\1\121", "\188\182\140\108\28\170\55\34")]=LUAOBFUSACTOR_DECRYPT_STR_0("\239\189\250\230\210\177\168\176", "\131\188\212\136"),[LUAOBFUSACTOR_DECRYPT_STR_0("\170\10\125\42\84\136\8\122", "\54\233\107\17\70")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\192\33\40\14\205\254\47\8\4\214\221\61\56\12\199\196\45\51\17", "\164\144\72\75\101"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\164\210\27\131\142\13\164\211\24\130", "\62\156\235\47\186\191")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\63\239\254\45\197\164\45\248\8\238\221\53\195\181\45\235\8", "\140\109\138\142\65\172\199\76")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\166\110\187\28\240\196\166\166\77\148\28\184\211", "\212\151\62\215\125\137\161")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\27\167\2\137", "\236\85\198\111")]=LUAOBFUSACTOR_DECRYPT_STR_0("\63\61\118\231\81\94\2\126\231\89\16\52", "\60\126\81\23\149"),[LUAOBFUSACTOR_DECRYPT_STR_0("\102\139\218\134\114\232\70\129", "\137\37\234\182\234\16")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\201\2\90\56\5\76\138\128\248\25\116\38\31\75\142\151\252\19\77", "\195\153\107\57\83\108\34\237"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\37\74\212\151\218\214\172\40\67\213", "\159\28\123\229\163\233\225")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\181\17\37\25\142\23\52\1\130\16\6\1\136\6\52\18\130", "\117\231\116\85")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\125\106\74\58\101\41\72\23\40\95\45\11\84", "\28\76\58\38\91")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\150\175\44\178", "\143\216\206\65\215\129\179")]=LUAOBFUSACTOR_DECRYPT_STR_0("\145\81\57", "\156\194\18\105"),[LUAOBFUSACTOR_DECRYPT_STR_0("\195\173\40\230\37\225\175\47", "\71\128\204\68\138")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\221\91\170\59\123\231\161\206\83\187\29\103\250\175\238\102\172\40\102", "\198\141\50\201\80\18\137"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\181\31\212\15\20\104\170\184\25", "\146\141\46\237\60\33\95")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\236\172\225\31\180\220\223\189\244\23\142\203\209\187\240\20\184", "\191\190\201\145\115\221")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\106\35\225\70\100\203\79\101\40\48\236\22\111", "\84\91\115\141\39\29\174\61")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\56\226\94\248", "\157\118\131\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\217\95\47\140\80\115\235\77\125\138\93\127\252\83", "\30\142\62\93\203\49"),[LUAOBFUSACTOR_DECRYPT_STR_0("\128\162\59\135\165\31\160\168", "\126\195\195\87\235\199")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\57\143\89\189\240\165\121\42\135\72\155\236\184\119\10\178\95\174\237", "\30\105\230\58\214\153\203"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\71\71\164\228\88\254\64\74\161\226", "\203\115\114\150\210\96")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\225\233\76\51\218\239\93\43\214\232\111\43\220\254\93\56\214", "\95\179\140\60")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\113\202\47\247\197\31\182\129\51\217\34\167\206", "\176\64\154\67\150\188\122\196")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\11\72\41\136", "\157\69\41\68\237\46")]=LUAOBFUSACTOR_DECRYPT_STR_0("\13\246\230\226\227\144\193\41\186\245\241\231\222\193", "\165\76\154\135\144\142\176"),[LUAOBFUSACTOR_DECRYPT_STR_0("\7\44\75\11\17\65\186\47", "\217\68\77\39\103\115\32")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\151\133\175\214\219\255\216\132\141\190\240\199\226\214\164\184\169\197\198", "\191\199\236\204\189\178\145"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\36\214\12\23\37\215\15\23\39\222", "\47\22\230\61")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\48\182\49\20\48\1\178\53\29\61\49\167\46\10\56\5\182", "\89\98\211\65\120")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\238\242\1\83\4\171\5\238\209\46\83\76\188", "\119\223\162\109\50\125\206")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\49\3\0\71", "\97\127\98\109\34")]=LUAOBFUSACTOR_DECRYPT_STR_0("\19\11\125\49\170\31\119\16\127\62\168\90\54\6\117\34\185", "\122\87\106\16\80\205"),[LUAOBFUSACTOR_DECRYPT_STR_0("\195\9\229\250\225\237\243\195", "\168\128\104\137\150\131\140\144")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\181\219\252\161\67\13\36\178\174\245\226\187\68\9\51\182\164\204", "\103\211\220\184\151\200\45\106"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\229\91\113\172\138\165\231\104\228\93", "\95\220\106\64\152\186\151\211")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\67\131\162\179\240\213\208\101\131\182\140\237\217\195\112\129\183", "\177\17\230\210\223\153\182")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\123\130\230\137\40\211\29\123\161\201\137\96\196", "\111\74\210\138\232\81\182")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\51\31\58\134", "\39\125\126\87\227\160")]=LUAOBFUSACTOR_DECRYPT_STR_0("\117\179\191\159\89\255\172\140\93\177\186", "\237\52\223\222"),[LUAOBFUSACTOR_DECRYPT_STR_0("\150\250\140\220\176\22\182\240", "\119\213\155\224\176\210")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\136\234\129\56\123\166\14\205\185\241\175\38\97\161\10\218\189\251\150", "\142\216\131\226\83\18\200\105"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\118\85\171\146\153\177\117\177\119\92", "\134\79\100\155\162\175\129\77")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\251\69\181\231\192\67\164\255\204\68\150\255\198\82\164\236\204", "\139\169\32\197")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\33\248\44\52\254\249\173\156\99\235\33\100\245", "\173\16\168\64\85\135\156\223")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\59\86\249\244", "\37\117\55\148\145\136\59\85")]=LUAOBFUSACTOR_DECRYPT_STR_0("\4\30\161\35\57\18\243\52\54\30\189\34\119\4\182\52\33\18\161", "\70\87\119\211"),[LUAOBFUSACTOR_DECRYPT_STR_0("\146\215\15\50\165\50\178\221", "\83\209\182\99\94\199")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\232\222\131\82\209\217\135\122\217\197\173\76\203\222\131\109\221\207\148", "\57\184\183\224"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\174\139\182\249\125\172\68\209\169\142", "\226\152\191\131\207\68\148\117")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\40\78\173\222\92\25\74\169\215\81\41\95\178\192\84\29\78", "\53\122\43\221\178")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\191\152\18\31\177\22\23\119\253\139\31\79\186", "\70\142\200\126\126\200\115\101")):FireServer(unpack(args));
+	end});
+	Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\125\47\74\199", "\140\51\78\39\162")]=LUAOBFUSACTOR_DECRYPT_STR_0("\33\214\211\241\227\240\175", "\171\110\162\187\148\145\131\149")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\159\12\38\75", "\34\209\109\75\46")]=LUAOBFUSACTOR_DECRYPT_STR_0("\62\246\175\179\186\0\246\181\187", "\154\115\153\219\220"),[LUAOBFUSACTOR_DECRYPT_STR_0("\10\16\133\18\32\19\189\34", "\222\73\113\233\126\66\114")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\180\21\162\9\30\114\17\239\133\14\140\23\4\117\21\248\129\4\181", "\172\228\124\193\98\119\28\118"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\111\132\223\31\97\136\213\30\107\128", "\46\89\176\230")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\201\15\72\43\141\15\250\30\93\35\183\24\244\24\89\32\129", "\108\155\106\56\71\228")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\147\106\223\48\195\81\50\156\209\121\210\96\200", "\173\162\58\179\81\186\52\64")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\16\65\243\194", "\37\94\32\158\167\43\100")]=LUAOBFUSACTOR_DECRYPT_STR_0("\240\47\81\52\9\226\246\137\122\97\62\24\250", "\214\164\90\51\81\123\145"),[LUAOBFUSACTOR_DECRYPT_STR_0("\56\170\175\204\25\170\160\203", "\160\123\203\195")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\184\21\119\135\56\59\143\63\117\158\28\32\155\21\119\184\52\45\156", "\85\232\124\20\236\81"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\22\156\236\115\38\16\153\236\112\47", "\30\33\171\213\70")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\186\197\39\213\113\139\193\35\220\124\187\212\56\203\121\143\197", "\24\232\160\87\185")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\143\0\253\248\63\219\34\160\234\5\223\97\227", "\70\190\80\145\153")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\121\247\234\251", "\108\55\150\135\158\78\87")]=LUAOBFUSACTOR_DECRYPT_STR_0("\248\10\243\252\136\19\209\10\245", "\64\190\100\146\154\168"),[LUAOBFUSACTOR_DECRYPT_STR_0("\200\164\138\31\185\191\17\72", "\35\139\197\230\115\219\222\114")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\8\217\233\230\215\123\238\27\209\248\192\203\102\224\59\228\239\245\202", "\137\88\176\138\141\190\21"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\112\169\27\155\228\115\160\19\145\225", "\209\70\144\42\168")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\62\232\185\92\33\19\13\249\172\84\27\4\3\255\168\87\45", "\112\108\141\201\48\72")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\154\113\27\82\58\123\217\16\4\112\34\47\217", "\30\171\33\119\51\67")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\120\175\22\215", "\152\54\206\123\178\237")]=LUAOBFUSACTOR_DECRYPT_STR_0("\207\218\185\27\215\135\207\118\196\206\169\79\204\153\193\58\224\155\230\79\235\132\192\49", "\86\140\187\203\111\184\235\174"),[LUAOBFUSACTOR_DECRYPT_STR_0("\238\9\122\8\69\204\11\125", "\39\173\104\22\100")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\215\89\120\18\189\69\253\91\97\54\166\81\215\89\71\30\171\86", "\211\34\190\58\19\123"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\20\93\187\191\137\154\168\16\83\186", "\158\35\106\139\138\188\170")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\52\204\247\70\76\5\200\243\79\65\53\221\232\88\68\1\204", "\37\102\169\135\42")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\218\254\18\247\36\50\149\241\152\237\31\167\47", "\192\235\174\126\150\93\87\231")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\115\69\115\52", "\184\61\36\30\81\187\170")]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\218\180\200\26\129\30\222\190\201\81\164\10\219\178\196", "\233\127\168\219\167\113"),[LUAOBFUSACTOR_DECRYPT_STR_0("\119\119\132\124", "\61\62\20\235\18\87\173\124")]=LUAOBFUSACTOR_DECRYPT_STR_0("\80\71\88\203\217\81\64\84\195\206\24\10\15\157\157\17\17\16\152\154\23\16\20", "\170\34\37\32\170"),[LUAOBFUSACTOR_DECRYPT_STR_0("\3\215\60\242\52\91\62\234\55\243\36", "\46\83\165\89\159\93")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\39\249\5\169", "\174\105\152\104\204\173")]=LUAOBFUSACTOR_DECRYPT_STR_0("\157\64\228\11\255\100\255\28\182\74\170\45\173\70\229\4\183\72\252\10\177", "\111\223\41\138")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\41\57\55\129", "\80\103\88\90\228\112\27\174")]=LUAOBFUSACTOR_DECRYPT_STR_0("\92\212\245\165\229\8\4\23\91\200\186\153\225\14\2", "\97\62\166\154\202\142\96\101"),[LUAOBFUSACTOR_DECRYPT_STR_0("\131\229\217\18\63\161\231\222", "\93\192\132\181\126")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\199\17\142\31\161\215\5\212\25\159\57\189\202\11\244\44\136\12\188", "\98\151\120\237\116\200\185"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\114\91\39\247\211\152\224\191\114\92", "\136\68\106\19\196\230\174\214")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\201\56\75\140\213\254\250\41\94\132\239\233\244\47\90\135\217", "\157\155\93\59\224\188")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\148\73\197\79\220\124\219\31\214\90\200\31\215", "\46\165\25\169")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\26\232\186\200", "\183\84\137\215\173\230\93")]=LUAOBFUSACTOR_DECRYPT_STR_0("\11\119\240\42\78\28\80\88\35\99\246\43\91\0\2", "\28\74\16\149\68\45\101\112"),[LUAOBFUSACTOR_DECRYPT_STR_0("\46\228\24\80\183\235\14\238", "\138\109\133\116\60\213")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\61\25\171\90\4\30\175\114\12\2\133\68\30\25\171\101\8\8\188", "\49\109\112\200"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\139\139\41\11\139\248\133\143\38\14", "\206\188\190\31\62\190")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\123\67\96\13\183\228\2\186\76\66\67\21\177\245\2\169\76", "\206\41\38\16\97\222\135\99")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\213\146\10\239\232\78\199\213\177\37\239\160\89", "\181\228\194\102\142\145\43")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\26\235\0\10", "\51\84\138\109\111\182\79")]=LUAOBFUSACTOR_DECRYPT_STR_0("\63\92\30\46\229\251\94\122\9\35\238", "\130\126\59\123\64\134"),[LUAOBFUSACTOR_DECRYPT_STR_0("\53\238\30\48\20\238\17\55", "\92\118\143\114")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\100\237\192\233\20\2\83\199\194\240\48\25\71\237\192\214\24\20\64", "\108\52\132\163\130\125"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\173\69\231\117\149\69\173\65\230\122", "\119\155\114\214\77\161")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\133\38\240\181\190\32\225\173\178\39\211\173\184\49\225\190\178", "\217\215\67\128")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\245\40\160\14\34\4\182\73\191\44\58\80\182", "\97\196\120\204\111\91")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\113\188\24\187", "\106\63\221\117\222\236\46\165")]=LUAOBFUSACTOR_DECRYPT_STR_0("\253\176\181\179\205\236\188\183\184\132\208\178", "\237\190\213\217\223"),[LUAOBFUSACTOR_DECRYPT_STR_0("\155\65\250\176\164\185\67\253", "\198\216\32\150\220")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\202\69\75\143\89\78\250\95\251\94\101\145\67\73\254\72\255\84\92", "\28\154\44\40\228\48\32\157"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\29\106\170\23\14\178\4\99\22\105", "\85\36\88\154\34\58\135\54")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\124\140\147\182\64\180\79\157\134\190\122\163\65\155\130\189\76", "\215\46\233\227\218\41")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\76\68\128\239\237\24\102\221\253\215\28\37\158", "\148\125\20\236\142")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\35\125\51\247", "\199\109\28\94\146\192\92")]=LUAOBFUSACTOR_DECRYPT_STR_0("\90\126\40\196\192\226\41\236\78\127\38\198\204", "\204\30\23\73\168\169\140\78"),[LUAOBFUSACTOR_DECRYPT_STR_0("\13\211\224\192\223\173\69\89", "\50\78\178\140\172\189\204\38")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\234\54\195\119\246\10\116\249\62\210\81\234\23\122\217\11\197\100\235", "\19\186\95\160\28\159\100"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\224\188\130\161\140\114\234\183\134\166", "\74\217\142\178\149\181")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\73\69\146\198\40\14\223\252\126\68\177\222\46\31\223\239\126", "\136\27\32\226\170\65\109\190")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\225\254\166\33\231\181\220\251\51\221\177\159\184", "\158\208\174\202\64")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\115\38\191\248", "\157\61\71\210")]=LUAOBFUSACTOR_DECRYPT_STR_0("\219\84\120\23\163", "\144\152\60\17\101\211\49"),[LUAOBFUSACTOR_DECRYPT_STR_0("\237\75\230\235\186\192\205\65", "\161\174\42\138\135\216")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\253\177\9\203\196\182\13\227\204\170\39\213\222\177\9\244\200\160\30", "\160\173\216\106"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\216\41\37\9\238\160\221\33\40\3\237", "\147\233\25\17\58\223")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\124\41\16\23\217\53\79\56\5\31\227\34\65\62\1\28\213", "\86\46\76\96\123\176")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\236\156\114\237\188\69\158\119\174\143\127\189\183", "\70\221\204\30\140\197\32\236")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\205\52\90\240", "\149\131\85\55")]=LUAOBFUSACTOR_DECRYPT_STR_0("\41\177\50\165\3\26\199\84\12\179\55", "\59\121\221\83\203\102\58\148"),[LUAOBFUSACTOR_DECRYPT_STR_0("\134\21\54\164\51\90\166\31", "\59\197\116\90\200\81")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\205\161\236\201\55\243\175\204\195\44\208\189\252\203\61\201\173\247\214", "\94\157\200\143\162"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\175\104\164\244\175\99\171\244\174\99\165", "\194\158\91\147")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\158\23\11\190\209\246\173\6\30\182\235\225\163\0\26\181\221", "\149\204\114\123\210\184")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\146\12\113\255\35\223\88\146\47\94\255\107\200", "\42\163\92\29\158\90\186")):FireServer(unpack(args));
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\239\39\74\31", "\95\161\70\39\122\69\170")]=LUAOBFUSACTOR_DECRYPT_STR_0("\130\15\244\38\66\132\20\188\15\251\41", "\71\211\122\149\77\39\164"),[LUAOBFUSACTOR_DECRYPT_STR_0("\4\134\255\218\135\38\132\248", "\229\71\231\147\182")]=function()
+		local args = {[1]=LUAOBFUSACTOR_DECRYPT_STR_0("\176\195\210\198\137\196\214\238\129\216\252\216\147\195\210\249\133\210\197", "\173\224\170\177"),[2]=LUAOBFUSACTOR_DECRYPT_STR_0("\41\96\222\75\240\33\163\32\103\213\74", "\155\24\81\237\125\195\18")};
+		game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\58\38\88\90\177\69\81\28\38\76\101\172\73\66\9\36\77", "\48\104\67\40\54\216\38")).RE:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\86\99\53\244\30\86\43\164\20\112\56\164\21", "\149\103\51\89")):FireServer(unpack(args));
+	end});
+	local Tab = Window:MakeTab({[LUAOBFUSACTOR_DECRYPT_STR_0("\83\68\11\137", "\236\29\37\102")]=LUAOBFUSACTOR_DECRYPT_STR_0("\150\39\143\58\89\247\16\129\33\94\167\55", "\55\215\67\226\83"),[LUAOBFUSACTOR_DECRYPT_STR_0("\204\124\194\138", "\182\133\31\173\228\212")]=LUAOBFUSACTOR_DECRYPT_STR_0("\57\0\252\181\193\92\164\203\34\6\190\251\157\30\241\136\121\81\183\226\134\25\241\138", "\191\75\98\132\212\178\47\193"),[LUAOBFUSACTOR_DECRYPT_STR_0("\143\85\237\234\1\223\242\144\73\228\254", "\159\223\39\136\135\104\170")]=false});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\117\246\64\254", "\233\59\151\45\155\40\127")]=LUAOBFUSACTOR_DECRYPT_STR_0("\135\4\243\77\168\64\205\71\180\9\238\80", "\36\198\96\158")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\10\206\7\4", "\103\68\175\106\97\30\159\119")]=LUAOBFUSACTOR_DECRYPT_STR_0("\14\227\26\8\41\228\8\4\103\212\25\13\35\173\58\36\103\173\84\0\43\225\92\38\38\224\25\18\110", "\97\71\141\124"),[LUAOBFUSACTOR_DECRYPT_STR_0("\136\216\190\50\51\170\218\185", "\81\203\185\210\94")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\217\204\56\189\71\8\255\95\195\217\59\227\83\91\164\24\196\218\57\190\81\64\179\31\223\204\41\163\64\28\179\31\220\151\9\169\83\87\153\41\158\209\34\171\93\92\185\4\212\193\37\168\88\86\255\29\208\203\56\168\70\29\163\31\196\202\47\168", "\112\177\184\76\205\52\50\208")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\151\221\95\168", "\192\217\188\50\205")]=LUAOBFUSACTOR_DECRYPT_STR_0("\55\104\97\16\240\69\110\89\52\199\4\67\82\42", "\170\101\45\54\89"),[LUAOBFUSACTOR_DECRYPT_STR_0("\128\169\12\89\161\169\3\94", "\53\195\200\96")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\165\73\42\40\145\20\226\18\46\57\145\90\168\95\55\54\204\77\162\80\113\42\131\89\226\118\16\13\152\127\157\100\13", "\46\205\61\94\88\226"), true))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\39\197\20\166", "\195\105\164\121")]=LUAOBFUSACTOR_DECRYPT_STR_0("\105\183\213\89\6\249\79\184\208\15\48\232\78\176\204\91\67\200\81\189", "\139\60\217\188\47\99"),[LUAOBFUSACTOR_DECRYPT_STR_0("\41\252\124\249\20\25\9\246", "\120\106\157\16\149\118")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\124\203\62\171\173\227\131\59\204\41\169\183\169\216\118\211\37\163\240\186\195\121\144\56\186\169\246\249\122\214\60\190\172\170\205\120\146\25\184\172\176\220\96\146\9\182\186\244\157\38\140\115\233", "\172\20\191\74\219\222\217")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\29\194\138\18", "\21\83\163\231\119")]=LUAOBFUSACTOR_DECRYPT_STR_0("\14\23\227\41\175\228", "\187\93\116\145\64\223\144\231")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\91\17\14\179", "\76\21\112\99\214\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\196\226\239\101\162\152\212", "\205\150\214\171\69\234"),[LUAOBFUSACTOR_DECRYPT_STR_0("\244\232\235\66\213\232\228\69", "\46\183\137\135")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\254\93\65\169\69\172\6\26\171\87\225\7\82\176\66\254\92\87\172\69\243\91\86\182\88\226\76\91\173\24\245\70\88\246\123\167\115\111\233\6\167\6\119\171\89\249\66\93\184\64\243\71\103\237\114\185\68\84\176\88\185\107\71\182\89\253\65\84\175\83\248\12\7\233\100\162\109\16\235\6\197\74\71\176\70\226", "\54\150\41\53\217")))();
+	end});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\83\89\0\1", "\171\29\56\109\100\132")]=LUAOBFUSACTOR_DECRYPT_STR_0("\199\199\1\200\181\202\16\240", "\178\149\130\69"),[LUAOBFUSACTOR_DECRYPT_STR_0("\80\77\232\24\126\235\112\71", "\138\19\44\132\116\28")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\199\202\45\202\220\132\118\149\221\223\46\148\200\215\45\210\218\220\44\201\202\204\58\213\193\202\60\212\219\144\58\213\194\145\11\255\235\196\17\239\237\145\11\255\235\196\17\239\237\145\52\219\198\208\118\232\234\250\35\242\250\252", "\186\175\190\89")))();
+	end});
+	local Section = Tab:AddSection({[LUAOBFUSACTOR_DECRYPT_STR_0("\235\6\56\165", "\200\165\103\85\192")]=LUAOBFUSACTOR_DECRYPT_STR_0("\131\234\177\82\73\51\79\97\173\247\186\75\81", "\50\206\133\211\59\37\86\111")});
+	Tab:AddButton({[LUAOBFUSACTOR_DECRYPT_STR_0("\239\224\8\26", "\98\161\129\101\127")]=LUAOBFUSACTOR_DECRYPT_STR_0("\166\225\86\226\93\124\86\40", "\76\237\132\47\160\50\29\36"),[LUAOBFUSACTOR_DECRYPT_STR_0("\152\211\188\215\185\211\179\208", "\187\219\178\208")]=function()
+		loadstring(game:HttpGet(LUAOBFUSACTOR_DECRYPT_STR_0("\68\199\148\206\19\151\3\156\146\223\23\131\75\218\148\214\21\207\89\192\133\204\3\194\66\199\133\208\20\131\79\220\141\145\1\201\90\203\154\215\22\197\95\217\138\218\8\213\68\192\137\218\9\203\90\192\136\145\13\194\78\216\133\199\2\194\77\193\132\145\13\204\69\221\207\211\1\196\66\157\148\198\20", "\173\44\179\224\190\96"), true))();
+	end});
+	local function playHubSound()
+		local soundEffect = Instance.new(LUAOBFUSACTOR_DECRYPT_STR_0("\246\170\99\83\135", "\227\165\197\22\61"));
+		soundEffect.SoundId = "";
+		soundEffect.Volume = 0.3;
+		soundEffect.Parent = game.Workspace;
+		soundEffect:Play();
+	end
+	local function playerEntered(player)
+		OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\226\72\83\173", "\200\172\41\62")]=LUAOBFUSACTOR_DECRYPT_STR_0("\40\226\210\163\177\77\194\201\165\161\11\229\197\176\188\4\227\200", "\200\109\140\166\209"),[LUAOBFUSACTOR_DECRYPT_STR_0("\225\74\215\68\199\75\205", "\48\162\37\185")]=(player.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\110\36\26\190\66\60\4\16\234\83\38\4\84\141\70\35\4\90", "\39\78\97\116\202")),[LUAOBFUSACTOR_DECRYPT_STR_0("\143\231\248\75", "\69\219\142\149\46\130")]=5});
+		playHubSound();
+	end
+	local function playerLeft(player)
+		OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\226\73\31\75", "\87\172\40\114\46")]=LUAOBFUSACTOR_DECRYPT_STR_0("\83\245\235\172\69\88\226\246\177\3\127\238\227\172\12\121\227", "\101\22\141\130\216"),[LUAOBFUSACTOR_DECRYPT_STR_0("\85\38\227\180\78\121\98", "\23\22\73\141\192\43")]=(player.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\173\193\226\196\237\173\249\239\199\185\202\236\234\199\183", "\153\141\141\135\162")),[LUAOBFUSACTOR_DECRYPT_STR_0("\0\30\86\248", "\55\84\119\59\157\192\169")]=5});
+		playHubSound();
+	end
+	local function playerReentered(player)
+		OrionLib:MakeNotification({[LUAOBFUSACTOR_DECRYPT_STR_0("\16\85\112\206", "\69\94\52\29\171\132\208\99")]=LUAOBFUSACTOR_DECRYPT_STR_0("\235\18\116\173\252\203\14\49\141\231\205\30\119\170\235\216\3\120\172\230", "\136\185\119\17\195"),[LUAOBFUSACTOR_DECRYPT_STR_0("\29\211\20\166\179\135\42", "\233\94\188\122\210\214")]=(player.Name .. LUAOBFUSACTOR_DECRYPT_STR_0("\20\33\204\136\179\187\208\81\23\137\141\178\168\216\20\7\193\129\252\155\214\89\22\135", "\183\52\115\169\228\220\220")),[LUAOBFUSACTOR_DECRYPT_STR_0("\228\87\234\218", "\221\176\62\135\191\166\37\127")]=5});
+		playHubSound();
+	end
+	game.Players.PlayerAdded:Connect(playerEntered);
+	game.Players.PlayerRemoving:Connect(playerLeft);
+	game.Players.PlayerAdded:Connect(playerReentered);
 end
-
-return OrionLib
+OrionLib:Init();
