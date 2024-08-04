@@ -3020,14 +3020,21 @@ Tab:AddTextbox({
 	Default = "Enter Key",
 	TextDisappear = true,
 	Callback = function(Value)
-        _G.KeyInput = Value
+        _G.Key = Value
 	end	  
+})
+
+OrionLib:MakeNotification({
+	Name = "How Crack?",
+	Content = "Type Anything In Key And Press Check",
+	Image = "rbxassetid://2005276185",
+	Time = 1000000000000000000
 })
 
 Tab:AddButton({
 	Name = "Check Key!",
 	Callback = function()
-        if _G.KeyInput == _G.Key then
+        if _G.Key== _G.Key then
          MakeScriptHub()
          CorrectKeyNotifications()
      else
