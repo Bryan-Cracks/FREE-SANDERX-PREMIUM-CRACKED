@@ -2,6 +2,4 @@
         ░▀▀▀▄▄ ▒█▄▄█ ▒█▒█▒█ ▒█░▒█ ▒█▀▀▀ ░▒█░░ 　 ░▒█▒█░ ▒█░ ▒█▄▄█ 
         ▒█▄▄▄█ ▒█░▒█ ▒█░░▀█ ▒█▄▄▀ ▒█▄▄▄ ▄▀▒▀▄ 　 ░░▀▄▀░ ▄█▄ ▒█░░░ 
 
-heres what do you want = loadstring(game:HttpGet("https://raw.githubusercontent.com/Bryan-Cracks/FREE-SANDERX-PREMIUM-CRACKED/main/main.lua"))()
-
-the sorce is free and you just need to execute
+DO NOT WORKS MORE, THE MF OBFUSCATED THE KEY SYSTEM, KILL YOU SELF NIGA!
